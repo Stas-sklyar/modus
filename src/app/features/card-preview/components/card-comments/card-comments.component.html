@@ -1,0 +1,12 @@
+<div
+  *ngIf="comments$ | async as comments; else loader"
+  class="lr-card-comments">
+  <lr-comments
+    [comments]="comments"
+    (addCommentEvent)="addNewComment($event)"
+  ></lr-comments>
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

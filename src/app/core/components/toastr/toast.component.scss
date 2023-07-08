@@ -1,0 +1,52 @@
+@import '../../../../assets/styles/global';
+
+.lr-toastr {
+  @include large-paragraph;
+  padding: 10px 20px;
+  line-height: 110%;
+  color: $GRAY_0;
+  display: flex;
+  align-items: center;
+  width: 462px;
+  background-color: $GREEN_1;
+  border: 1px solid $GREEN_2;
+  border-radius: $BORDER_RADIUS_BASE;
+  margin-bottom: 10px;
+  animation-name: toastr-animation;
+  animation-duration: .25s;
+
+  &__content {
+    flex-grow: 1;
+    margin-right: 20px;
+  }
+
+  &__icon {
+
+    &_check {
+      width: 35px;
+      padding: 10px;
+      height: 35px;
+      background: $GREEN_2 url("../../../../assets/icons/ic_check.svg") no-repeat center center;
+      background-size: 30px 30px;
+      margin-right: 10px;
+      border-radius: $BORDER_RADIUS_BASE;
+    }
+
+    &_close {
+      width: 13px;
+      height: 21px;
+      background: url("../../../../assets/icons/ic_close.svg") no-repeat center center;
+    }
+  }
+}
+
+@keyframes toastr-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

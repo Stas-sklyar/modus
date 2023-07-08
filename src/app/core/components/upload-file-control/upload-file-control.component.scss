@@ -1,0 +1,30 @@
+@import '../../../../assets/styles/global';
+
+.upload-file-control {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  border-radius: $BORDER_RADIUS_BASE;
+  border: 2px solid $BORDER_GRAY_2;
+  padding: 25px;
+  cursor: pointer;
+  @include large-paragraph;
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    background: url("../../../../assets/icons/ic_upload.svg") center no-repeat;
+    margin-right: 14px;
+  }
+
+  &__label {
+
+    & u {
+      color: $BLUE_0;
+    }
+  }
+
+  & input {
+    display: none;
+  }
+}

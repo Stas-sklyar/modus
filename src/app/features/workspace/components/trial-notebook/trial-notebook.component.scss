@@ -1,0 +1,33 @@
+@import '../../../../../assets/styles/global';
+
+.lr-trial-notebook {
+
+  &__dropdown {
+    @include dropdown-menu;
+
+    & .dropdown-menu {
+      transform: translateY(2px) translateX(-150px) !important;
+    }
+  }
+}
+
+.cards-container {
+  display: grid;
+  margin: -10px -10px 0;
+
+  @media screen and (min-width: 320px) {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  }
+
+  @media screen and (min-width: 1440px) {
+    grid-template-columns: repeat(auto-fill, minmax(33.33%, 1fr));
+  }
+
+  &__card {
+    margin: 10px;
+  }
+}

@@ -1,0 +1,99 @@
+<div
+  [formGroup]="form"
+  class="lr-edit-story-item">
+
+  <input
+    lrAutoFocus
+    formControlName="title"
+    autocomplete="off"
+    placeholder="Enter title"
+    type="text"
+    class="lr-edit-story-item__control lr-filled-input"
+  >
+
+  <select
+    *ngIf="parentStoryItems"
+    formControlName="parentStoryItemId"
+    class="lr-edit-story-item__control lr-filled-input role-select">
+    <option [value]="null">Select parent Story Item</option>
+    <option
+      *ngFor="let currentStoryItem of parentStoryItems"
+      [value]="currentStoryItem.id">
+        {{
+          storyItem.trialCaseNarrativeStoryItemId === currentStoryItem.id
+            ? 'Current parent story item: ' + currentStoryItem.title
+            : currentStoryItem.title
+        }}
+    </option>
+  </select>
+
+  <div class="lr-edit-story-item__control_radio-btns-container">
+    <div class="form-check">
+      <label class="form-check-label">
+        Allegation
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="storyItemType"
+          [value]="'allegation'"
+        >
+      </label>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        Fact
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="storyItemType"
+          [value]="'fact'"
+        >
+      </label>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        Note
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="storyItemType"
+          [value]="'note'"
+        >
+      </label>
+    </div>
+  </div>
+
+  <lr-text-editor
+    formControlName="description"
+    [participants$]="participants$"
+    placeholder="Enter description">
+  </lr-text-editor>
+
+  <lr-related-documents
+    [documents]="getRelatedStoryItemDocuments(storyItem)">
+  </lr-related-documents>
+
+  <div class="lr-edit-story-item__control">
+    <lr-documents-buffer></lr-documents-buffer>
+  </div>
+
+  <div class="lr-edit-story-item__buttons-container">
+    <button
+      class="lr-edit-story-item-form__form-btn cancel-button"
+      (click)="closeForm()"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="updateStoryItem()"
+      type="submit"
+      class="lr-edit-story-item__form-btn primary-button"
+      [disabled]="form.status === 'INVALID'"
+    >
+      edit story item
+    </button>
+  </div>
+</div>

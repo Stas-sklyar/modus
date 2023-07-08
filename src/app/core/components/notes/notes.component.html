@@ -1,0 +1,106 @@
+<section
+  (click)="indexOfCurrentVisibleAddNoteDropdown = null"
+  class="lr-notes">
+  <ng-container *ngIf="!showAddNoteForm; else addNotesForm">
+    <section class="lr-notes__notes-list notes-list">
+      <ng-container *ngFor="let note of notes | sortByOrder; let i = index">
+        <section
+          *ngIf="i !== indexOfCurrentVisibleEditNoteForm"
+          class="notes-list__record record">
+          <button
+            (click)="toggleCreateNoteDropdown(i); $event.stopPropagation()"
+            class="record__dropdown-btn"
+            lr-ic-btn
+            icon="ellipsis">
+          </button>
+
+          <div
+            *ngIf="i === indexOfCurrentVisibleAddNoteDropdown"
+            class="record__dropdown-menu dropdown-menu">
+            <div
+              (click)="toggleEditNoteForm(i)"
+              class="dropdown-menu__item">
+              Edit
+            </div>
+
+            <div
+              (click)="showConfirmationWindow(template)"
+              class="dropdown-menu__item">
+              Delete
+            </div>
+          </div>
+
+          <h5 class="record__title">
+            {{ note.title }}
+          </h5>
+
+          <div class="record__content">
+            <div
+              lrApplyRedirectsToMentions
+              [innerHTML]="note.description | safeHtml">
+            </div>
+            <div class="record__content_highlighted">
+              {{ note.modifiedDateTime ? 'Updated:' : 'Created:' }}
+              {{
+              ((note.modifiedDateTime ? note.modifiedDateTime : note.createdDateTime) | date: "dd/MM/yyyy")
+              + " at " +
+              ((note.modifiedDateTime ? note.modifiedDateTime : note.createdDateTime) | date:'h:mm a')
+              }}
+              by
+              <b>@{{ note.modifiedByUser ? note.modifiedByUser?.name : note.createdByUser?.name }}</b>
+            </div>
+
+            <lr-related-documents
+              [documents]="getRelatedNoteDocuments(note)">
+            </lr-related-documents>
+          </div>
+
+          <div
+            [class]="
+              indexOfCurrentVisibleAddNoteForm === null && indexOfCurrentVisibleEditNoteForm === null
+                ? 'record__add-btn'
+                : 'record__add-btn_hidden'
+            "
+            (click)="toggleCreateNoteForm(i)">
+            <lr-add-content-btn [btnLabel]="'Add note'"></lr-add-content-btn>
+          </div>
+        </section>
+
+        <ng-container *ngIf="i === indexOfCurrentVisibleAddNoteForm">
+          <lr-add-note
+            [order]="indexOfCurrentVisibleAddNoteForm + 1"
+            [cancelBtnIsActive]="true"
+            (changeVisibilityFormEvent)="changeVisibilityOfAddNoteForm($event)"
+            (clickAddNoteBtn)="addNote($event)"
+          ></lr-add-note>
+        </ng-container>
+
+        <ng-container *ngIf="i === indexOfCurrentVisibleEditNoteForm">
+          <lr-edit-note
+            [note]="note"
+            (editNoteEvent)="editNote($event)"
+            (hideFormEvent)="indexOfCurrentVisibleEditNoteForm = null"
+          ></lr-edit-note>
+        </ng-container>
+
+        <ng-template #template>
+          <lr-confirmation-modal
+            (cancel)="confirmationCanceled()"
+            (confirm)="confirmationConfirmed(note.id)"
+          ></lr-confirmation-modal>
+        </ng-template>
+      </ng-container>
+    </section>
+  </ng-container>
+
+  <ng-template #addNotesForm>
+    <div class="lr-notes__add-note">
+      <lr-add-note
+        [order]="0"
+        [cancelBtnIsActive]="false"
+        (changeVisibilityFormEvent)="this.indexOfCurrentVisibleAddNoteForm = null;"
+        (clickAddNoteBtn)="addNote($event)"
+      ></lr-add-note>
+    </div>
+  </ng-template>
+</section>

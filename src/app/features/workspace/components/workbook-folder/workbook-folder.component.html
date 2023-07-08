@@ -1,0 +1,95 @@
+<section class="lr-folder lr-folder_gray-cover lr-folder_bookmark">
+  <header
+    class="lr-folder__folder-header folder-header"
+    (click)="toggleExpand(workbookFolder.id)">
+    <h3 class="folder-header__title">
+      {{ workbookFolder.name }}
+    </h3>
+
+<!--    <div class="folder-header__updates-notification">-->
+<!--      + 13 Updates-->
+<!--    </div>-->
+
+    <div class="folder-header__controls controls">
+      <button
+        lr-ic-btn-dropdown
+        (click)="openCreateSectionModal(workbookFolder.id); $event.stopPropagation()"
+        icon="plus">
+      </button>
+
+      <div class="controls__dropdown dropdown" dropdown>
+        <button
+          class="dropdown__toggle dropdown-toggle"
+          (click)="$event.stopPropagation()"
+          dropdownToggle
+          lr-ic-btn
+          icon="ellipsis">
+        </button>
+
+        <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+          <div
+            class="dropdown-menu__item"
+            (click)="openEditFolderModal(workbookFolder.id); $event.stopPropagation()">
+            Edit folder
+          </div>
+
+          <div
+            class="dropdown-menu__item"
+            (click)="openSortSectionsModal(); $event.stopPropagation()">
+            Sort sections
+          </div>
+        </div>
+      </div>
+
+      <lr-invert-arrow
+        class="controls_shift-arrow"
+        [isInverted]="(expandedFolderId$ | async) === workbookFolder.id">
+      </lr-invert-arrow>
+    </div>
+  </header>
+
+  <section
+    *ngIf="(expandedFolderId$ | async) === workbookFolder.id"
+    class="lr-folder__folder-container folder-container folder-container_separated">
+    <div class="folder-container__folder-content folder-content">
+      <div
+        *ngIf="workbookFolder.description"
+        class="folder-content__description folder-description">
+        <h5 class="folder-description__title">
+          description
+        </h5>
+        <article class="folder-description__text">
+          {{ workbookFolder.description }}
+        </article>
+      </div>
+
+      <div
+        *ngIf="workbookFolder.sections?.length"
+        class="folder-content__folder-sections folder-sections">
+        <h5 class="folder-sections__title">
+          sections
+        </h5>
+
+        <div class="folder-sections__container">
+          <div
+            *ngFor="let section of workbookFolder.sections | sortByOrder"
+            class="folder-section-btn"
+            [routerLink]="[workbookFolder.id, section.id]">
+            {{ section.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="folder-container__activities activities">
+      <h5 class="activities__title">
+        recent activity
+      </h5>
+      <lr-recent-activities
+        [partialOutput]="true"
+        displayType="full">
+      </lr-recent-activities>
+    </div>
+  </section>
+
+</section>

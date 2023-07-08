@@ -1,0 +1,51 @@
+@import '../../../../../assets/styles/global';
+
+:host {
+  display: flex;
+  flex-grow: 1;
+  overflow-y: hidden;
+}
+
+.task-preview {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &__categories {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  margin: 0 20px 20px 20px;
+
+  @media screen and (min-width: 1280px) {
+    margin: 30px;
+  }
+
+  &__task-title {
+    @include extra-large-headline;
+    font-size: 24px;
+    line-height: 52px;
+
+    @media screen and (min-width: 1280px) {
+      font-size: 40px;
+    }
+  }
+
+  &__controls {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+
+    @media screen and (min-width: 1280px) {
+      gap: 10px;
+    }
+  }
+}

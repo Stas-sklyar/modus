@@ -1,0 +1,10 @@
+<div class="text-editor" [class.disabled]="disabled">
+  <quill-editor
+    [(ngModel)]="value"
+    (ngModelChange)="setValue($event)"
+    [modules]="modules"
+    [name]="name"
+    [placeholder]="placeholder"
+    class="text-editor__quill-editor">
+  </quill-editor>
+</div>

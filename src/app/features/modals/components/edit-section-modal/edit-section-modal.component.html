@@ -1,0 +1,72 @@
+<lr-modal>
+  <ng-container modalTitle>Edit section</ng-container>
+
+  <div
+    *ngIf="section$ | async as section; else loader"
+    class="lr-edit-section-form"
+    modalContent>
+    <form
+      class="lr-edit-section-form__form form"
+      [formGroup]="form"
+    >
+      <label class="form__label lr-default-label">
+        <span>Name</span>
+
+        <input
+          autocomplete="off"
+          formControlName="name"
+          placeholder="Section name"
+          type="text"
+          class="lr-filled-input">
+      </label>
+
+      <label class="form__label lr-default-label">
+        <span>Description</span>
+
+        <textarea
+          autocomplete="off"
+          formControlName="description"
+          placeholder="Section description"
+          type="text"
+          class="lr-filled-textarea">
+      </textarea>
+      </label>
+    </form>
+
+    <section
+      *ngIf="section.subsections?.length"
+      class="lr-edit-section-form__subsections-container subsections-container">
+      <div class="subsections-container__title">
+        Sub-Sections
+      </div>
+      <bs-sortable
+        [(ngModel)]="section.subsections"
+        fieldName="name"
+        itemActiveClass="sortable-elem--active"
+        itemClass="sortable-elem">
+      </bs-sortable>
+    </section>
+  </div>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="initSectionEditing()"
+      class="primary-button"
+      [disabled]="form.status === 'INVALID' || form.disabled">
+      save changes
+      <div *ngIf="form.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

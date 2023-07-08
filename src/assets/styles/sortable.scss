@@ -1,0 +1,31 @@
+@import './constants/common';
+@import './mixins/mixins';
+
+.lr-sortable {
+  cursor: pointer;
+  position: relative;
+
+
+  &:after {
+    background: url('../../assets/icons/ic-sort-solid.svg') no-repeat;
+    color: $TEXT_DARK_GRAY;
+    content: '';
+    height: 14px;
+    margin-left: 10px;
+    position: absolute;
+    top: calc(50% - 6px);
+    width: 7px;
+  }
+
+  &.asc {
+    &:after {
+      background: url('../../assets/icons/ic-sort-up-solid.svg') no-repeat;
+    }
+  }
+
+  &.desc {
+    &:after {
+      background: url('../../assets/icons/ic-sort-down-solid.svg') no-repeat;
+    }
+  }
+}

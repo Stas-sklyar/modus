@@ -1,0 +1,44 @@
+<lr-modal>
+  <ng-container modalTitle>Edit sub-section</ng-container>
+
+  <form
+    *ngIf="subsection$ | async as subsection; else loader"
+    [formGroup]="form"
+    class="lr-edit-subsection-form"
+    modalContent>
+
+    <label class="lr-default-label">
+      <span>Name</span>
+
+      <input
+        autocomplete="off"
+        formControlName="name"
+        placeholder="Subsection name"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="initSubsectionEditing()"
+      class="primary-button"
+      [disabled]="form.status === 'INVALID' || form.disabled">
+      save changes
+      <div *ngIf="form.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

@@ -1,0 +1,149 @@
+<lr-modal>
+  <ng-container modalTitle>Create Event</ng-container>
+
+  <form
+    [formGroup]="form"
+    class="create-timeline-event"
+    modalContent>
+
+    <label class="create-timeline-event__label lr-default-label">
+      <span>Title</span>
+
+      <input
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Give your event a title"
+        type="text"
+        class="create-timeline-event__control lr-filled-input">
+    </label>
+
+    <div class="create-timeline-event__row">
+      <label class="create-timeline-event__label lr-default-label">
+        <span>Date</span>
+
+        <input
+          autocomplete="off"
+          formControlName="date"
+          type="date"
+          class="create-timeline-event__control lr-filled-input">
+      </label>
+      <label class="create-timeline-event__label lr-default-label">
+        <span>Time</span>
+
+        <input
+          autocomplete="off"
+          formControlName="time"
+          type="time"
+          class="create-timeline-event__control lr-filled-input">
+      </label>
+    </div>
+
+    <div class="create-timeline-event__label lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor
+        formControlName="description"
+        [participants$]="participants$"
+        placeholder="Add some details about this event">
+      </lr-text-editor>
+    </div>
+
+    <div class="create-timeline-event__radio-buttons-container">
+      <div class="form-check">
+        <label class="form-check-label" >
+          Defence
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="partyType"
+            [value]="'Defense'"
+          >
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          Plaintiff
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="partyType"
+            [value]="'Plaintiff'"
+          >
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          3rd Party
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="partyType"
+            [value]="'Other'"
+          >
+        </label>
+      </div>
+    </div>
+
+    <div class="create-timeline-event__issues-title">Issues</div>
+
+    <div class="create-timeline-event__issues issues dropdown" dropdown>
+      <mat-form-field class="issues__form-control" appearance="fill">
+        <mat-chip-grid #chipGrid>
+          <mat-chip-row
+            *ngFor="let issue of selectedIssues"
+            (removed)="removeIssue(issue)">
+            {{ issue.name }}
+
+            <button matChipRemove>✖</button>
+          </mat-chip-row>
+
+          <input
+            dropdownToggle
+            class="dropdown-toggle"
+            placeholder="New issue..."
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="false"
+            (matChipInputTokenEnd)="addIssue($event)"
+            [formControl]="addIssuesControl"
+            #addIssueInput
+            autocomplete="off"
+          />
+        </mat-chip-grid>
+
+      </mat-form-field>
+
+      <div *dropdownMenu class="issues__dropdown dropdown-menu issues-dropdown">
+        <div
+          *ngFor="let issue of filteredIssues | async"
+          (click)="onSelectIssue(issue)"
+          class="issues-dropdown__item"
+        >
+          {{ issue.name }}
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal(); $event.stopPropagation()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="createTimelineEvent()"
+      type="submit"
+      class="primary-button"
+      [disabled]="form.status === 'INVALID' || form.disabled"
+    >
+      create event
+      <div *ngIf="form.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

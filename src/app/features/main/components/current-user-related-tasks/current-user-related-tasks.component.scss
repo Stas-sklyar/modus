@@ -1,0 +1,90 @@
+@import '../../../../../assets/styles/global';
+
+.tabs-panel {
+  display: flex;
+  padding: 30px 20px 0;
+  border-bottom: 1px solid $SEPARATION_LINE_LIGHT_GRAY;
+  gap: 30px;
+
+  &__tab {
+
+  }
+
+  &_space-between {
+    justify-content: space-between;
+    gap: 0;
+  }
+}
+
+.tab {
+  @include reset-native-control;
+  @include panel-tab;
+}
+
+.tasks {
+
+  &__title {
+    @include large-headline;
+    margin-bottom: 5px;
+  }
+
+  &__container {
+    background-color: $COVER_PURE_WHITE;
+    border-radius: 3px;
+    min-height: 500px;
+  }
+
+  &__list {
+    padding: 55px 25px;
+  }
+
+  &__card {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.task-card {
+  @include task-card-decor-line;
+  height: 79px;
+  background-color: $GRAY_4;
+  border-radius: $BORDER_RADIUS_BASE;
+  padding: 9px 23px;
+  cursor: pointer;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__col {
+    margin-right: 10px;
+  }
+
+  &__case-title {
+    @include extra-small-paragraph;
+    color: $GRAY_0;
+  }
+
+  &__task-title {
+    @include medium-headline;
+  }
+
+  &__due-date {
+    @include extra-small-paragraph;
+    color: $GREEN_3;
+  }
+
+  &__link-icon {
+    display: inline-block;
+    margin-left: 3px;
+    width: 5px;
+    height: 8px;
+    transform: rotate(180deg);
+    background: url("../../../../../assets/icons/ic_arrow_left.svg");
+  }
+}

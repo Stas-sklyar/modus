@@ -1,0 +1,49 @@
+@import "./mixins/mixins";
+
+.lr-default-label {
+  @include default-label;
+  position: relative;
+
+  .lr-form-control-success,
+  .lr-form-control-warning,
+  .lr-form-control-error {
+    position: absolute;
+    left: 0;
+    top: 105%;
+  }
+}
+
+.lr-filled-input {
+  @include filled-input;
+
+  &:disabled {
+    color: $TEXT_DISABLED;
+  }
+}
+
+.lr-filled-textarea {
+  @include filled-textarea;
+
+  &:disabled {
+    color: $TEXT_DISABLED;
+  }
+}
+
+.lr-form-control-success {
+  color: $TEXT_SUCCEED;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.lr-form-control-warning {
+  color: $TEXT_YELLOW;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.lr-form-control-error {
+  color: $TEXT_DARK_RED;
+  font-size: 12px;
+  line-height: 14px;
+}
+

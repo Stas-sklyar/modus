@@ -1,0 +1,47 @@
+@import './constants/common';
+@import './mixins/mixins';
+
+.lr-search-input {
+  display: flex;
+  width: 100%;
+
+  & input {
+    @include large-paragraph;
+    border: 2px solid $BORDER_LIGHT_GRAY;
+    border-radius: 4px 0 0 4px;
+    box-sizing: border-box;
+    height: 50px;
+    flex-grow: 1;
+    outline: none;
+    padding: 0 24px;
+
+    &::placeholder {
+      @include medium-paragraph;
+      color: $TEXT_DARK_GRAY;
+    }
+  }
+
+  &_outline {
+    border: 2px solid $BORDER_LIGHT_GRAY;
+    border-radius: 4px;
+
+    & input {
+      border: none;
+    }
+  }
+
+  &__icon,
+  &__solid-icon {
+    border-radius: 0 4px 4px 0;
+    transform: translateX(-1px);
+    width: 81px;
+  }
+
+  &__icon {
+    background: url("../../assets/icons/ic_search_gray.svg") center no-repeat;
+  }
+
+  &__solid-icon {
+    background: url("../../assets/icons/ic_search.svg") center no-repeat $COVER_DARK_BLUE;
+  }
+}

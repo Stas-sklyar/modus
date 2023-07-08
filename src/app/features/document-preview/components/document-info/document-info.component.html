@@ -1,0 +1,80 @@
+<form class="document-info">
+  <div
+    *ngIf="this.isExhibit"
+    class="document-info__row parent-data">
+    <div class="parent-data__title">
+      Created from
+    </div>
+    <div class="parent-data__container">
+      <a
+        [routerLink]="[]"
+        [queryParams]="{'documentId': document.parent?.id}"
+        class="parent-data__link">
+        {{ document.parent?.title }}
+      </a>
+      <div
+        [innerHTML]="document.parent?.description"
+        class="parent-data__description">
+      </div>
+    </div>
+  </div>
+
+  <div class="document-info__row document-info__row_filename">
+    <div class="document-info__control control">
+      <span class="control__title">File</span>
+      <button
+        [disabled]="submitting"
+        class="lr-filled-input download-button"
+        type="button"
+        (click)="downloadFile()">
+        {{ fileName }}
+      </button>
+    </div>
+  </div>
+
+  <div class="document-info__row document-info__row_dates">
+    <div class="document-info__control control">
+      <span class="control__title">Bates Number</span>
+
+      <input
+        [value]="document.batesNumber"
+        autocomplete="off"
+        placeholder="Bates Number"
+        type="text"
+        class="lr-filled-input"
+        disabled>
+    </div>
+
+    <div class="document-info__control control">
+      <span class="control__title">Date Added</span>
+
+      <input
+        [value]="document.createdDateTime | date: 'dd/MM/yyyy'"
+        autocomplete="off"
+        placeholder="Date Added"
+        type="text"
+        class="lr-filled-input"
+        disabled>
+    </div>
+  </div>
+
+  <div class="document-info__row">
+    <div class="document-info__control control">
+      <span class="control__title">Issues</span>
+
+      <div class="document-info__tags-container">
+        <span class="tag">-</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="document-info__row">
+    <div class="document-info__control">
+      <span class="control__title">Description</span>
+      <div
+        [innerHTML]="document.description || '-'"
+        class="document-info__description">
+      </div>
+    </div>
+  </div>
+</form>

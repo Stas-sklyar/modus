@@ -1,0 +1,48 @@
+@import '../../../../../assets/styles/global';
+
+.create-timeline-event {
+
+  &__row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+  }
+
+  &__label {
+    width: 100%;
+  }
+
+  &__control {
+    width: 100%;
+
+    &--radio-btn {
+      width: auto;
+      margin-right: 10px;
+    }
+  }
+
+  &__radio-buttons-container {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__issues-title {
+    @include small-headline;
+    margin: 30px 0 20px 0;
+  }
+}
+
+.issues {
+  &__form-control,
+  &__dropdown {
+    width: 100%;
+  }
+
+  &__dropdown {
+    transform: translateY(-20px) !important;
+  }
+}
+
+.issues-dropdown {
+  @include issues-dropdown;
+}

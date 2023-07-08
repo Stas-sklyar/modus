@@ -1,0 +1,61 @@
+<section class="lr-subsection">
+  <header
+    class="lr-subsection__subsection-header subsection-header"
+    (click)="toggleExpand(workbookSubsection.id)">
+    <h5 class="subsection-header__title">
+      {{ workbookSubsection.name }}
+    </h5>
+
+    <div class="lr-subsection__controls controls">
+      <button
+        (click)="openCardCreationModal(workbookSubsection.id); $event.stopPropagation()"
+        lr-ic-btn-dropdown
+        icon="plus">
+      </button>
+
+      <div class="controls__dropdown dropdown" dropdown>
+        <button
+          class="dropdown__toggle dropdown-toggle"
+          (click)="$event.stopPropagation()"
+          dropdownToggle
+          lr-ic-btn
+          icon="ellipsis">
+        </button>
+
+        <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+          <div
+            class="dropdown-menu__item"
+            (click)="openEditSubsectionModal(workbookSubsection.id); $event.stopPropagation()">
+            Edit subsection
+          </div>
+
+          <div
+            class="dropdown-menu__item"
+            (click)="openSortCardsModal(); $event.stopPropagation()">
+            Sort cards
+          </div>
+        </div>
+      </div>
+
+      <lr-invert-arrow
+        class="controls_shift-arrow"
+        [isInverted]="(expandedSubsectionId$ | async) === workbookSubsection.id">
+      </lr-invert-arrow>
+    </div>
+  </header>
+
+  <ng-container *ngIf="(expandedSubsectionId$ | async) === workbookSubsection.id">
+    <div
+      *ngIf="workbookSubsection.cards?.length"
+      class="lr-subsection__cards-container cards-container">
+      <ng-container *ngFor="let card of workbookSubsection.cards | sortByOrder">
+        <lr-card
+          *ngIf="!card.isDeleted"
+          [card]="card"
+          (click)="expandSelectedCard(card.id)"
+          class="cards-container__card">
+        </lr-card>
+      </ng-container>
+    </div>
+  </ng-container>
+</section>

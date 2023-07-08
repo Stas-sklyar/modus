@@ -1,0 +1,46 @@
+@import './constants/common';
+@import './mixins/mixins';
+
+.lr-file-uploader {
+  border-radius: $BORDER_RADIUS_BASE;
+  border: 2px solid $BORDER_GRAY_2;
+  cursor: pointer;
+  display: flex;
+  height: 70px;
+  padding: 0 15px;
+  @include large-paragraph;
+
+  &__container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    color: $TEXT_DARK_BLUE;
+    flex: 1;
+    margin-left: 10px;
+    max-width: 250px;
+    text-decoration: underline;
+  }
+
+  &__trigger {
+    margin-left: 20px;
+    position: relative;
+
+    &:before {
+      background: url("../../assets/icons/ic_upload.svg") center no-repeat;
+      content: '';
+      height: 20px;
+      left: -25px;
+      margin-right: 14px;
+      position: absolute;
+      top: 2px;
+      width: 20px;
+    }
+  }
+
+  & input {
+    display: none;
+  }
+}

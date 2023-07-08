@@ -1,0 +1,12 @@
+<div
+  *ngIf="storyItems$ | async as storyItems; else loader"
+  class="lr-case-narrative-story-general">
+  <lr-narrative-story-items
+    [storyId]="storyId"
+    [storyItems]="storyItems"
+  ></lr-narrative-story-items>
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

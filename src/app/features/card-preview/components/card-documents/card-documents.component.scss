@@ -1,0 +1,12 @@
+.lr-card-documents {
+}
+
+.documents-list {
+  &__item {
+    margin-bottom: 14px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

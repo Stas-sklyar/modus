@@ -1,0 +1,66 @@
+<section class='login-page'>
+  <section class='login-page__sign-in-widget sign-in-widget'>
+    <header class='sign-in-widget__header'>
+      <div class='sign-in-widget__logo logo'>
+        <div class='logo__icon'></div>
+      </div>
+
+      <h2 class='sign-in-widget__title'>
+        Log in to Modus
+      </h2>
+    </header>
+
+    <form
+      [formGroup]="form"
+      class='sign-in-widget__login-form login-form'>
+
+      <label class='lr-default-label'>
+        <span>Email address</span>
+
+        <input
+          formControlName='email'
+          placeholder='Enter your email address'
+          type='text'
+          class='lr-filled-input'>
+      </label>
+
+      <label class='lr-default-label'>
+        <span>
+            Password
+          </span>
+
+        <input
+          formControlName='password'
+          placeholder='Enter your password'
+          type='password'
+          class='lr-filled-input'>
+      </label>
+
+      <a
+        [routerLink]="[loginRoutes.PASSWORD_RESET]"
+        class="login-form__recovery-link login-form__recovery-link_forgot-password">
+        Forgot password?
+      </a>
+
+      <button
+        (click)="initLoginProcess()"
+        class='login-form__submit-button primary-button'
+        [disabled]="sending | async">
+        Sign In
+        <div *ngIf="sending | async" class="btn-loader"></div>
+      </button>
+
+      <div [style.text-align]="'center'">
+        <span>
+          Don’t have an account?
+        </span>
+        <a
+          [routerLink]="['/', appRoutes.REGISTER_ADMIN]"
+          class="login-form__recovery-link">
+          Sign Up
+        </a>
+      </div>
+
+    </form>
+  </section>
+</section>

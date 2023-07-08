@@ -1,0 +1,43 @@
+@import '../../../../../assets/styles/global';
+
+.lr-case-timeline {
+  padding: 7px 10px 0 10px;
+
+  &__description {
+    margin-bottom: 40px;
+    background-color: $GRAY_4;
+    border-radius: $BORDER_RADIUS_BASE;
+    padding: 20px;
+    @include medium-paragraph;
+    color: $GRAY_0;
+  }
+
+  &__back-to-top-btn {
+    @include large-paragraph;
+    text-decoration: underline;
+    color: $BLACK_1;
+    font-weight: 600;
+    width: 120px;
+    margin: 86px auto 30px auto;
+    cursor: pointer;
+    text-align: center;
+  }
+}
+
+.set-of-events {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  &__title {
+    @include large-headline;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  &__events {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

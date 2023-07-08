@@ -1,0 +1,134 @@
+@import '../../../../../assets/styles/global';
+
+.lr-card-tasks {
+  &__empty {
+    @include large-paragraph;
+  }
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+
+  &__record {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+
+      @media screen and (min-width: 1280px) and (min-height: 800px) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  & + .lr-card-tasks__add-btn {
+    opacity: 0;
+    transition: all .2s linear;
+    margin-bottom: 20px;
+
+    &:hover {
+      opacity: 1;
+      transition: all .2s linear;
+    }
+  }
+
+  &:hover {
+    & + .lr-card-tasks__add-btn {
+      opacity: 1;
+      transition: all .2s linear;
+    }
+  }
+}
+
+.record {
+  background: $COVER_GRAY_TO_WHITE;
+  border-radius: $BORDER_RADIUS_BASE;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 30px;
+  }
+
+  &__title {
+    @include medium-paragraph;
+    color: $GRAY_0;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include large-paragraph;
+    }
+  }
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    gap: 20px;
+  }
+
+  &__avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: $COVER_DARK_GRAY;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+
+.record-content {
+  display: flex;
+  margin-left: auto;
+  gap: 50px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    @include large-paragraph;
+    gap: 60px;
+  }
+
+
+}
+
+.author,
+.date {
+  &__info {
+    min-width: 100px;
+    &_small {
+      @include extra-small-paragraph;
+      line-height: 14px;
+      color: $GRAY_0;
+    }
+
+    &_bold {
+      @include small-paragraph;
+      font-weight: bold;
+      line-height: 17px;
+    }
+  }
+}
+
+.date {
+  &__info {
+    &_colored {
+      color: $TEXT_DARK_RED;
+    }
+  }
+}
+
+.add-new-task {
+
+  &--open {
+    display: block;
+  }
+
+  &--closed {
+    display: none;
+  }
+}

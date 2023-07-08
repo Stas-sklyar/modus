@@ -1,0 +1,19 @@
+<div class="task-documents">
+  <div class="task-documents__list">
+    <lr-document-card
+      *ngFor="let document of task.documents"
+      [document]="document.document">
+    </lr-document-card>
+  </div>
+  <div class="task-documents__form">
+    <lr-documents-buffer [dropUp]="true"></lr-documents-buffer>
+    <div class="task-documents__form-buttons">
+      <button
+        (click)="attachDocument()"
+        class="primary-button"
+        [disabled]="(hasUploadedDocuments$ | async) === false || submitting">
+        attach document
+      </button>
+    </div>
+  </div>
+</div>

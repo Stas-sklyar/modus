@@ -1,0 +1,27 @@
+@import '../../../../assets/styles/global';
+
+.related-documents {
+  display: flex;
+  flex-direction: column;
+
+  &__container {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    padding: 5px;
+  }
+
+  &__document {
+    cursor: pointer;
+  }
+
+  &__icon {
+    margin-right: 15px;
+    width: 16px;
+  }
+
+  &__title {
+    color: $TEXT_DARK_BLUE;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,103 @@
+<div class="lr-case-narrative glb-grid-container">
+  <section class="glb-grid-container__main-column">
+    <ng-container *ngIf="selectedCase$ | async as selectedCase; else loader">
+      <lr-case-header
+        pageTitle="case narrative"
+        [caseTitle]="selectedCase.name"
+        [separated]="true">
+
+<!--        TODO: IMPLEMENT FEATURE -->
+<!--        <button-->
+<!--          lr-ic-btn-dropdown-->
+<!--          icon="square-arrow">-->
+<!--        </button>-->
+        <button
+          (click)="openCreateNarrativeStoryModal()"
+          lr-ic-btn-dropdown
+          icon="plus">
+        </button>
+
+        <div class="lr-case-narrative__dropdown dropdown" dropdown>
+          <button
+            class="dropdown__toggle dropdown-toggle"
+            dropdownToggle
+            lr-ic-btn
+            icon="ellipsis">
+          </button>
+
+              <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+                <ng-container *ngIf="narrativeStories$ | async as narrativeStories">
+                  <ng-container *ngIf="narrativeStories | sortByOrder as sortedNarrativeStories">
+                    <div
+                      (click)="openSortNarrativeStoriesModal(sortedNarrativeStories)"
+                      class="dropdown-menu__item">
+                      Sort narrative stories
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+        </div>
+      </lr-case-header>
+
+      <div
+        lrApplyRedirectsToMentions
+        [innerHTML]="selectedCase.description | safeHtml"
+        class="lr-case-narrative__description"
+        *ngIf="selectedCase.description">
+        {{ selectedCase.description }}
+      </div>
+
+      <div class="lr-case-narrative__filter-form filter-form">
+        <div class="filter-form__col">
+          <lr-search-autocomplete
+            *ngIf="narrativeStories$ | async as narrativeStories; else emptyNarrativeStoriesList"
+            (searchQueryChangeEvent)="filterBySearchQuery($event, narrativeStories)">
+          </lr-search-autocomplete>
+
+          <ng-template #emptyNarrativeStoriesList>
+            <lr-search-autocomplete (searchQueryChangeEvent)="filterBySearchQuery($event, [])"></lr-search-autocomplete>
+          </ng-template>
+        </div>
+
+        <div class="filter-form__col">
+<!--          TODO: IMPLEMENT FILTER BY PEOPLE AFTER API FIX-->
+<!--          <lr-select-->
+<!--            [list]="[1, 2, 3]"-->
+<!--            [label]="'Filter by people'"-->
+<!--            class="filter-form__form-control">-->
+<!--          </lr-select>-->
+
+<!-- TODO: IMPLEMENT ISSUES -->
+<!--          <lr-select-->
+<!--            [list]="[1, 2, 3]"-->
+<!--            [label]="'Filter by issues'"-->
+<!--            class="filter-form__form-control">-->
+<!--          </lr-select>-->
+        </div>
+      </div>
+
+      <div
+        *ngIf="narrativeStories$ | async as narrativeStories; else loader"
+        class="lr-case-narrative__stories">
+        <div
+          *ngFor="let narrativeStory of (filterIsActive ? filteredNarrativeStories : narrativeStories) | sortByOrder"
+          class="lr-case-narrative__story case-narrative-story">
+          <lr-case-narrative-story [story]="narrativeStory"></lr-case-narrative-story>
+        </div>
+      </div>
+
+
+    </ng-container>
+  </section>
+
+  <section class="glb-grid-container__aside-column">
+    <header class="glb-grid-container__aside-column_heading">
+      Recent activity
+    </header>
+    <lr-recent-activities-cards></lr-recent-activities-cards>
+  </section>
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

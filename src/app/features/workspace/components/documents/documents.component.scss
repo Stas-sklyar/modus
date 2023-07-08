@@ -1,0 +1,138 @@
+@import '../../../../../assets/styles/global';
+
+.documents {
+  padding: 20px 20px 0 20px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 30px 30px 0 30px;
+  }
+
+  &__inner-container {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__folders {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__documents-table {
+    flex: 1;
+  }
+}
+
+.documents-table {
+  &__filters {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+.filters {
+  margin-bottom: 30px;
+
+  &__search {
+    height: 50px;
+    width: 598px;
+  }
+
+  &_to-right {
+    margin-left: auto;
+  }
+
+  &__type-filter {
+    width: 353px;
+  }
+}
+
+.filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 18px 20px;
+  width: 350px;
+  border: 2px solid $GRAY_3;
+  border-radius: $BORDER_RADIUS_BASE;
+  cursor: pointer;
+
+  &__icon {
+
+    &_sort {
+      width: 16px;
+      height: 16px;
+      background: center center url("../../../../../assets/icons/ic_filer.svg");
+      margin-right: 10px;
+    }
+  }
+
+  &__label {
+    @include medium-paragraph;
+    color: $GRAY_0;
+    flex-grow: 1;
+
+    & span:last-child {
+      color: $BLUE_0;
+    }
+  }
+}
+
+.table-header {
+  color: $GRAY_0;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: $GRAY_4;
+}
+
+.nav {
+  cursor: pointer;
+  color: $TEXT_DARK_BLUE;
+}
+
+.data-cell {
+  padding: 24px;
+}
+
+.document-title-cell {
+  position: relative;
+
+  &__title {
+    margin-left: 35px;
+    position: relative;
+  }
+
+  &__sub-title {
+    min-width: 100px;
+    max-width: 150px;
+    color: $TEXT_GRAY;
+    font-size: 10px;
+    position: absolute;
+    left: 35px;
+    bottom: -13px;
+    text-decoration: underline;
+  }
+
+  &__root-icon,
+  &__exhibit-icon {
+    &:before {
+      height: 25px;
+      left: -40px;
+      position: absolute;
+      width: 25px;
+    }
+  }
+
+  &__root-icon {
+    &:before {
+      content: url('../../../../../assets/icons/ic_documents.svg');
+    }
+  }
+  &__exhibit-icon {
+    &:before {
+      content: url('../../../../../assets/icons/ic-landmark-solid.svg');
+    }
+  }
+}

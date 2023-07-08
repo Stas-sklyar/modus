@@ -1,0 +1,15 @@
+@import './constants/common';
+@import './mixins/mixins';
+
+.lr-data-field {
+  @include large-paragraph;
+  background: $COVER_GRAY_TO_WHITE;
+  border-radius: $BORDER_RADIUS_BASE;
+  border: none;
+  color: $TEXT_DARK_GRAY;
+  display: flex;
+  min-height: 60px;
+  outline: none;
+  padding: 15px;
+  width: 100%;
+}

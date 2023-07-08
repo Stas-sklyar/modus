@@ -1,0 +1,28 @@
+@import '../../../../assets/styles/global';
+
+.lr-edit-note {
+
+  &__control {
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    @include large-paragraph;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  &__form-btn {
+    margin-left: 15px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

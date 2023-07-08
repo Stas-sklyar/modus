@@ -1,0 +1,162 @@
+<section class="documents">
+  <ng-container *ngIf="selectedCase$ | async as selectedCase">
+    <lr-case-header
+      pageTitle="documents"
+      [caseTitle]="selectedCase.name">
+
+      <div class="btn-group lr-dropdown lr-dropdown_primary" dropdown>
+        <button
+          lr-ic-btn-dropdown
+          dropdownToggle
+          icon="plus"
+          type="button"
+          class="dropdown-toggle">
+        </button>
+        <ul
+          *dropdownMenu
+          id="dropdown-basic"
+          class="dropdown-menu dropdown-menu-right"
+          role="menu">
+          <li
+            (click)="openDocumentFolderModal('create')"
+            role="menuitem">
+            <a class="dropdown-item">Add Folder</a>
+          </li>
+          <li
+            (click)="openAddDocumentModal()"
+            role="menuitem">
+            <a class="dropdown-item">Add Document</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="btn-group lr-dropdown lr-dropdown_primary" dropdown>
+        <button
+          lr-ic-btn-dropdown
+          dropdownToggle
+          icon="ellipsis"
+          type="button"
+          class="dropdown-toggle">
+        </button>
+        <ul
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right"
+          role="menu">
+          <li
+            (click)="openDocumentFolderModal('edit')"
+            role="menuitem">
+            <a class="dropdown-item">Edit folder</a>
+          </li>
+          <li
+            (click)="openDeleteFolderModal()"
+            role="menuitem">
+            <a class="dropdown-item">Delete folder</a>
+          </li>
+        </ul>
+      </div>
+    </lr-case-header>
+  </ng-container>
+
+  <div class="documents__inner-container">
+    <div class="documents__folders">
+      <lr-documents-folder
+        [title]="'All documents'"
+        [filesAmount]="folders$ | async | documentsTotalAmount"
+        (click)="selectFolder(null)"
+        [selected]="(selectedFolder$ | async) === null">
+      </lr-documents-folder>
+      <ng-container *ngIf="folders$ | async as folders">
+        <lr-documents-folder
+          *ngFor="let folder of folders"
+          [title]="folder.name"
+          [filesAmount]="folder['documents@odata.count']"
+          (click)="selectFolder(folder)"
+          [selected]="(selectedFolder$ | async)?.id === folder.id">
+        </lr-documents-folder>
+      </ng-container>
+    </div>
+
+    <div class="documents__documents-table documents-table">
+      <div class="documents-table__filters filters">
+        <label class="lr-search-input filters__search">
+          <input
+            [formControl]="searchFilter$"
+            type="text"
+            placeholder="Search for a keyword…">
+          <span class="lr-search-input__solid-icon"></span>
+        </label>
+
+        <div
+          dropdown
+          #dropdown="bs-dropdown"
+          placement="bottom right"
+          class="btn-group lr-dropdown filters__type-filter filters_to-right">
+          <button
+            class="dropdown-toggle lr-selectable-trigger {{ dropdown.isOpen ? 'expanded' : 'collapsed' }}"
+            dropdownToggle>
+            <span class="lr-selectable-trigger__title">Filter by Type:</span>
+            <span class="lr-selectable-trigger__selected-option">{{ typeFilter$ | async }}</span>
+          </button>
+
+          <div
+            *dropdownMenu
+            class="dropdown-menu dropdown-menu-right">
+            <div
+              (click)="typeFilter$.next('View All')"
+              class="dropdown-item">
+              View All
+            </div>
+            <div
+              (click)="typeFilter$.next('Document')"
+              class="dropdown-item">
+              Document
+            </div>
+            <div
+              (click)="typeFilter$.next('Exhibit')"
+              class="dropdown-item">
+              Exhibit
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr class="table-secondary">
+              <th class="lr-sortable table-header" scope="col" lrSortableHeader="title" (sort)="onSort($event)">NAME</th>
+              <th class="lr-sortable table-header" scope="col" lrSortableHeader="batesStamp" (sort)="onSort($event)">BATES STAMP</th>
+              <th class="lr-sortable table-header" scope="col" lrSortableHeader="exhibitStamp" (sort)="onSort($event)">EXHIBIT STAMP</th>
+              <th class="lr-sortable table-header" scope="col" lrSortableHeader="createdDateTime" (sort)="onSort($event)">DATE ADDED</th>
+              <th class="table-header" scope="col">ISSUES</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="documents$ | async as documents">
+            <tr *ngFor="let document of documents">
+              <td
+                (click)="openDocumentPreview(document)"
+                class="nav border-end data-cell">
+                <div class="document-title-cell">
+                  <span class="document-title-cell__title {{ isExhibit(document) ? 'document-title-cell__exhibit-icon' : 'document-title-cell__root-icon'}}">
+                    {{ document.title }}
+                  </span>
+                  <span
+                    *ngIf="isExhibit(document)"
+                    class="document-title-cell__sub-title text-truncate">
+                    {{ document.parent?.title }}
+                  </span>
+                </div>
+              </td>
+              <td class="data-cell">{{ document.batesStamp || '-' }}</td>
+              <td class="data-cell">{{ document.exhibitStamp || '-' }}</td>
+              <td class="data-cell">{{ document.createdDateTime | date: 'dd/MM/yyyy'}}</td>
+              <td class="data-cell">
+                <span>-</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,75 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+      },
+      "extends": [
+        "plugin:import/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-typescript/base"
+      ],
+      "rules": {
+        "array-element-newline": ["warn", "consistent"],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unsafe-member-access": "warn",
+        "@typescript-eslint/no-unsafe-assignment": "warn",
+        "@typescript-eslint/unbound-method": "off",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/adjacent-overload-signatures": "off",
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/lines-between-class-members": "off",
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "lr",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "lr",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.js"
+      ],
+      "parserOptions": {
+        "ecmaVersion": "latest"
+      },
+      "env": {
+        "node": true,
+        "es6": true
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }
+  ]
+}

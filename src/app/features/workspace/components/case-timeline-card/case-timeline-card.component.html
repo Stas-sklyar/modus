@@ -1,0 +1,63 @@
+<div [class]="
+  this.timelineEventCard?.partyType === 'Defense'
+    ? 'lr-case-timeline-card lr-case-timeline-card_defense-type'
+    : (this.timelineEventCard?.partyType === 'Plaintiff' ? 'lr-case-timeline-card lr-case-timeline-card_plaintiff-type' : 'lr-case-timeline-card lr-case-timeline-card_other-type'  )
+">
+  <div class="lr-case-timeline-card__col">
+    <div class="lr-case-timeline-card__circle"></div>
+    <div *ngIf="this.timelineEventCard?.description || false" class="lr-case-timeline-card__line"></div>
+  </div>
+
+  <div *ngIf="this.timelineEventCard?.description || false; else cardWithoutContent" class="lr-case-timeline-card__col case-timeline-content">
+    <span class="case-timeline-content__title">{{ timelineEventCard?.title || '' }}</span>
+    <span
+      class="case-timeline-content__date">
+      {{
+        (timelineEventCard?.eventDate | date: "MMMM d, y")
+        + " at " +
+        (timelineEventCard?.eventDate | date:'h:mm a')
+      }}
+    </span>
+
+    <div
+      *ngIf="timelineEventCard"
+      lrApplyRedirectsToMentions
+      [innerHTML]="timelineEventCard.description | safeHtml"
+      class="case-timeline-content__details">
+    </div>
+
+    <div class="case-timeline-content__footer case-timeline-card-footer">
+      <div class="case-timeline-card-footer__col">
+<!--        TODO: UNCOMMENT AFTER "DOCUMENTS" IMPLEMENTATION-->
+<!--        <lr-card-chip></lr-card-chip>-->
+<!--        <lr-card-chip></lr-card-chip>-->
+      </div>
+
+      <div class="case-timeline-card-footer__col">
+        <span
+          *ngIf="timelineEventCard?.timeLineEventTags?.length"
+          class="case-timeline-card-footer__issues">
+          <b>Issues:</b>
+
+          <span
+            *ngFor="let tag of timelineEventCard?.timeLineEventTags; let i = index">
+            {{ tag.trialCaseTag.name }}<span *ngIf="i + 1 !== timelineEventCard?.timeLineEventTags?.length">,</span>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #cardWithoutContent>
+    <div class="lr-case-timeline-card__col lr-case-timeline-card__body-without-content">
+      <span class="case-timeline-content__title">{{ timelineEventCard?.title || '' }}</span>
+      <span class="case-timeline-content__date">
+        {{
+          timelineEventCard?.eventDate | date: "MMMM d, y"
+          + " at " +
+          timelineEventCard?.eventDate | date:'h:mm a'
+        }}
+      </span>
+    </div>
+  </ng-template>
+</div>

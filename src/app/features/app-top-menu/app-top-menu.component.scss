@@ -1,0 +1,52 @@
+@import '../../../assets/styles/global';
+
+.app-top-menu,
+.tabs-panel,
+.controls-panel {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.app-top-menu {
+  padding: 27px 50px;
+
+  @media screen and (min-width: 1440px) {
+    padding: 27px 105px;
+  }
+
+  &__logo {
+    @include app-logo;
+  }
+}
+
+.controls-panel {
+  margin-left: auto;
+  display: flex;
+  gap: 30px;
+}
+
+.tab {
+  @include reset-native-control;
+  @include panel-tab;
+  @include medium-headline;
+}
+
+.control-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  &__add-menu {
+    background: url('../../../assets/icons/ic_add_plus.svg') no-repeat center;
+    border-color: transparent;
+  }
+
+  &__profile {
+    background: url('../../../assets/icons/ic_profile.svg') no-repeat center;
+  }
+
+  &__logout {
+    background: url('../../../assets/icons/ic_logout.svg') no-repeat center;
+  }
+}

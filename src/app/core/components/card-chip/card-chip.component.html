@@ -1,0 +1,15 @@
+<div class="lr-card-chip">
+  <div [class]="cardChipType === 'DOCUMENT'
+    ? 'lr-card-chip__icon lr-card-chip__icon--document'
+    : 'lr-card-chip__icon lr-card-chip__icon--people'
+  ">
+  </div>
+
+  <span class="lr-card-chip__value">{{ value }}</span>
+
+  <div class="lr-card-chip__title">
+    {{
+      cardChipType === "DOCUMENT" ? "Documents" : "People"
+    }}
+  </div>
+</div>

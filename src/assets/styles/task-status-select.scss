@@ -1,0 +1,41 @@
+@import './constants/common';
+
+.lr-status-select {
+  position: relative;
+  &:before {
+    content: "";
+    width: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 4px 0 0 4px;
+    background-color: $COVER_GRAY_TO_BLACK;
+  }
+  &_custom-chevron {
+    appearance: none;
+    background: url('../../assets/icons/ic-chevron-down-solid.svg') no-repeat right $COVER_GRAY_TO_WHITE;
+    background-size: 17px;
+    background-position-x: 97%;
+  }
+  &_todo {
+    &:before {
+      background-color: $COVER_GRAY;
+    }
+  }
+  &_in-progress {
+    &:before {
+      background-color: $COVER_YELLOW;
+    }
+  }
+  &_completed {
+    &:before {
+      background-color: $COVER_GREEN;
+    }
+  }
+  &_blocked {
+    &:before {
+      background-color: $COVER_DARK_RED;
+    }
+  }
+}

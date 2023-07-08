@@ -1,0 +1,13 @@
+@import '../../../../../assets/styles/global';
+
+.lr-create-folder-form {
+  &__radios-title {
+    margin-top: 20px;
+    @include medium-paragraph;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      margin-top: 30px;
+      @include large-paragraph;
+    }
+  }
+}

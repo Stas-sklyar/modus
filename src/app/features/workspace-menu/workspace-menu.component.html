@@ -1,0 +1,76 @@
+<div class="workspace-menu">
+  <a
+    lr-btn-nav-primary
+    class="bordered"
+    icon="logo"
+    routerLink="/">
+  </a>
+
+  <ng-container *ngIf="selectedCase$ | async as selectedCase">
+    <div class="scrollable-container">
+      <div class="hubs-container">
+        <section class="hub-group">
+          <a
+            lr-btn-nav-primary
+            icon="workbook"
+            [routerLink]="[workspaceRoutes.WORKBOOK]"
+            routerLinkActive="activated-route">
+          </a>
+
+          <a
+            lr-btn-nav-primary
+            icon="timeline"
+            [routerLink]="[workspaceRoutes.CASE_TIMELINE]"
+            routerLinkActive="activated-route">
+          </a>
+
+          <a
+            lr-btn-nav-primary
+            icon="case-narrative"
+            [routerLink]="[workspaceRoutes.CASE_NARRATIVE]"
+            routerLinkActive="activated-route">
+          </a>
+
+          <a
+            lr-btn-nav-primary
+            icon="trial-notebook"
+            [routerLink]="[workspaceRoutes.TRIAL_NOTEBOOK]"
+            routerLinkActive="activated-route">
+          </a>
+        </section>
+
+        <section class="hub-group">
+          <a
+            lr-btn-nav-primary
+            class="bordered"
+            icon="tasks"
+            [routerLink]="[workspaceRoutes.CASE_TASKS]"
+            routerLinkActive="activated-route">
+          </a>
+
+          <a
+            lr-btn-nav-primary
+            class="bordered"
+            icon="documents"
+            [routerLink]="[workspaceRoutes.CASE_DOCUMENTS]"
+            routerLinkActive="activated-route">
+          </a>
+
+          <a
+            lr-btn-nav-primary
+            class="bordered"
+            icon="people"
+            [routerLink]="[workspaceRoutes.CASE_PEOPLE]"
+            routerLinkActive="activated-route">
+          </a>
+        </section>
+      </div>
+    </div>
+
+    <a
+      (click)="openEditCaseModal(selectedCase.id)"
+      lr-btn-nav-secondary
+      icon="settings">
+    </a>
+  </ng-container>
+</div>

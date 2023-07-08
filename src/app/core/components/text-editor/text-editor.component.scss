@@ -1,0 +1,13 @@
+.text-editor {
+  height: 200px;
+
+  &__quill-editor {
+    display: block;
+    height: 150px;
+  }
+
+  &.disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+}

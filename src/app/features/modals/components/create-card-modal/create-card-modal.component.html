@@ -1,0 +1,49 @@
+<lr-modal>
+  <ng-container modalTitle>
+    Create card
+  </ng-container>
+
+  <form
+    [formGroup]="cardForm"
+    modalContent>
+
+    <label class="lr-default-label">
+      <span>Name</span>
+
+      <input
+        autocomplete="off"
+        formControlName="name"
+        placeholder="Give your card a name"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <div class="lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor
+        formControlName="description"
+        [participants$]="participants$"
+        placeholder="Add some details about this card">
+      </lr-text-editor>
+    </div>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="initCardCreation()"
+      class="primary-button"
+      [disabled]="cardForm.status === 'INVALID' || cardForm.disabled">
+      create card
+      <div *ngIf="cardForm.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

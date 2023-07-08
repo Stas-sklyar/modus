@@ -1,0 +1,237 @@
+<section class="participants">
+  <header class="participants__title">
+    People
+  </header>
+
+  <div class="participants__container">
+    <div class="participants__filters filters">
+      <div class="filters__row">
+        <label class="lr-search-input lr-search-input_outline filters__search-input">
+          <input
+            [formControl]="searchFilter$"
+            type="text"
+            placeholder="Search people…">
+          <span class="lr-search-input__icon"></span>
+        </label>
+      </div>
+
+      <section class="lr-category-tabs-container">
+        <ng-container *ngIf="typeFilter$ | async as typeFilter">
+<!--          <div-->
+<!--            class="lr-category-tabs-container__category-tab  lr-category-tabs-container__category-tab_purple"-->
+<!--            [class.selected]="typeFilter === 'mine'">-->
+<!--            <div class="tab_name" (click)="typeFilter$.next('mine')">-->
+<!--              Collaborating with me (13)-->
+<!--            </div>-->
+<!--          </div>-->
+          <div
+            class="lr-category-tabs-container__category-tab  lr-category-tabs-container__category-tab_purple"
+            [class.selected]="true">
+            <div class="tab_name" (click)="typeFilter$.next('all')">
+              View All ({{ (users$ | async)?.length }})
+            </div>
+          </div>
+        </ng-container>
+      </section>
+    </div>
+
+    <div class="participants__inner-container">
+      <div class="filters__column">
+        <h5 class="filters__header">Filter by:</h5>
+
+        <div class="filters__group">
+          <div class="filters__group-title">Case:</div>
+          <ng-container *ngIf="trialCases$ | async as trialCases">
+            <label
+              *ngFor="let trialCase of trialCases | clipList: caseFilterSliceSize"
+              class="filters__group-item group-item">
+              <input
+                (change)="trialCaseFilter = trialCase.id"
+                type="checkbox"
+                class="form-check-input">
+              <span
+                [title]="trialCase.name"
+                class="group-item__name text-truncate">{{ trialCase.name }}</span>
+            </label>
+            <a
+              *ngIf="trialCases.length > 5"
+              (click)="changeSliceSize('case')"
+              class="filters__filter-toggle">
+              {{ caseFilterSliceSize ? 'Show more' : 'Hide' }}
+            </a>
+          </ng-container>
+        </div>
+
+<!--        <div class="filters__group">-->
+<!--          <div class="filters__group-title">Team:</div>-->
+<!--          <label class="filters__group-item">-->
+<!--            <input type="checkbox" class="form-check-input">-->
+<!--            <span>Internal</span>-->
+<!--          </label>-->
+<!--          <label class="filters__group-item">-->
+<!--            <input type="checkbox" class="form-check-input">-->
+<!--            <span>Opposing Counsel</span>-->
+<!--          </label>-->
+<!--          <label class="filters__group-item">-->
+<!--            <input type="checkbox" class="form-check-input">-->
+<!--            <span>Expert</span>-->
+<!--          </label>-->
+<!--        </div>-->
+
+        <div class="filters__group">
+          <div class="filters__group-title">Title:</div>
+          <label
+            *ngFor="let title of availableTitles | clipList: titleFilterSliceSize"
+            class="filters__group-item group-item">
+            <input
+              type="checkbox"
+              (change)="titleFilter = title"
+              class="form-check-input">
+            <span class="capitalized">{{ title }}</span>
+          </label>
+          <a
+            *ngIf="(availableTitles && availableTitles.length > 5)"
+            (click)="changeSliceSize('title')"
+            class="filters__filter-toggle">
+            {{ titleFilterSliceSize ? 'Show more' : 'Hide' }}
+          </a>
+<!--          <label class="filters__group-item group-item">-->
+<!--            <input-->
+<!--              type="checkbox"-->
+<!--              (change)="titleFilter = 'mediator'"-->
+<!--              class="form-check-input">-->
+<!--            <span>Mediator</span>-->
+<!--          </label>-->
+<!--          <label class="filters__group-item group-item">-->
+<!--            <input-->
+<!--              type="checkbox"-->
+<!--              (change)="titleFilter = 'title'"-->
+<!--              class="form-check-input">-->
+<!--            <span>Title</span>-->
+<!--          </label>-->
+<!--          <label class="filters__group-item group-item">-->
+<!--            <input-->
+<!--              type="checkbox"-->
+<!--              (change)="titleFilter = 'admin'"-->
+<!--              class="form-check-input">-->
+<!--            <span>Admin</span>-->
+<!--          </label>-->
+        </div>
+
+<!--        <div class="filters__group">-->
+<!--          <div class="filters__group-title">Role/permissions:</div>-->
+<!--          <label class="filters__group-item">-->
+<!--            <input type="checkbox" class="form-check-input">-->
+<!--            <span>Admin</span>-->
+<!--          </label>-->
+<!--          <label class="filters__group-item">-->
+<!--            <input type="checkbox" class="form-check-input">-->
+<!--            <span>Associate</span>-->
+<!--          </label>-->
+<!--          <label class="filters__group-item">-->
+<!--            <input type="checkbox" class="form-check-input">-->
+<!--            <span>Editor</span>-->
+<!--          </label>-->
+<!--          <label class="filters__group-item">-->
+<!--            <input type="checkbox" class="form-check-input">-->
+<!--            <span>View Only</span>-->
+<!--          </label>-->
+<!--        </div>-->
+      </div>
+
+      <div class="participants__table">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr class="table-secondary">
+              <th class="lr-sortable table-header" scope="col" lrSortableHeader="name" (sort)="onSort($event)">NAME</th>
+              <th class="table-header" scope="col">CURRENT CASES</th>
+              <th class="lr-sortable table-header" scope="col" lrSortableHeader="title" (sort)="onSort($event)">TITLE</th>
+              <th class="table-header" scope="col">ROLE</th>
+              <th class="table-header" scope="col"></th>
+              <th class="table-header" scope="col"></th>
+            </tr>
+            </thead>
+            <tbody *ngIf="users$ | async as users">
+              <tr class="data-row" *ngFor="let user of users">
+                <td
+                  class="data-cell">
+                  <div class="participants__user-card user-card">
+                    <div class="user-card__avatar">
+                      {{ (user.name | getInitials)?.toUpperCase() }}
+                    </div>
+
+                    <div class="user-card__info">
+                      <span class="user-card__name">
+                        {{ user.name }}
+                      </span>
+                      <span
+                        class="user-card__email">
+                        {{ user.email }}
+                      </span>
+                    </div>
+
+                  </div>
+                </td>
+                <td class="data-cell data-cell__related-cases">
+                  <div class="related-cases">
+                    <ng-container *ngIf="getRelatedCases(user) as cases; else noCases">
+                    <span
+                      [title]="cases.name"
+                      class="related-cases__tag related-cases__name">
+                      {{ cases.name }}
+                    </span>
+                      <span
+                        *ngIf="cases.amount > 0"
+                        class="related-cases__tag">
+                      +{{ cases.amount }}
+                    </span>
+                    </ng-container>
+                    <ng-template #noCases><span> - </span></ng-template>
+                  </div>
+                </td>
+                <td class="data-cell">{{ user.title }}</td>
+                <td class="data-cell">-</td>
+                <td class="data-cell">
+                  <button class="primary-button" (click)="openParticipantPanel(user)">View Profile</button>
+                </td>
+                <td class="data-cell">
+                  <div
+                    dropdown
+                    placement="bottom right"
+                    class="btn-group lr-dropdown">
+                    <button
+                      dropdownToggle
+                      class='dropdown-toggle participants__ellipsis-button'>
+                      ...
+                    </button>
+
+                    <div
+                      *dropdownMenu
+                      class="dropdown-menu dropdown-menu-right">
+                      <div
+                        (click)="sendInviteToUser(user)"
+                        class="dropdown-item">
+                        Invite User
+                      </div>
+                      <div
+                        (click)="openEditUserModal(user)"
+                        class="dropdown-item">
+                        Edit User
+                      </div>
+                      <div
+                        (click)="deleteUser(user)"
+                        class="dropdown-item">
+                        Delete User
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

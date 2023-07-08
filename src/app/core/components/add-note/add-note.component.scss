@@ -1,0 +1,20 @@
+.lr-add-note {
+
+  &__control {
+    margin-bottom: 20px;
+  }
+
+  &__buttons-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__form-btn {
+    margin-left: 15px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

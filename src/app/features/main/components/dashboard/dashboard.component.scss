@@ -1,0 +1,56 @@
+@import '../../../../../assets/styles/global';
+
+.dashboard {
+  &__header {
+    padding-bottom: 50px;
+  }
+
+  &__date-indicator,
+  &__greeting {
+    font-weight: normal;
+  }
+
+  &__date-indicator {
+    @include medium-headline;
+    color: $GRAY_0;
+  }
+
+  &__greeting {
+    @include extra-large-headline;
+    font-weight: normal;
+    color: $GRAY_0;
+
+    &_capitalized {
+      text-transform: capitalize;
+    }
+  }
+
+
+  &__content-container {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__inner-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 30px;
+  }
+
+  &__overdue-button {
+    @include secondary-button($PURPLE_0);
+    padding: 10px;
+    text-align: center;
+  }
+
+  &__tasks {
+    align-self: flex-start;
+    flex-shrink: 0;
+    width: 500px;
+  }
+
+  &__analytics {
+    background: $COVER_PURE_WHITE;
+  }
+}

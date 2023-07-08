@@ -1,0 +1,54 @@
+<lr-modal>
+  <ng-container modalTitle>Edit card</ng-container>
+
+  <form
+    *ngIf="card$ | async as card; else loader"
+    [formGroup]="editCardForm"
+    class="edit-card-form"
+    modalContent>
+
+    <label class="lr-default-label">
+      <span>Name</span>
+
+      <input
+        autocomplete="off"
+        formControlName="name"
+        placeholder="Give your card a name"
+        type="text"
+        class="edit-card-form__control lr-filled-input">
+    </label>
+
+    <div class="lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor
+        formControlName="description"
+        [participants$]="participants$"
+        placeholder="Add some details about this card">
+      </lr-text-editor>
+    </div>
+
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      class="cancel-button"
+      type="button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="editCard()"
+      class="primary-button"
+      [disabled]="editCardForm.status === 'INVALID' || editCardForm.disabled">
+      edit card
+      <div *ngIf="editCardForm.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

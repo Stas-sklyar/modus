@@ -1,0 +1,113 @@
+<div class="participant-preview">
+  <a
+    (click)="closePanel()"
+    class="step-back-button">
+    <svg class="step-back-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+      <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+    </svg>
+    {{ backTo || 'Go back' }}
+  </a>
+
+  <ng-container *ngIf="selectedUser$ | async as user">
+    <header class="participant-preview__header header">
+      <div class="participant-preview__user-card user-card">
+        <div class="user-card__avatar">
+          {{ (user.name | getInitials)?.toUpperCase() }}
+        </div>
+
+        <div class="user-card__info">
+          <span class="user-card__name">
+            {{ user.name }}
+          </span>
+          <span class="user-card__title">
+            {{ user.title }}
+          </span>
+        </div>
+      </div>
+
+      <div class="header__controls">
+<!--        <button-->
+<!--          lr-ic-btn-->
+<!--          icon="plus">-->
+<!--        </button>-->
+
+        <div
+          dropdown
+          placement="bottom right"
+          class="btn-group lr-dropdown lr-dropdown_primary">
+          <button
+            class="dropdown-toggle"
+            dropdownToggle
+            lr-ic-btn
+            icon="ellipsis">
+          </button>
+
+          <div
+            *dropdownMenu
+            class="dropdown-menu dropdown-menu-right">
+            <div
+              (click)="sendInviteToUser(user)"
+              class="dropdown-item">
+              Invite User
+            </div>
+            <div
+              (click)="openEditUserModal(user)"
+              class="dropdown-item">
+              Edit User
+            </div>
+            <div
+              (click)="deleteUser(user)"
+              class="dropdown-item">
+              Delete User
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <ng-container *ngIf="selectedCategory$ | async as selectedCategory">
+      <section class="lr-category-tabs-container">
+        <div
+          class="lr-category-tabs-container__category-tab lr-category-tabs-container__category-tab_purple"
+          [class.selected]="selectedCategory === 'profile'"
+          (click)="selectedCategory$.next('profile')">
+          <div class="tab_name">
+            profile
+          </div>
+        </div>
+        <div
+          class="lr-category-tabs-container__category-tab lr-category-tabs-container__category-tab_purple"
+          [class.selected]="selectedCategory === 'cases'"
+          (click)="selectedCategory$.next('cases')">
+          <div class="tab_name">
+            current cases
+          </div>
+        </div>
+<!--        <div-->
+<!--          class="lr-category-tabs-container__category-tab lr-category-tabs-container__category-tab_purple"-->
+<!--          [class.selected]="selectedCategory === 'tasks'"-->
+<!--          (click)="selectedCategory$.next('tasks')">-->
+<!--          <div class="tab_name">-->
+<!--            assigned tasks-->
+<!--          </div>-->
+<!--        </div>-->
+      </section>
+
+      <ng-container [ngSwitch]="selectedCategory">
+        <section *ngSwitchCase="'profile'">
+          <lr-participant-profile [user]="user"></lr-participant-profile>
+        </section>
+
+        <section
+          *ngSwitchCase="'cases'">
+          <lr-participant-cases [user]="user"></lr-participant-cases>
+        </section>
+
+        <section *ngSwitchCase="'tasks'">
+          <lr-participant-tasks></lr-participant-tasks>
+        </section>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+

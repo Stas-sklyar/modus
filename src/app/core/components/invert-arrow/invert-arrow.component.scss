@@ -1,0 +1,14 @@
+@import '../../../../assets/styles/global';
+
+.icon {
+  color: $COVER_PURE_BLACK;
+
+  &_invert-arrow {
+    width: 20px;
+    height: 20px;
+  }
+
+  &_arrow-up {
+    transform: rotate(180deg);
+  }
+}

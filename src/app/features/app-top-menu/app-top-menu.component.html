@@ -1,0 +1,70 @@
+<header class="app-top-menu">
+  <div class="app-top-menu__logo"></div>
+
+  <div class='app-top-menu__tabs-panel tabs-panel'>
+    <a
+      routerLink="dashboard"
+      routerLinkActive="active"
+      class='tabs-panel__tab tab'>
+      Dashboard
+    </a>
+
+    <a
+      routerLink="cases"
+      routerLinkActive="active"
+      class='tabs-panel__tab tab'>
+      Cases
+    </a>
+
+    <a
+      routerLink="participants"
+      routerLinkActive="active"
+      class='tabs-panel__tab tab'>
+      People
+    </a>
+
+    <a
+      routerLink="my-tasks"
+      routerLinkActive="active"
+      class='tabs-panel__tab tab'>
+      Tasks
+    </a>
+  </div>
+
+  <div class='app-top-menu__controls-panel controls-panel'>
+    <div
+      dropdown
+      placement="bottom right"
+      class="btn-group lr-dropdown">
+      <button
+        dropdownToggle
+        class='dropdown-toggle controls-panel__control control-icon control-icon__add-menu'>
+      </button>
+
+      <div
+        *dropdownMenu
+        class="dropdown-menu dropdown-menu-right">
+        <div
+          (click)="openCreateCaseModal()"
+          class="dropdown-item">
+          Add Case
+        </div>
+        <div
+          (click)="openInvitePeopleModal()"
+          class="dropdown-item">
+          Add User
+        </div>
+      </div>
+    </div>
+
+<!--    <div-->
+<!--      class='controls-panel__control control-icon control-icon__profile'>-->
+<!--    </div>-->
+
+    <a
+      (click)="logout()"
+      [routerLink]="['/', appRoutes.LOGIN]"
+      class='controls-panel__control control-icon control-icon__logout'>
+    </a>
+  </div>
+</header>

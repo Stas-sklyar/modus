@@ -1,0 +1,110 @@
+@import '../../../../../assets/styles/global';
+
+.lr-case-timeline-card {
+  display: flex;
+  overflow: hidden;
+  cursor: pointer;
+
+  &_defense-type {
+
+    & .case-timeline-content {
+      border: 2px solid $BLUE_2;
+      background-color: $BLUE_1;
+    }
+    & .lr-case-timeline-card__circle {
+      background-color: $BLUE_2;
+    }
+  }
+
+  &_plaintiff-type {
+
+    & .case-timeline-content {
+      border: 2px solid $PINK_0;
+      background-color: $PINK_1;
+    }
+    & .lr-case-timeline-card__circle {
+      background-color: $PINK_0;
+    }
+  }
+
+  &_other-type {
+
+    & .case-timeline-content {
+      border: 2px solid $GRAY_3;
+      background-color: $GRAY_4;
+    }
+    & .lr-case-timeline-card__circle {
+      background-color: $GRAY_2;
+    }
+  }
+
+  &__col {
+
+    &:first-child {
+      width: 20px;
+      margin-right: 20px;
+    }
+
+    &:last-child {
+      flex-grow: 1;
+      width: 100%;
+    }
+  }
+
+  &__circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  &__line {
+    height: 100%;
+    width: 1px;
+    background-color: $GRAY_2;
+    margin: 20px auto 0 auto;
+  }
+
+  &__body-without-content {
+    transform: translateY(-4px);
+  }
+}
+
+.case-timeline-content {
+  border-radius: $BORDER_RADIUS_BASE;
+  padding: 30px;
+
+  &__title {
+    margin-right: 20px;
+    @include medium-paragraph;
+    font-weight: 600;
+  }
+
+  &__date {
+    @include large-paragraph;
+  }
+
+  &__details {
+    @include large-paragraph;
+    margin: 20px 0;
+  }
+}
+
+.case-timeline-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__col {
+    &:first-child {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      gap: 20px;
+    }
+  }
+
+  &__issues {
+    @include extra-small-paragraph;
+    color: $GRAY_0;
+  }
+}

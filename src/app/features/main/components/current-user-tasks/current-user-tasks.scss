@@ -1,0 +1,64 @@
+@import '../../../../../assets/styles/global';
+
+.current-user-tasks {
+  min-height: 100vh;
+
+  &__title {
+    @include large-headline;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  &__table-container {
+    padding: 35px;
+    margin: 32px 0 20px 0;
+    background-color: $WHITE_0;
+  }
+}
+
+.current-user-tasks-table {
+  width: 100%;
+
+  &__row {
+  }
+
+  &__cell {
+    &:last-child {
+      & .current-user-tasks-table__card {
+        margin-right: 0;
+      }
+    }
+  }
+
+  & th {
+    @include small-paragraph;
+    font-weight: 600;
+    color: $BLACK_2;
+    padding-bottom: 21px;
+    cursor: pointer;
+
+    &:after {
+      top: calc(50% - 16px);
+    }
+  }
+
+  &__card {
+    @include medium-headline;
+    margin: 0 50px 21px 0;
+  }
+
+  &__icon {
+    margin-right: 17px;
+    width: 24px;
+    height: 24px;
+    background: url("../../../../../assets/icons/ic_circle-check-outline.svg");
+  }
+}
+
+.table-card {
+  @include task-card-decor-line;
+  background-color: $GRAY_7;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}

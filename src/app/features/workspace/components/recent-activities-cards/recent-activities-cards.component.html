@@ -1,0 +1,29 @@
+<!-- TODO: Fix component after implementation of the "recent-activities" entity on the BE  -->
+
+<div
+  class='recent-activities-cards'
+  *ngIf='recentActivities; else loader'
+>
+  <ng-container *ngIf='recentActivities.length'>
+    <div
+      class='recent-activities-cards__card recent-activity-card'
+      *ngFor='let activity of recentActivities'
+    >
+      <b>{{ activity.property1 }}</b>
+      <p class='recent-activity-card__content'>{{ activity.property2 }}</p>
+    </div>
+  </ng-container>
+
+  <div class='recent-activities-cards__card recent-activity-card'>
+    <b>People: </b>
+    <p class='recent-activity-card__content'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</p>
+  </div>
+  <div class='recent-activities-cards__card recent-activity-card'>
+    <b>People: </b>
+    <p class='recent-activity-card__content'>Lorem isum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</p>
+  </div>
+</div>
+
+<ng-template #loader>
+  <div class='loader'></div>
+</ng-template>

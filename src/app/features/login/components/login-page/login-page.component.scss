@@ -1,0 +1,87 @@
+@import '../../../../../assets/styles/global';
+
+.login-page {
+  background: $GRAY_5;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in-widget {
+  padding: 20px;
+  width: 100%;
+  max-width: 695px;
+  background: $COVER_PURE_WHITE;
+  border-radius: 3px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 30px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      gap: 30px;
+    }
+  }
+
+  &__title {
+    font-weight: 500;
+    text-align: center;
+  }
+
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+
+  &__icon {
+    @include app-logo;
+  }
+}
+
+.login-form {
+  @include large-paragraph;
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0;
+  color: $GRAY_0;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    gap: 30px;
+  }
+
+  &__control {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  &__recovery-link {
+    color: $TEXT_DARK_BLUE;
+
+    &_forgot-password {
+      width: 100%;
+      max-width: 150px;
+      margin: -10px 0 30px 0;
+    }
+  }
+
+  &__submit-button {
+    @include large-paragraph;
+    font-weight: 600;
+    padding: 25px 17px;
+    margin-bottom: 30px;
+    color: $WHITE_0;
+  }
+
+  &__label-row {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,150 @@
+@import '../../../../assets/styles/global';
+
+.lr-notes {
+  &__notes-list {
+    margin: 0 0 20px;
+  }
+
+  &__add-note {
+    margin-top: 20px;
+
+    &_subtitle {
+      margin: 20px 0;
+    }
+  }
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.record {
+  padding: 20px 0;
+  position: relative;
+
+  &:hover {
+    .record__dropdown-btn {
+      opacity: 1;
+      transition: all .2s linear;
+    }
+  }
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 30px 0;
+  }
+
+  &__title {
+    min-height: 35px;
+    margin-bottom: 10px;
+    @include medium-paragraph;
+    font-weight: bold;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__content {
+    background: $COVER_GRAY_TO_WHITE;
+    border-radius: $BORDER_RADIUS_BASE;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    line-height: 26px;
+    gap: 20px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      gap: 27px;
+    }
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      padding: 30px;
+      @include large-paragraph;
+    }
+
+    &_highlighted {
+      border-radius: $BORDER_RADIUS_BASE;
+      background: $COVER_LIGHT_GRAY;
+      align-self: flex-start;
+      @include extra-small-paragraph;
+      color: $TEXT_DARK_GRAY;
+      padding: 8px 10px;
+
+      @media screen and (min-width: 1280px) and (min-height: 800px) {
+        @include small-paragraph;
+        padding: 10px;
+      }
+    }
+  }
+
+  &:hover {
+    .record__add-btn {
+      visibility: visible;
+      opacity: 1;
+      transition: all .2s linear;
+    }
+  }
+
+  .record__add-btn {
+    visibility: hidden;
+    opacity: 0;
+    transition: all .2s linear;
+
+    &_hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: all .2s linear;
+    }
+  }
+
+  &__documents {
+    margin-top: 10px;
+  }
+
+  &__dropdown-btn {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    cursor: pointer;
+    transition: all .2s linear;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__dropdown-menu {
+  }
+}
+
+.document {
+
+  &__link {
+    text-decoration: none;
+  }
+}
+
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  padding: 15px;
+  background-color: $BLUE_0;
+  z-index: 2;
+  border-radius: $BORDER_RADIUS_BASE;
+  color: $WHITE_0;
+
+  &__item {
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+}

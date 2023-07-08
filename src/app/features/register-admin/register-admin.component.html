@@ -1,0 +1,77 @@
+<section class='register-admin'>
+  <section class='register-admin__form-widget form-widget'>
+    <header class='form-widget__header'>
+      <div class='form-widget__logo logo'>
+        <div class='logo__icon'></div>
+      </div>
+
+      <h2 class='form-widget__title'>
+        Registration in Modus
+      </h2>
+    </header>
+
+    <form
+      [formGroup]="form"
+      class='form-widget__registration-form registration-form'>
+
+      <label class='lr-default-label'>
+        <span>Full Name</span>
+
+        <input
+          formControlName='name'
+          placeholder='Enter your full name'
+          type='text'
+          class='lr-filled-input'>
+      </label>
+
+      <label class='lr-default-label'>
+        <span>Email address</span>
+
+        <input
+          formControlName='email'
+          placeholder='Enter your email address'
+          type='email'
+          class='lr-filled-input'>
+        <span
+          *ngIf="invalidEmailError"
+          class="lr-form-control-warning">
+          Please, enter a valid email address.
+        </span>
+      </label>
+
+      <label class='lr-default-label'>
+        <span>Password</span>
+
+        <input
+          formControlName='password'
+          placeholder='Enter your password'
+          type='password'
+          class='lr-filled-input'>
+        <span
+          *ngIf="invalidPasswordError"
+          class="lr-form-control-warning">
+          The password should be at least 8 characters long, includes one uppercase character and one number.
+        </span>
+      </label>
+
+      <label class='lr-default-label'>
+        <span>Company</span>
+
+        <input
+          formControlName='companyName'
+          placeholder='Enter your company name'
+          type='text'
+          class='lr-filled-input'>
+      </label>
+
+      <button
+        (click)="initRegistrationProcess()"
+        [disabled]="submitting.getValue() || form.invalid"
+        class='primary-button'>
+        Registration
+        <div *ngIf="submitting | async" class="btn-loader"></div>
+      </button>
+    </form>
+  </section>
+</section>
+

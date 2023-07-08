@@ -1,0 +1,46 @@
+<div
+  #origin='cdkOverlayOrigin'
+  cdkOverlayOrigin>
+</div>
+<ng-template
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (backdropClick)="clearParams()"
+  (detach)="clearParams()"
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlay>
+
+  <div class="aside-panel">
+    <div class="aside-panel__inner-container">
+      <ng-container [ngSwitch]="selectedComponent">
+        <ng-container *ngSwitchCase="'document'">
+          <lr-document-preview></lr-document-preview>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'card'">
+          <lr-card-preview></lr-card-preview>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'person'">
+          <lr-person-preview></lr-person-preview>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'timeline-event'">
+          <lr-timeline-event-preview></lr-timeline-event-preview>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'case-narrative'">
+          <lr-case-narrative-story-preview></lr-case-narrative-story-preview>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'participant'">
+          <lr-participant-preview></lr-participant-preview>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'task'">
+          <lr-task-preview></lr-task-preview>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

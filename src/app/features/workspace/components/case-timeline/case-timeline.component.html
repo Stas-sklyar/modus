@@ -1,0 +1,73 @@
+<section
+  class="lr-case-timeline glb-grid-container"
+  *ngIf="selectedCase$ | async as selectedCase; else loader">
+
+  <div class="glb-grid-container__main-column">
+    <lr-case-header
+      pageTitle="case timeline"
+      [caseTitle]="selectedCase.name"
+      [separated]="true">
+
+      <button
+        (click)="openCreateTimelineEventModal()"
+        lr-ic-btn-dropdown
+        icon="plus">
+      </button>
+    </lr-case-header>
+
+    <div
+      lrApplyRedirectsToMentions
+      [innerHTML]="selectedCase.description | safeHtml"
+      class="lr-case-timeline__description"
+      *ngIf="selectedCase.description">
+      {{ selectedCase.description }}
+    </div>
+
+    <lr-case-timeline-filters
+      *ngIf="timelineEvents$ | async as events"
+      [timelineEvents]="events">
+    </lr-case-timeline-filters>
+
+    <ng-container
+      *ngIf="(timelineEvents$ | async)
+        | filterEventsBySearchQuery: searchQuery$.getValue()
+        | filterEventsByIssues: selectedIssuesIdArr$.getValue()
+        | filterEventsByPeople: selectedPeopleIdArr$.getValue()
+        | filterEventsByPartyType: selectedPartyTypes$.getValue()
+        | groupEventsByYear as setOfEvents; else loader"
+    >
+      <div class="lr-case-timeline__list set-of-events">
+        <div *ngFor="let set of setOfEvents">
+
+          <h2 class="set-of-events__title">{{ set.year }}</h2>
+
+          <div class="set-of-events__events">
+            <lr-case-timeline-card
+              *ngFor="let timelineEventCard of set.events"
+              [timelineEventCard]="timelineEventCard"
+              (click)="expandSelectedTimelineEventCard(timelineEventCard.id)">
+            </lr-case-timeline-card>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div
+      class="lr-case-timeline__back-to-top-btn"
+      (click)="backToTop()">
+      Back to Top
+    </div>
+  </div>
+
+  <section class="glb-grid-container__aside-column">
+    <header class="glb-grid-container__aside-column_heading">
+      Recent activity
+    </header>
+
+    <lr-recent-activities-cards></lr-recent-activities-cards>
+  </section>
+</section>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

@@ -1,0 +1,150 @@
+<lr-modal>
+  <ng-container modalTitle>
+    {{ (action === 'create') ? 'Create document' : 'Edit document' }}
+  </ng-container>
+
+  <form
+    [formGroup]="documentForm"
+    modalContent>
+
+    <div class="lr-default-label">
+      <span>Folder</span>
+
+      <div class="folder-selector">
+        <div class="folder-selector__controls">
+          <div
+            dropdown
+            #dropdown="bs-dropdown"
+            placement="bottom right"
+            class="btn-group lr-dropdown lr-filled-input flex-grow-1">
+            <button
+              class="dropdown-toggle select-trigger"
+              type="button"
+              dropdownToggle>
+              <span [class.select-trigger_selected]="folderName">{{ folderName || 'Select Folder' }}</span>
+            </button>
+
+            <div
+              *dropdownMenu
+              class="dropdown-menu dropdown-menu-right">
+              <div
+                *ngFor="let folder of filteredFolders$ | async"
+                (click)="selectFolderId(folder.id); folderName = folder.name"
+                class="dropdown-item">
+                {{ folder.name }}
+              </div>
+            </div>
+          </div>
+
+          <button
+            (click)="showAddFolderForm = !showAddFolderForm"
+            class="folder-selector__form-toggle-button"
+            [class.folder-selector__form-toggle-button_rotated]="showAddFolderForm"
+            lr-ic-btn
+            icon="plus"
+            type="button">
+          </button>
+        </div>
+
+        <form
+          *ngIf="showAddFolderForm"
+          [formGroup]="folderForm"
+          (submit)="createFolder()"
+          class="folder-selector__add-folder-form">
+          <input
+            autocomplete="off"
+            formControlName="name"
+            placeholder="New folder name"
+            type="text"
+            class="lr-filled-input">
+
+          <button
+            [disabled]="folderForm.invalid || submitting"
+            class="primary-button"
+            type="submit">
+            add
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <label class="lr-file-uploader">
+      <div class="lr-file-uploader__container">
+      <span class="lr-file-uploader__trigger">
+        Choose a file
+      </span>
+
+        <span
+          *ngIf="fileName"
+          [title]="fileName"
+          class="lr-file-uploader__title text-truncate">
+        {{ fileName }}
+      </span>
+      </div>
+
+      <input
+        (change)="saveUploadedFile($event.target)"
+        type="file"
+      />
+    </label>
+
+    <label class="lr-default-label">
+      <span>Title</span>
+
+      <input
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Document Title"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label class="lr-default-label">
+      <span>Bates Number</span>
+
+      <input
+        autocomplete="off"
+        formControlName="batesNumber"
+        placeholder="000-000"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label class="lr-default-label">
+      <span>Issues</span>
+
+      <input
+        autocomplete="off"
+        placeholder="Issues"
+        type="text"
+        class="lr-filled-input"
+        disabled>
+    </label>
+
+    <div class="lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor formControlName="description"></lr-text-editor>
+    </div>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button">
+      cancel
+    </button>
+
+    <button
+      (click)="submitForm()"
+      [disabled]="documentForm.invalid || submitting"
+      class="primary-button"
+      type="submit">
+      {{ (action === 'create') ? 'Create document' : 'Edit document' }}
+      <div *ngIf="submitting" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>
+
+

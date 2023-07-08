@@ -1,0 +1,38 @@
+<lr-modal>
+  <ng-container modalTitle>Edit section</ng-container>
+
+  <form
+    *ngIf="notebookSection$ | async as section"
+    [formGroup]="form"
+    modalContent
+  >
+    <label class="lr-default-label">
+      <span>Name</span>
+
+      <input
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Section name"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+    <button
+      (click)="initSectionEditing()"
+      class="primary-button"
+      [disabled]="form.status === 'INVALID' || form.disabled">
+      save changes
+      <div *ngIf="form.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

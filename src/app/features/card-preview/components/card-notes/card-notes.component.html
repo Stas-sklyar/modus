@@ -1,0 +1,14 @@
+<div
+  *ngIf="notes$ | async as notes; else loader"
+  class="lr-card-notes">
+  <lr-notes
+    [notes]="notes"
+    (addNoteEvent)="addNote($event)"
+    (removeNoteEvent)="deleteNote($event)"
+    (editNoteEvent)="editNote($event)"
+  ></lr-notes>
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

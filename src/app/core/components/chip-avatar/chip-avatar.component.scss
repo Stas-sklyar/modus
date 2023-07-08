@@ -1,0 +1,46 @@
+@import '../../../../assets/styles/global';
+
+.lr-chip-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  background-color: $GRAY_3;
+  border-radius: 15px;
+  padding: 5px 10px 5px 0;
+  @include medium-paragraph;
+
+  &__full-name {
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__icon {
+    margin-right: 9px;
+  }
+
+  &__empty-avatar {
+    margin-right: 9px;
+    width: 30px;
+    height: 30px;
+    background-color: $GRAY_0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include extra-small-paragraph;
+    color: $WHITE_0;
+    line-height: 30px;
+  }
+
+  &__close-btn {
+    margin-left: 15px;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    background: url("../../../../assets/icons/ic_close.svg") no-repeat;
+  }
+
+}

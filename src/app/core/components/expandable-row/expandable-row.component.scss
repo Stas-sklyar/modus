@@ -1,0 +1,39 @@
+@import '../../../../assets/styles/global';
+
+.subsection-row {
+  border-bottom: 2px solid  $SEPARATION_LINE_LIGHT_GRAY;
+}
+
+.subsection-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px 0;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 20px 0;
+  }
+
+  &__title {
+    @include medium-headline;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include large-headline;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 8px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    gap: 10px;
+  }
+
+  &_shift-arrow {
+    margin-left: 10px;
+  }
+}

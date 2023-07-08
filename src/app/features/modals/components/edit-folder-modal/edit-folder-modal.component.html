@@ -1,0 +1,110 @@
+<lr-modal>
+  <ng-container modalTitle>Edit folder</ng-container>
+
+  <ng-container
+    *ngIf="folder$ | async as folder; else loader"
+    modalContent>
+
+    <form
+      [formGroup]="form"
+      class="lr-edit-folder-form">
+
+      <label class="lr-default-label">
+        <span>Name</span>
+
+        <input
+          autocomplete="off"
+          formControlName="name"
+          placeholder="Folder name"
+          type="text"
+          class="lr-edit-folder-form__control lr-filled-input">
+      </label>
+
+      <label class="lr-default-label">
+        <span>Description</span>
+
+        <textarea
+          autocomplete="off"
+          formControlName="description"
+          placeholder="Folder description"
+          type="text"
+          class="lr-edit-folder-form__control lr-filled-textarea">
+      </textarea>
+      </label>
+
+      <!--    <p class="lr-edit-folder-form__radios-title">-->
+      <!--      Who can access this folder?-->
+      <!--    </p>-->
+
+      <!--    <div class="form-check">-->
+      <!--      <label class="form-check-label" >-->
+      <!--        Anyone on this case-->
+      <!--        <input-->
+      <!--          class="lr-edit-folder-form__control form-check-input"-->
+      <!--          autocomplete="off"-->
+      <!--          formControlName="accessLevel"-->
+      <!--          value="restricted"-->
+      <!--          type="radio"-->
+      <!--        >-->
+      <!--      </label>-->
+      <!--    </div>-->
+
+      <!--    <div class="form-check">-->
+      <!--      <label class="form-check-label" >-->
+      <!--        Only invited people-->
+      <!--        <input-->
+      <!--          class="lr-edit-folder-form__control form-check-input"-->
+      <!--          autocomplete="off"-->
+      <!--          formControlName="accessLevel"-->
+      <!--          value="free"-->
+      <!--          type="radio"-->
+      <!--        >-->
+      <!--      </label>-->
+      <!--    </div>-->
+
+      <!--    <section-->
+      <!--      class="lr-edit-folder-form__invited-people-panel">-->
+      <!--      There will be invited people-->
+      <!--    </section>-->
+    </form>
+
+    <section
+      *ngIf="folder.sections.length"
+      class="lr-edit-folder-form__workbook-sections-container workbook-sections-container">
+      <div class="workbook-sections-container__title">
+        Sections
+      </div>
+
+      <bs-sortable
+        [(ngModel)]="folder.sections"
+        fieldName="name"
+        itemActiveClass="sortable-elem--active"
+        itemClass="sortable-elem">
+      </bs-sortable>
+
+    </section>
+  </ng-container>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="lr-edit-folder-form__form-btn cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="initFolderEditing()"
+      class="lr-edit-folder-form__form-btn primary-button"
+      [disabled]="form.status === 'INVALID' || form.disabled">
+      save changes
+      <div *ngIf="form.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>
+

@@ -1,0 +1,71 @@
+@import '../../../../../assets/styles/global';
+
+.participant-preview {
+  &__user-card {
+    margin: 25px 0;
+  }
+}
+
+.user-card {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+
+  &__avatar {
+    align-items: center;
+    background-color: $COVER_DARK_GRAY;
+    border-radius: 50%;
+    color: $TEXT_PURE_WHITE;
+    display: flex;
+    justify-content: center;
+    height: 106px;
+    width: 106px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__name {
+    font-size: 30px;
+    line-height: 25px;
+  }
+
+  &__title {
+    font-size: 16px;
+    line-height: 25px;
+  }
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  margin: 0 20px 20px 20px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    margin: 30px;
+  }
+
+  &__participant-title {
+    @include extra-large-headline;
+    font-size: 24px;
+    line-height: 52px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      font-size: 40px;
+    }
+  }
+
+  &__controls {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      gap: 10px;
+    }
+  }
+}

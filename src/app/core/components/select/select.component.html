@@ -1,0 +1,32 @@
+<div class="select btn-group" dropdown [insideClick]="true">
+  <div class="select__toggle dropdown-toggle" dropdownToggle>
+    <div class="dropdown-toggle__icon dropdown-toggle__icon_filter"></div>
+
+    <div class="dropdown-toggle__label">
+      <span *ngIf="selectedItems.length === 0; else selectedItemsList">
+        <span>{{ label }}: </span>
+        <span class="dropdown-toggle__link-style">View All</span>
+      </span>
+      <ng-template #selectedItemsList>{{ itemLabel ? calcSelectedItemsString() : selectedItems.join(', ') }}</ng-template>
+    </div>
+
+    <div class="dropdown-toggle__icon dropdown-toggle__icon_arrow"></div>
+  </div>
+
+  <div class="select__dropdown-menu dropdown-menu" *dropdownMenu role="menu">
+    <label
+      class="dropdown-menu__item form-check"
+      *ngFor="let item of list; let i = index">
+      <input
+        (click)="onToggleCheckboxes(item, $event)"
+        class="dropdown-menu__input form-check-input"
+        type="checkbox"
+        [checked]="isChecked(item)"
+      >
+
+      <span class="dropdown-menu__label">
+        {{ itemLabel ? item[itemLabel] : item }}
+      </span>
+    </label>
+  </div>
+</div>

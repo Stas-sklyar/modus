@@ -1,0 +1,35 @@
+
+trigger:
+  - main
+
+pool:
+  name: Azure Pipelines
+
+stages:
+  - stage: build
+    jobs:
+      - job: build
+        displayName: Build Web
+        steps:
+          - task: NodeTool@0
+            displayName: "Install Node.js"
+            inputs:
+              versionSpec: "16.x"
+
+          - script: |
+              npm install -g @angular/cli@15.0.5
+            displayName: "Install Angular CLI"
+
+          - script: |
+              npm install
+            displayName: "Install NPM modules"
+
+          - script: |
+              ng build --output-path=$(Build.ArtifactStagingDirectory)
+            displayName: "Build"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'Web'
+              publishLocation: 'Container'

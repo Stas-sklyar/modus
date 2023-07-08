@@ -1,0 +1,63 @@
+@import '../../../../../assets/styles/global';
+
+.lr-person-documents {
+  margin: 0 20px 20px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    margin: 0 30px 20px;
+  }
+
+  &__title {
+    @include medium-paragraph;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  &__documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__add-btn {
+    margin-top: -20px;
+  }
+}
+
+// TODO: refactor
+.document-card {
+  &:hover {
+    + .lr-person-documents__add-btn {
+      opacity: 1;
+      transition: all .2s linear;
+    }
+  }
+
+  + .lr-person-documents__add-btn {
+    opacity: 0;
+    transition: all .2s linear;
+    margin-bottom: 20px;
+
+    &:hover {
+      opacity: 1;
+      transition: all .2s linear;
+    }
+
+    & input {
+      display: none;
+    }
+  }
+}
+
+// TODO: refactor
+.add-document {
+  padding-bottom: 20px;
+
+  &--open {
+    display: block;
+  }
+
+  &--closed {
+    display: none;
+  }
+}

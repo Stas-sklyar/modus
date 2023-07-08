@@ -1,0 +1,153 @@
+@import '../../../../../assets/styles/global';
+
+.lr-section {
+  &__container {
+    padding: 20px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      padding: 30px;
+    }
+  }
+
+  &__section-content {
+    margin-top: 30px;
+  }
+
+  &__section-header {
+    padding: 20px;
+  }
+
+  &__subsection-create-panel {
+    padding: 15px 0;
+    border-bottom: 2px solid $SEPARATION_LINE_LIGHT_GRAY;
+  }
+}
+
+.section-header {
+  background: $COVER_GRAY_TO_WHITE;
+  border-radius: $BORDER_RADIUS_BASE;
+
+  &__dropdown {
+    @include dropdown-menu;
+
+    & .dropdown-menu {
+      transform: translateX(calc(-100% + 30px)) !important;
+    }
+  }
+
+  &__step-back-lnk {
+    display: flex;
+    align-items: center;
+    @include small-paragraph;
+    text-decoration: none;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include medium-paragraph;
+    }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    @include extra-large-headline;
+    font-size: 24px;
+    line-height: 52px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      font-size: 40px;
+    }
+  }
+
+  &__controls {
+    margin-left: auto;
+  }
+
+  &__description {
+    width: 70%;
+    @include small-paragraph;
+    color: $COVER_GRAY_TO_BLACK;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include medium-paragraph;
+    }
+  }
+}
+
+.step-back-lnk {
+  &__icon {
+    width: 7px;
+    height: 13px;
+    margin-right: 10px;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    gap: 10px;
+  }
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(33.3333%, 1fr));
+
+  &__card {
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    &:nth-child(3n+3) {
+      margin-right: 0;
+    }
+  }
+}
+
+.subsection-create-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  z-index: -1;
+
+  & input {
+    cursor: default;
+  }
+
+  &__input {
+    border: none;
+    background: $COVER_LIGHT_WHITE;
+    outline: none;
+    caret-color: $BLUE_0;
+    @include medium-headline;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include large-headline;
+    }
+
+    &::placeholder {
+      @include medium-headline;
+      color: $GRAY_1;
+      letter-spacing: 0;
+      text-indent: 10px;
+
+      @media screen and (min-width: 1280px) and (min-height: 800px) {
+        @include large-headline;
+      }
+    }
+  }
+
+  &__active {
+    opacity: 1;
+    z-index: auto;
+
+    & input {
+      cursor: text;
+    }
+  }
+}

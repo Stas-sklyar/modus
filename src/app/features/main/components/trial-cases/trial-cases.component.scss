@@ -1,0 +1,220 @@
+@import '../../../../../assets/styles/global';
+
+.trial-cases {
+  &__title {
+    @include large-headline;
+  }
+
+  &__container {
+    background: $COVER_PURE_WHITE;
+    border-radius: $BORDER_RADIUS_BASE;
+    margin-top: 20px;
+  }
+
+  &__inner-container {
+    display: flex;
+    gap: 50px;
+    margin: 75px 16px 0;
+  }
+
+  &__table {
+    flex: 1;
+  }
+
+  &__ellipsis-button {
+    background-color: transparent;
+    border: none;
+  }
+
+  &_widget {
+    .case-cards-list {
+      grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+
+      @media screen and (min-width: 1440px) {
+        grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+      }
+
+      @media screen and (min-width: 1600px) {
+        grid-template-columns: repeat(auto-fill, minmax(31%, 1fr));
+      }
+    }
+  }
+}
+
+.filters {
+  &__row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 20px 0;
+  }
+
+  &__column {
+    align-self: baseline;
+    background-color: $COVER_GRAY_TO_WHITE;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-left: 34px;
+    padding: 30px;
+    width: 273px;
+  }
+
+  &__search-input {
+    width: 498px;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  &__filter-toggle {
+    color: $TEXT_PURPLE;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.group-item {
+  display: flex;
+  gap: 18px;
+
+  &__name {
+    max-width: 150px;
+  }
+}
+
+.lr-search-input__icon {
+  background-color: transparent !important;
+}
+
+.lr-category-tabs-container {
+  border-bottom-width: 1px !important;
+  margin: -15px 0 !important;
+  padding: 0 20px;
+}
+
+.case-cards-column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.case-cards-list {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+  margin-bottom: 30px;
+
+  @media screen and (min-width: 1280px) {
+    grid-template-columns: repeat(auto-fill, minmax(24%, 1fr));
+  }
+
+
+  &__filter-toggle {
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 30px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.case-card {
+  background: $GRAY_5;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px;
+
+  &__buttons-panel {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__description,
+  &__heading {
+    flex-grow: 1;
+  }
+
+  &__description {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+  }
+
+  &__favorite-label {
+    background: url('../../../../../assets/icons/ic_star-default.svg');
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+
+    &_active {
+      background: url('../../../../../assets/icons/ic_star-actve.svg');
+    }
+  }
+
+  &__heading {
+    font-size: 22px;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  &__button {
+    align-items: center;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    flex-grow: 1;
+    line-height: 14px;
+    padding: 7px 20px;
+    text-decoration: none;
+  }
+
+  &__outline-button {
+    background: transparent;
+    border-color: $BORDER_BLACK;
+    color: $TEXT_LIGHT_BLACK;
+    display: flex;
+    gap: 5px;
+  }
+
+  &__solid-button {
+    background: $COVER_DARK_BLUE;
+    border-color: $COVER_DARK_BLUE;
+    color: $TEXT_PURE_WHITE;
+  }
+
+  &__status-panel {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__status {
+    background: $GRAY_3;
+    border-radius: 20px;
+    padding: 5px 30px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+}

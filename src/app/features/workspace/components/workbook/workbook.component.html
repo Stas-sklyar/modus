@@ -1,0 +1,55 @@
+<section class="lr-workbook">
+  <ng-container *ngIf="selectedTrialCase$ | async as trialCase; else loader">
+    <lr-case-header
+      pageTitle="workbook"
+      [caseTitle]="trialCase.name"
+      [separated]="true">
+
+      <button
+        lr-ic-btn-dropdown
+        (click)="openCreateFolderModal(trialCase.id)"
+        icon="plus">
+      </button>
+
+      <div class="lr-workbook__dropdown dropdown" dropdown>
+        <button
+          class="dropdown__toggle dropdown-toggle"
+          (click)="$event.stopPropagation()"
+          dropdownToggle
+          lr-ic-btn
+          icon="ellipsis">
+        </button>
+
+        <div
+          class="dropdown__menu dropdown-menu"
+          *dropdownMenu>
+          <ng-container *ngIf="folders$ | async as folders">
+            <ng-container *ngIf="folders.length > 0">
+              <ng-container *ngIf="folders | sortByOrder as sortedFolders">
+                <div
+                  class="dropdown-menu__item"
+                  (click)="openSortFoldersModal(sortedFolders); $event.stopPropagation()">
+                  Sort folders
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </lr-case-header>
+
+    <div *ngIf="folders$ | async as folders; else loader">
+      <lr-workbook-folder
+        *ngFor="let folder of folders | sortByOrder"
+        [workbookFolder]="folder">
+      </lr-workbook-folder>
+    </div>
+
+  </ng-container>
+</section>
+
+<router-outlet></router-outlet>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

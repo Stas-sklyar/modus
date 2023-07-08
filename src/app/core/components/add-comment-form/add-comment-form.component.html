@@ -1,0 +1,19 @@
+<div class="lr-add-comment-form">
+  <textarea
+    lrAutoFocus
+    [(ngModel)]="comment"
+    autocomplete="off"
+    placeholder="Your comment"
+    class="lr-add-comment-form__control lr-filled-textarea"
+  ></textarea>
+
+  <div class="lr-add-comment-form__buttons-container">
+    <button
+      class="lr-add-comment-form__form-btn primary-button"
+      (click)="addNewComment()"
+      [disabled]="comment.length === 0"
+    >
+      add comment
+    </button>
+  </div>
+</div>

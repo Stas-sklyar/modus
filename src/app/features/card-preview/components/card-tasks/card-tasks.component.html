@@ -1,0 +1,67 @@
+<section class="lr-card-tasks">
+  <ng-container *ngIf="currentCardTasks$ | async as currentCardTasks; else loader">
+    <ng-container *ngIf="currentCardTasks.length !== 0; else emptyCategory">
+      <div class="lr-card-tasks__tasks-list tasks-list">
+        <div class="tasks-list__record record" *ngFor="let task of currentCardTasks">
+          <h5 class="record__title">
+            {{ task.title }}
+          </h5>
+
+          <div class="record__content record-content">
+            <div class="record-content__author author">
+              <div class="author__avatar"></div>
+
+              <div class="author__info">
+                <div class="author__info_small">
+                  Assigned to
+                </div>
+                <div class="author__info_bold">
+                  {{ task.assignedToUser.name }}
+                </div>
+              </div>
+            </div>
+
+            <div class="date date__info">
+              <div class="date__info_small">Due date:</div>
+
+              <div class="date__info_bold date__info_colored">
+                {{ task.dueDate ? (task.dueDate | timeAgo) : '-' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="lr-card-tasks__add-btn"
+        (click)="openAddTaskSection()"
+      >
+        <lr-add-content-btn [btnLabel]="'Add Task'"></lr-add-content-btn>
+      </div>
+
+      <div [class]="
+        addNewTaskSectionIsActive
+          ? 'lr-card-tasks__add-new-task add-new-task add-new-task--open'
+          : 'lr-card-tasks__add-new-task add-new-task add-new-task--closed'
+    " #createNewTaskSection>
+        <lr-create-task-form
+          (cancelBtnWasPressed)="onClickCancelBtn()"
+          (submitBtnWasPressed)="addNewTask($event)"
+        ></lr-create-task-form>
+      </div>
+    </ng-container>
+
+  </ng-container>
+</section>
+
+<ng-template #emptyCategory>
+  <div class="lr-card-tasks__add-new-task add-new-task add-new-task--open">
+    <lr-create-task-form
+      (cancelBtnWasPressed)="onClickCancelBtn()"
+      (submitBtnWasPressed)="addNewTask($event)"
+    ></lr-create-task-form>
+  </div>
+</ng-template>
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

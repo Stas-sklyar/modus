@@ -1,0 +1,55 @@
+@import '../../../../assets/styles/global';
+
+.lr-user-comment {
+  padding: 20px 0;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 30px 0;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    @include medium-paragraph;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+
+    &_small {
+      @include extra-small-paragraph;
+      color: $TEXT_DARK_GRAY;
+
+      @media screen and (min-width: 1280px) and (min-height: 800px) {
+        @include small-paragraph;
+      }
+    }
+  }
+
+  &__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $COVER_DARK_GRAY;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+
+  &__content {
+    background: $COVER_GRAY_TO_WHITE;
+    border-radius: $BORDER_RADIUS_BASE;
+    padding: 20px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include large-paragraph;
+    }
+  }
+}

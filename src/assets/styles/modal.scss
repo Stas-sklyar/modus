@@ -1,0 +1,28 @@
+@import "./mixins/mixins";
+
+.lr-modal {
+  padding: 20px;
+
+  @media screen and (min-width: 1280px) {
+    padding: 30px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    @include large-headline;
+    font-size: 24px;
+    margin-bottom: 0;
+    line-height: 100%;
+    font-weight: 700;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      font-size: 30px;
+    }
+  }
+}

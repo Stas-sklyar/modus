@@ -1,0 +1,22 @@
+<ng-container *ngIf="peopleData">
+  <div class="lr-chip-avatar">
+    <img
+      *ngIf="peopleData.avatar; else emptyAvatar"
+      [src]="peopleData.avatar"
+      class="lr-chip-avatar__icon"
+      [alt]="peopleData.firstName[0] + (peopleData.lastName ? peopleData.lastName[0] : '')">
+
+    <ng-template #emptyAvatar>
+      <div class="lr-chip-avatar__empty-avatar">
+        {{ peopleData.firstName[0] + (peopleData.lastName ? peopleData.lastName[0] : '') }}
+      </div>
+    </ng-template>
+
+    <div class="lr-chip-avatar__full-name">
+      {{ peopleData.firstName }}
+      {{ peopleData.lastName || '' }}
+    </div>
+
+    <div class="lr-chip-avatar__close-btn"></div>
+  </div>
+</ng-container>

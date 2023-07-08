@@ -1,0 +1,122 @@
+<div class="task-preview">
+  <a
+    (click)="closePanel()"
+    class="step-back-button">
+    <svg class="step-back-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+      <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+    </svg>
+    {{ backTo || 'Go back' }}
+  </a>
+
+  <ng-container *ngIf="selectedTask$ | async as task">
+    <header class="task-preview__header header">
+      <div class="header__task-title">
+        {{ task.title }}
+      </div>
+
+      <div class="header__controls">
+        <div
+          dropdown
+          placement="bottom right"
+          class="btn-group lr-dropdown lr-dropdown_primary">
+          <button
+            class="dropdown-toggle"
+            dropdownToggle
+            lr-ic-btn
+            icon="plus">
+          </button>
+
+          <div
+            *dropdownMenu
+            class="dropdown-menu dropdown-menu-right">
+            <div
+              (click)="selectedCategory$.next('comments')"
+              class="dropdown-item">
+              Add Comment
+            </div>
+            <div
+              (click)="selectedCategory$.next('documents')"
+              class="dropdown-item">
+              Add Document
+            </div>
+          </div>
+        </div>
+
+        <div
+          dropdown
+          placement="bottom right"
+          class="btn-group lr-dropdown lr-dropdown_primary">
+          <button
+            class="dropdown-toggle"
+            dropdownToggle
+            lr-ic-btn
+            icon="ellipsis">
+          </button>
+
+          <div
+            *dropdownMenu
+            class="dropdown-menu dropdown-menu-right">
+            <div
+              (click)="openEditTaskModal(task)"
+              class="dropdown-item">
+              Edit Task
+            </div>
+            <div
+              (click)="deleteTask(task)"
+              class="dropdown-item">
+              Delete Task
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <ng-container *ngIf="selectedCategory$ | async as selectedCategory">
+      <section class="lr-category-tabs-container">
+        <div
+          class="lr-category-tabs-container__category-tab"
+          [class.selected]="selectedCategory === 'task'"
+          (click)="selectedCategory$.next('task')">
+          <div class="tab_name">
+            task
+          </div>
+        </div>
+        <div
+          class="lr-category-tabs-container__category-tab"
+          [class.selected]="selectedCategory === 'comments'"
+          (click)="selectedCategory$.next('comments')">
+          <div class="tab_name">
+            comments
+          </div>
+        </div>
+        <div
+          class="lr-category-tabs-container__category-tab"
+          [class.selected]="selectedCategory === 'documents'"
+          (click)="selectedCategory$.next('documents')">
+          <div class="tab_name">
+            documents
+          </div>
+        </div>
+      </section>
+
+      <section class="task-preview__categories">
+        <ng-container [ngSwitch]="selectedCategory">
+          <ng-container *ngSwitchCase="'task'">
+            <lr-task-info
+              (changeCategory)="selectedCategory$.next('comments')"
+              [task]="task">
+            </lr-task-info>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'comments'">
+            <lr-task-comments [task]="task"></lr-task-comments>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'documents'">
+            <lr-task-documents [task]="task"></lr-task-documents>
+          </ng-container>
+        </ng-container>
+      </section>
+    </ng-container>
+  </ng-container>
+</div>

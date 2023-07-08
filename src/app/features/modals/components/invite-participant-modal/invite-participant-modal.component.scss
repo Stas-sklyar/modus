@@ -1,0 +1,33 @@
+@import '../../../../../assets/styles/global';
+
+.invite-participant {
+  &__subtitle {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  &__role-select {
+    appearance: none;
+    background: url('../../../../../assets/icons/ic-chevron-down-solid.svg') no-repeat right $COVER_GRAY_TO_WHITE;
+    background-size: 17px;
+    background-position-x: 97%;
+  }
+
+  &__submit-button {
+    height: 60px;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.primary-button {
+  max-height: 60px !important;
+}
+
+.lr-filled-input {
+  color: $TEXT_DARK_GRAY;
+}
+
+.email-list {
+  width: 100%;
+}

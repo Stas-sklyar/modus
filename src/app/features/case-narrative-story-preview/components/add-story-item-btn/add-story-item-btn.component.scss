@@ -1,0 +1,41 @@
+@import '../../../../../assets/styles/global';
+
+.lr-add-story-item-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__decor-line {
+    height: 1px;
+    background-color: $GRAY_1;
+    flex-grow: 1;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+  }
+
+  &__btn {
+    @include large-paragraph;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: $GRAY_0;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__btn-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    background: center center url("../../../../../assets/icons/ic_plus.svg") no-repeat;
+  }
+}

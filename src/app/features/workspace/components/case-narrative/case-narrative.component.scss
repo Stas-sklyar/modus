@@ -1,0 +1,48 @@
+@import '../../../../../assets/styles/global';
+
+.lr-case-narrative {
+
+  &__description {
+    margin-bottom: 40px;
+    background-color: $GRAY_4;
+    border-radius: $BORDER_RADIUS_BASE;
+    padding: 30px;
+    @include large-paragraph;
+    color: $GRAY_0;
+  }
+
+  &__story {
+    margin-bottom: 20px;
+  }
+
+  &__filter-form {
+    margin-bottom: 30px;
+  }
+
+  &__dropdown {
+    @include dropdown-menu;
+
+    & .dropdown__menu {
+      transform: translateX(-150px) !important;
+    }
+  }
+}
+
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+
+  &__col {
+    display: flex;
+  }
+
+  &__form-control {
+    min-width: 353px;
+    margin-right: 20px;
+    height: 60px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

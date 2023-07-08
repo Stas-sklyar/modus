@@ -1,0 +1,61 @@
+@import '../../../../../assets/styles/global';
+
+.folder-selector {
+  &__controls,
+  &__add-folder-form {
+    align-items: center;
+    background: $COVER_GRAY_TO_WHITE;
+    border-radius: $BORDER_RADIUS_BASE;
+    display: flex;
+  }
+
+  &__controls {
+    gap: 20px;
+  }
+
+  &__add-folder-form {
+    margin-top: 20px;
+  }
+
+  .primary-button,
+  &__form-toggle-button {
+    margin-right: 20px;
+  }
+
+  &__form-toggle-button {
+    &_rotated {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.dropdown-toggle {
+  text-align: left;
+}
+
+.dropdown-menu {
+  margin-top: 5px;
+  max-height: 465px;
+  overflow: auto;
+}
+
+.dropdown-item {
+  &.selected {
+    background: $COVER_GRAY_TO_WHITE;
+  }
+}
+
+.lr-file-uploader {
+  margin-bottom: 30px;
+}
+
+.select-trigger {
+  background: $COVER_GRAY_TO_WHITE;
+  border: none;
+  color: $TEXT_DARK_GRAY;
+  width: 100%;
+
+  &_selected {
+    color: $TEXT_DARK_BLUE;
+  }
+}

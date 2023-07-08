@@ -1,0 +1,53 @@
+<form class="user-profile">
+  <h4 class="user-profile__title mt-3">
+    Contact Details
+  </h4>
+  <div class="user-profile__row">
+    <div class="user-profile__control control">
+      <span class="control__title">Email</span>
+      <div
+        class="lr-data-field">
+        {{ user.email }}
+      </div>
+    </div>
+  </div>
+
+  <div class="user-profile__row">
+    <div class="user-profile__control control">
+      <span class="control__title">Company</span>
+      <div
+        class="lr-data-field">
+        {{ user.company?.name || '-' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="user-profile__row">
+    <div class="user-profile__control control">
+      <span class="control__title">Phone Number</span>
+      <div
+        class="lr-data-field">
+        {{ user.phone || '-' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="user-profile__row">
+    <div class="user-profile__control control">
+      <span class="control__title">Address</span>
+      <div
+        class="lr-data-field">
+        -
+      </div>
+    </div>
+  </div>
+
+  <h4 class="user-profile__title">
+    Description
+  </h4>
+
+  <div
+    [innerHTML]="user.description || '-'"
+    class="lr-data-field">
+  </div>
+</form>

@@ -1,0 +1,118 @@
+@import '../../../../../assets/styles/global';
+
+
+.lr-narrative-story-items {
+  &__story-item-list {
+    margin: 0 0 20px;
+  }
+
+  &__add-story-item {
+    margin-top: 20px;
+  }
+
+  &__add-btn {
+    visibility: hidden;
+    opacity: 0;
+    transition: all .2s linear;
+    margin-bottom: 15px;
+
+    &:hover {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &_hidden {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      transition: all .2s linear;
+    }
+  }
+}
+
+.story-item-list {
+  display: flex;
+  flex-direction: column;
+
+  &__parent-story-item{
+    &:hover {
+      .lr-narrative-story-items__add-btn {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.story-item {
+  @include case-native-story-card-base;
+  margin-bottom: 20px;
+  cursor: default;
+
+  &:hover {
+    & .story-item__dropdown-btn {
+      opacity: 1;
+      transition: all .2s linear;
+    }
+  }
+
+  &_child {
+    position: relative;
+    margin: 0 0 20px 20px;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 2px;
+      height: 100%;
+      position: absolute;
+      left: -20px;
+      top: 0;
+      background-color: $GRAY_2;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__dropdown-btn {
+    opacity: 0;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    transition: all .2s linear;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__related-documents {
+    margin-top: 10px;
+  }
+}
+
+// TODO: REFACTOR
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 40px;
+  padding: 15px;
+  background-color: $BLUE_0;
+  z-index: 2;
+  border-radius: $BORDER_RADIUS_BASE;
+  color: $WHITE_0;
+
+  &__item {
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+}

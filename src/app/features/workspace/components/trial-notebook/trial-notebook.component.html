@@ -1,0 +1,100 @@
+<section class="lr-trial-notebook glb-grid-container">
+  <section class="glb-grid-container__main-column">
+    <ng-container *ngIf="selectedCase$ | async as selectedCase">
+      <lr-case-header
+        pageTitle="trial notebook"
+        [caseTitle]="selectedCase.name"
+        [separated]="true">
+
+        <button
+          (click)="openCreateSectionModal(selectedCase.id)"
+          lr-ic-btn-dropdown
+          icon="plus">
+        </button>
+
+        <ng-container *ngIf="trialNotebookSections$ | async as trialNotebookSections">
+          <div class="lr-trial-notebook__dropdown dropdown" dropdown>
+            <button
+              class="dropdown__toggle dropdown-toggle"
+              (click)="$event.stopPropagation()"
+              dropdownToggle
+              lr-ic-btn
+              icon="ellipsis">
+            </button>
+
+            <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+              <div
+                class="dropdown-menu__item"
+                (click)="openSortSectionsModal(trialNotebookSections); $event.stopPropagation()">
+                Sort sections
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </lr-case-header>
+    </ng-container>
+
+    <ng-container *ngIf="trialNotebookSections$ | async as trialNotebookSections">
+      <lr-expandable-row
+        *ngFor="let section of trialNotebookSections | sortByOrder"
+        [title]="section.title"
+        [isExpanded]="(expandedSectionId$ | async) === section.id"
+        (click)="toggleExpand(section.id)"
+      >
+        <ng-container row-controls>
+          <button
+            (click)="openCreateCardModal(section.id); $event.stopPropagation()"
+            lr-ic-btn-dropdown
+            icon="plus">
+          </button>
+
+          <div class="lr-trial-notebook__dropdown dropdown" dropdown>
+            <button
+              class="dropdown__toggle dropdown-toggle"
+              (click)="$event.stopPropagation()"
+              dropdownToggle
+              lr-ic-btn
+              icon="ellipsis">
+            </button>
+
+            <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+              <div
+                class="dropdown-menu__item"
+                (click)="openEditSectionModal(section.id); $event.stopPropagation()">
+                Edit section
+              </div>
+
+              <div
+                class="dropdown-menu__item"
+                (click)="openSortCardsModal(section.cards); $event.stopPropagation()">
+                Sort cards
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="section.cards">
+          <section
+            class="cards-container" (click)="$event.stopPropagation()">
+            <ng-container *ngFor="let card of section.cards | sortByOrder">
+              <lr-card
+                *ngIf="!card.isDeleted"
+                [card]="card"
+                (click)="expandSelectedCard(card.id)"
+                class="cards-container__card">
+              </lr-card>
+            </ng-container>
+          </section>
+        </ng-container>
+
+      </lr-expandable-row>
+    </ng-container>
+  </section>
+
+  <section class="glb-grid-container__aside-column">
+    <header class="glb-grid-container__aside-column_heading">
+      Recent activity
+    </header>
+    <lr-recent-activities-cards></lr-recent-activities-cards>
+  </section>
+</section>

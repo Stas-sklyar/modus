@@ -1,0 +1,27 @@
+@import '../../../../assets/styles/global';
+
+.lr-document-card {
+  background: $COVER_GRAY_TO_WHITE;
+  border-radius: $BORDER_RADIUS_BASE;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  gap: 20px;
+  cursor: pointer;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 10px;
+    gap: 30px;
+  }
+}
+
+.content {
+  &__document-name {
+    @include medium-paragraph;
+    color: $TEXT_DARK_BLUE;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include large-paragraph;
+    }
+  }
+}

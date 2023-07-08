@@ -1,0 +1,10 @@
+<section class="workspace" [class.lr-scroll-lock]="scrollLock">
+  <lr-workspace-menu></lr-workspace-menu>
+
+  <section class="workspace__content-container" #testtest>
+    <router-outlet></router-outlet>
+  </section>
+
+  <lr-aside-panel (scrollLock)="scrollLock = $event"></lr-aside-panel>
+</section>
+

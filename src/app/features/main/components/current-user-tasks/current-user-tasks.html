@@ -1,0 +1,59 @@
+<div class="current-user-tasks">
+  <h1 class="current-user-tasks__title">My tasks</h1>
+
+  <lr-current-user-tasks-filter-form></lr-current-user-tasks-filter-form>
+
+  <div
+    *ngIf="tasks$ | async as tasks; else loader"
+    class="current-user-tasks__table-container">
+    <table class="current-user-tasks__table current-user-tasks-table">
+      <thead>
+        <th class="lr-sortable" scope="col" lrSortableHeader="taskName" (sort)="onSort($event)">TASK NAME</th>
+        <th class="lr-sortable" scope="col" lrSortableHeader="caseName" (sort)="onSort($event)">CASE NAME</th>
+        <th class="lr-sortable" scope="col" lrSortableHeader="dueDate" (sort)="onSort($event)">DUE DATE</th>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let task of applySorting(
+            tasks
+            | filterTasksBySearchQuery: searchQuery$.getValue()
+            | filterTasksByDueDate: dueDateFilter$.getValue(),
+            tasksSorter$.getValue()
+          )
+            | filterTasksBySearchQuery: searchQuery$.getValue()
+            | filterTasksByDueDate: dueDateFilter$.getValue()
+          "
+          (click)="openTaskPreviewModal(task.id)"
+          class="current-user-tasks-table__row">
+
+          <td class="current-user-tasks-table__cell">
+
+            <div [class]="'current-user-tasks-table__card table-card table-card_' + tasksService.calcTaskStatus(task.dueDate, task.status)">
+              <div class="current-user-tasks-table__icon"></div>
+
+              <span>{{ task.title }}</span>
+            </div>
+
+          </td>
+
+          <td class="current-user-tasks-table__cell">
+            <div class="current-user-tasks-table__card table-card">{{ task.trialCase.name }}</div>
+          </td>
+
+          <td class="current-user-tasks-table__cell">
+            <div class="current-user-tasks-table__card table-card">
+              {{ (task.dueDate && task.status !== 'completed') ? (task.dueDate | timeAgo) : '-' }}
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

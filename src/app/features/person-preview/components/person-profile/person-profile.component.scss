@@ -1,0 +1,19 @@
+@import '../../../../../assets/styles/global';
+
+.lr-person-profile {
+  margin: 20px;
+
+  &__title {
+    @include large-paragraph;
+    font-weight: 600;
+    margin-bottom: 17px;
+  }
+
+  &__form-control {
+    max-width: 460px;
+
+    &--description {
+      max-width: 100%;
+    }
+  }
+}

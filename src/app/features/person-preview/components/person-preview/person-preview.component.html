@@ -1,0 +1,80 @@
+<div class="lr-person-preview">
+  <a
+    (click)="closePanel()"
+    class="lr-person-preview__go-back-button go-back-button">
+    <svg class="go-back-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+      <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+    </svg>
+    Back to People
+  </a>
+
+  <ng-container *ngIf="selectedPerson$ | async as person">
+    <header class="lr-person-preview__header header">
+      <div class="header__container">
+        <div class="header__person-info person-info">
+          <div class="person-info__avatar">
+            <img
+              class="person-info__avatar-img"
+              *ngIf="'person.avatar' && false; else emptyAvatar"
+              src=""
+              alt=""
+            >
+
+            <ng-template #emptyAvatar>
+              <div class="person-info__empty-avatar">
+                {{ person.name | getInitials }}
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="person-info__container">
+            <div class="person-info__full-name">{{ person.name }}</div>
+            <div class="person-info__role">{{ person.userType }}</div>
+          </div>
+        </div>
+
+        <div class="header__controls controls">
+          <button
+            (click)="openEditPersonModal(person)"
+            lr-ic-btn
+            icon="ellipsis">
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <ng-container *ngIf="selectedCategory$ | async as selectedCategory">
+      <section class="lr-person-preview__tabs-container tabs-container">
+        <div
+          class="tabs-container__tab tab"
+          [class.selected]="selectedCategory === 'profile'"
+          (click)="selectedCategory$.next('profile')">
+          <div class="tab_name">
+            profile
+          </div>
+        </div>
+<!--        TODO: ADD DOCUMENT TAB -->
+<!--        <div-->
+<!--          class="tabs-container__tab tab"-->
+<!--          [class.selected]="selectedCategory === 'documents'"-->
+<!--          (click)="selectedCategory$.next('documents')">-->
+<!--          <div class="tab_name">-->
+<!--            documents-->
+<!--          </div>-->
+<!--        </div>-->
+      </section>
+
+      <section class="lr-person-preview__categories">
+        <ng-container [ngSwitch]="selectedCategory">
+          <section *ngSwitchCase="'profile'">
+            <lr-person-profile [person]="person"></lr-person-profile>
+          </section>
+
+          <section *ngSwitchCase="'documents'">
+            <lr-person-documents></lr-person-documents>
+          </section>
+        </ng-container>
+      </section>
+    </ng-container>
+  </ng-container>
+</div>

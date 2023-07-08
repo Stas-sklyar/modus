@@ -1,0 +1,33 @@
+@import '../../../../assets/styles/global';
+
+.lr-search-autocomplete {
+  height: 50px;
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  max-width: 540px;
+
+  & input {
+    flex-grow: 1;
+    box-sizing: border-box;
+    outline: none;
+    padding: 0 24px;
+    height: 50px;
+    @include large-paragraph;
+    border: 1px solid $GRAY_3;
+    border-radius: 4px 0 0 4px;
+
+    &::placeholder {
+      @include medium-paragraph;
+      color: $GRAY_0;
+    }
+  }
+
+  &__icon {
+    width: 81px;
+    height: 50px;
+    background: $BLUE_0 center url("../../../../assets/icons/ic_search.svg") no-repeat;
+    border-radius: 0 4px 4px 0;
+    transform: translateX(-1px);
+  }
+}

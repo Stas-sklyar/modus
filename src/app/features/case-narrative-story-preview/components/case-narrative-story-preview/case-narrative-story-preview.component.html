@@ -1,0 +1,60 @@
+<div
+  *ngIf="selectedNarrativeStory$ | async as selectedNarrativeStory; else loader"
+  [class]="
+        selectedCategory === 'comments'
+          ? 'lr-narrative-story-preview lr-narrative-story-preview--comment-tab-active'
+          : 'lr-narrative-story-preview'
+        "
+  #narrativeStoryPreview
+>
+
+  <div class="lr-narrative-story-preview__container" #headerContainer>
+    <lr-aside-panel-header
+      [backToBtnLabel]="'Case Narrative'"
+      [title]="selectedNarrativeStory.title"
+      [description]="selectedNarrativeStory.description || ''"
+      [specificCreateContentItemsList]="['allegation', 'fact', 'note', 'comments']"
+      (createContent)="onCreateContent($event)"
+      (editEntity)="openEditNarrativeStoryModal(selectedNarrativeStory)"
+      (sortNotes)="openSortStoryItemsModal()"
+      (deleteEntityEvent)="deleteNarrativeStory()"
+    ></lr-aside-panel-header>
+
+    <section class="lr-narrative-story-preview__tabs-container tabs-container">
+      <div
+        class="tabs-container__tab tab"
+        [class.selected]="category === selectedCategory"
+        *ngFor="let category of categoryList"
+        (click)="selectedCategory = category">
+        <div class="tab_name">
+          {{ category }}
+<!--          TODO: DISPLAY AMOUNT OF COMMENTS-->
+<!--          <ng-container *ngIf="category === 'comments'">-->
+<!--            ({{ selectedNarrativeStory.comments.length }})-->
+<!--          </ng-container>-->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="lr-narrative-story-preview__categories">
+    <ng-container [ngSwitch]="selectedCategory">
+      <section *ngSwitchCase="'story'">
+        <lr-case-narrative-story-general [storyId]="selectedNarrativeStory.id"></lr-case-narrative-story-general>
+      </section>
+
+      <section *ngSwitchCase="'comments'">
+        <lr-case-narrative-story-comments [storyId]="selectedNarrativeStory.id"></lr-case-narrative-story-comments>
+      </section>
+
+      <section *ngSwitchCase="'documents'">
+        <lr-case-narrative-story-documents [storyId]="selectedNarrativeStory.id"></lr-case-narrative-story-documents>
+      </section>
+    </ng-container>
+  </div>
+
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

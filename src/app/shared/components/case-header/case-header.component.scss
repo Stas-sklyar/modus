@@ -1,0 +1,52 @@
+@import '../../../../assets/styles/global';
+
+.lr-case-header {
+  margin-bottom: 30px;
+
+  &__header-content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__page-title {
+    @include extra-small-paragraph;
+    line-height: 14px;
+    color: $GRAY_0_5;
+    text-transform: uppercase;
+    letter-spacing: 0.56px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include small-paragraph;
+    }
+  }
+
+  &__case-title {
+    @include extra-large-headline;
+    line-height: 50px;
+    font-size: 24px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      font-size: 40px;
+    }
+  }
+
+  &__controls {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      gap: 10px;
+    }
+  }
+
+  &_separated {
+    border-bottom: 1px solid  $SEPARATION_LINE_LIGHT_GRAY;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      padding-bottom: 20px;
+    }
+  }
+}

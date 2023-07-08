@@ -1,0 +1,20 @@
+<section class="subsection-row">
+  <header
+    class="subsection-row__subsection-header subsection-header">
+    <h5 class="subsection-header__title">
+      {{ title }}
+    </h5>
+
+    <div class="subsection-row__controls controls">
+      <ng-content select="[row-controls]"></ng-content>
+      <lr-invert-arrow
+        class="controls_shift-arrow"
+        [isInverted]="isExpanded">
+      </lr-invert-arrow>
+    </div>
+  </header>
+
+  <ng-container *ngIf="isExpanded">
+    <ng-content></ng-content>
+  </ng-container>
+</section>

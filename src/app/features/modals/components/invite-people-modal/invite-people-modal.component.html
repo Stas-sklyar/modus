@@ -1,0 +1,84 @@
+<lr-modal>
+  <ng-container modalTitle>Invite People</ng-container>
+
+  <form
+    [formGroup]="form"
+    modalContent>
+
+    <div class="invite-people__invitation-list invitation-list">
+
+      <div
+        formArrayName="invitations"
+        *ngFor="let formGroup of invitations.controls; let i = index"
+        class="invitation-list__record">
+        <div class="invitation-list__title">
+          <span class="invitation-list__counter">Person #{{ i + 1 }}</span>
+          <svg
+            (click)="removeInvitation(i)"
+            class="invitation-list__close-button"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill="#4C4C4C">
+            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+          </svg>
+        </div>
+        <div [formGroupName]="i">
+          <label class="lr-default-label">
+            <span>Title</span>
+
+            <input
+              formControlName='title'
+              autocomplete="off"
+              placeholder="Assign a Title"
+              type="text"
+              class="lr-filled-input">
+          </label>
+
+          <label class="lr-default-label">
+            <span>Email</span>
+
+            <input
+              formControlName='email'
+              autocomplete="off"
+              placeholder="Assign an Email"
+              type="text"
+              class="lr-filled-input">
+          </label>
+
+          <label class="lr-default-label">
+            <span>Role</span>
+
+            <select formControlName="role" class="lr-filled-input role-select">
+              <option [value]="null">Choose a role</option>
+              <option [value]="'owner'">Owner</option>
+              <option [value]="'admin'">Admin</option>
+              <option [value]="'visitor'">Visitor</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button">
+      cancel
+    </button>
+
+    <button
+      (click)="addInvitation()"
+      class="primary-button"
+      type="button">
+      Add more
+    </button>
+
+    <button
+      (click)="submitForm()"
+      [disabled]="form.invalid || submitting"
+      class="primary-button">
+      Invite people
+      <div *ngIf="submitting" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

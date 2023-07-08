@@ -1,0 +1,66 @@
+<div
+  *ngIf="selectedTimelineEvent$ | async as selectedTimelineEvent; else loader"
+  (click)="hideHeaderMenuToggle = !hideHeaderMenuToggle; $event.stopPropagation()"
+  [class]="
+        selectedCategory === 'comments'
+          ? 'lr-timeline-event-preview lr-timeline-event-preview--comment-tab-active'
+          : 'lr-timeline-event-preview'
+        "
+  #timelineEventPreview>
+
+  <div class="lr-timeline-event-preview__container" #headerContainer>
+    <lr-aside-panel-header
+      [backToBtnLabel]="'Case Timeline'"
+      [title]="selectedTimelineEvent.title"
+      [description]="selectedTimelineEvent?.description || ''"
+      (editEntity)="openEditEntityModal()"
+      (sortNotes)="openSortNotesModal()"
+      (createContent)="onCreateContent($event)"
+      [hideHeaderMenuToggle]="hideHeaderMenuToggle"
+      (deleteEntityEvent)="deleteTimelineEvent()"
+    ></lr-aside-panel-header>
+
+    <section class="lr-timeline-event-preview__tabs-container tabs-container">
+      <div
+        class="tabs-container__tab tab"
+        [class.selected]="category === selectedCategory"
+        *ngFor="let category of categoryList"
+        (click)="selectedCategory = category">
+        <div class="tab_name">
+          {{ category }}
+<!--          TODO: DISPLAY AMOUNT OF COMMENTS-->
+<!--          <ng-container *ngIf="category === 'comments'">-->
+<!--            ({{ selectedTimelineEvent.timeLineEventApplicationUserComments.length }})-->
+<!--          </ng-container>-->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="lr-timeline-event-preview__categories">
+    <ng-container [ngSwitch]="selectedCategory">
+      <section *ngSwitchCase="'general'">
+        <lr-timeline-event-notes
+          [timelineEventId]="selectedTimelineEvent.id"
+          [selectedAddContentMenuItemType]="selectedAddContentMenuItemType"
+        ></lr-timeline-event-notes>
+      </section>
+
+      <section *ngSwitchCase="'comments'">
+        <lr-timeline-event-comments
+          [timelineEventId]="selectedTimelineEvent.id"
+        ></lr-timeline-event-comments>
+      </section>
+
+      <section *ngSwitchCase="'documents'">
+        <lr-timeline-event-documents
+          [eventId]="selectedTimelineEvent.id"
+        ></lr-timeline-event-documents>
+      </section>
+    </ng-container>
+  </section>
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

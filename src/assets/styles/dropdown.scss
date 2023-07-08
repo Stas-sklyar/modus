@@ -1,0 +1,97 @@
+@import './constants/common';
+@import './mixins/mixins';
+
+.lr-dropdown {
+  .dropdown-menu {
+    border-radius: $BORDER_RADIUS_BASE;
+    overflow: auto;
+    margin-top: 10px;
+    max-height: 350px;
+    min-width: 100%;
+  }
+
+  .dropdown-item {
+    @include medium-paragraph;
+    color: $TEXT_DARK_GRAY;
+    cursor: pointer;
+    line-height: 24px;
+  }
+
+  &_primary {
+    .dropdown-menu {
+      background-color: $COVER_DARK_BLUE;
+      border-color: transparent;
+    }
+
+    .dropdown-item {
+      color: $TEXT_PURE_WHITE;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+}
+
+.lr-selectable-trigger {
+  align-items: center;
+  background: transparent;
+  border: 2px solid $BORDER_LIGHT_GRAY;
+  border-radius: $BORDER_RADIUS_BASE;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  padding: 22px 20px;
+  position: relative;
+  width: 100%;
+
+  &.collapsed {
+    &:before {
+      background: url("../../assets/icons/ic-chevron-down-solid.svg") center no-repeat;
+      background-size: contain;
+      content: '';
+      height: 13px;
+      left: calc(100% - 30px);
+      position: absolute;
+      top: 20px;
+      width: 13px;
+    }
+  }
+
+  &.expanded {
+    &:before {
+      background: url("../../assets/icons/ic-chevron-up-solid.svg") center no-repeat;
+      background-size: contain;
+      content: '';
+      height: 13px;
+      left: calc(100% - 30px);
+      position: absolute;
+      top: 20px;
+      width: 13px;
+    }
+  }
+
+  &__title {
+    @include medium-paragraph;
+    color: $TEXT_DARK_GRAY;
+    line-height: 24px;
+    margin-left: 30px;
+    position: relative;
+
+    &:before {
+      background: url("../../assets/icons/ic_filer.svg") center no-repeat;
+      background-size: contain;
+      content: '';
+      height: 25px;
+      left: -35px;
+      position: absolute;
+      top: -2px;
+      width: 25px;
+    }
+  }
+
+  &__selected-option {
+    color: $TEXT_DARK_BLUE;
+  }
+}

@@ -1,0 +1,20 @@
+@import '../../../../../assets/styles/global';
+
+.lr-file-uploader {
+  margin-bottom: 30px;
+}
+
+.parent-document-control {
+  background: $COVER_LIGHT_WHITE;
+  border: 2px solid $BORDER_LIGHT_BLUE;
+  border-radius: $BORDER_RADIUS_BASE;
+
+  input {
+    background: $COVER_LIGHT_WHITE;
+    border: none;
+    color: $TEXT_DARK_BLUE;
+    height: 60px;
+    outline: none;
+    padding: 0 15px;
+  }
+}

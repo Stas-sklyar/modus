@@ -1,0 +1,38 @@
+@import '../../../../../assets/styles/global';
+
+.invitation-list {
+  &__record {
+    &:not(:first-child) {
+      border-top: 1px solid $BORDER_LIGHT_GRAY;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+
+  &__counter {
+    color: $TEXT_DARK_GRAY;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &__close-button {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.lr-filled-input {
+  color: $TEXT_DARK_GRAY;
+}
+
+.role-select {
+  appearance: none;
+  background: url('../../../../../assets/icons/ic-chevron-down-solid.svg') no-repeat right $COVER_GRAY_TO_WHITE;
+  background-size: 17px;
+  background-position-x: 97%;
+}

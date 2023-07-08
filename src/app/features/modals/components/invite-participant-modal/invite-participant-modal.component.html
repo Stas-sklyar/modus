@@ -1,0 +1,75 @@
+<lr-modal>
+  <ng-container modalTitle>INVITE NEW USERS ON YOUR TEAM</ng-container>
+
+  <div
+    class="invite-participant"
+    modalContent>
+
+    <div>
+      <div class="invite-participant__subtitle">
+        Once invites are sent, users will receive a specific URL invite to their email address which will expire after 14 days.
+      </div>
+
+      <mat-form-field class="email-list" appearance="fill">
+        <mat-chip-grid #chipGrid>
+          <mat-chip-row
+            *ngFor="let email of emailList"
+            (removed)="removeEmail(email)">
+              {{ email }}
+              <button matChipRemove>✖</button>
+          </mat-chip-row>
+          <input
+            placeholder="Assign new Email..."
+            [matChipInputFor]="chipGrid"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addEmail($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+
+<!--      <label class="lr-default-label">-->
+<!--        <input-->
+<!--          formControlName='email'-->
+<!--          autocomplete="off"-->
+<!--          placeholder="Invite by email address or list of addresses"-->
+<!--          type="email"-->
+<!--          class="lr-filled-input">-->
+<!--      </label>-->
+
+<!--      <label class="lr-default-label">-->
+<!--        <span>Assign a Role</span>-->
+
+<!--        <select formControlName="role" class="lr-filled-input invite-participant__role-select">-->
+<!--          <option [value]="null">Pick a role</option>-->
+<!--          <option [value]="'owner'">Owner</option>-->
+<!--          <option [value]="'admin'">Admin</option>-->
+<!--          <option [value]="'visitor'">Visitor</option>-->
+<!--        </select>-->
+<!--      </label>-->
+
+<!--      <label class="lr-default-label">-->
+<!--        <span>Assign a Title</span>-->
+
+<!--        <input-->
+<!--          formControlName='title'-->
+<!--          autocomplete="off"-->
+<!--          placeholder="Assign a Title"-->
+<!--          type="text"-->
+<!--          class="lr-filled-input">-->
+<!--      </label>-->
+
+    </div>
+  </div>
+
+  <ng-container modalFooter>
+    <button
+      (click)="submitForm()"
+      [disabled]="submitting"
+      class="primary-button invite-participant__submit-button">
+      SEND INVITE
+      <div *ngIf="submitting" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>
+
+

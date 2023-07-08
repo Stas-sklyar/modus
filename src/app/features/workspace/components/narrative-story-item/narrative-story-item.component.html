@@ -1,0 +1,38 @@
+<div [class]="'lr-narrative-story-item lr-narrative-story-item_' + storyItem.type">
+  <div
+    class="lr-narrative-story-item__header">
+    <div [class]="'lr-narrative-story-item__type' + ' ' + 'lr-narrative-story-item__type_' + storyItem.type">
+      {{ storyItem.type }}
+    </div>
+    <h4 class="lr-narrative-story-item__title">{{ storyItem.title }}</h4>
+  </div>
+
+  <div
+    *ngIf="isOpen"
+    [innerHTML]="storyItem.description | safeHtml"
+    class="lr-narrative-story-item__body">
+   {{ storyItem.description }}
+  </div>
+
+  <div
+    class="lr-narrative-story-item__footer"
+    *ngIf="isOpen">
+<!--    TODO: IMPLEMENT DOCUMENTS -->
+<!--    <div class="lr-narrative-story-item__documents"></div>-->
+
+<!--    TODO: IMPLEMENT ISSUES -->
+<!--    <div class="lr-narrative-story-item__issues">-->
+<!--      <b>Issues: </b>-->
+<!--      <span>Key Facts</span>-->
+<!--    </div>-->
+  </div>
+
+  <div
+    [class]="
+      isOpen
+        ? 'lr-narrative-story-item__expander lr-narrative-story-item__expander_' + storyItem.type + ' lr-narrative-story-item__expander_open'
+        : 'lr-narrative-story-item__expander lr-narrative-story-item__expander_' + storyItem.type
+    "
+    (click)="onExpanderClick(); $event.stopPropagation()">
+  </div>
+</div>

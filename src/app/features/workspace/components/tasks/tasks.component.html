@@ -1,0 +1,86 @@
+<section class="lr-tasks glb-grid-container">
+  <section class="glb-grid-container__main-column">
+    <ng-container *ngIf="selectedCase$ | async as selectedCase">
+      <lr-case-header
+        pageTitle="tasks"
+        [caseTitle]="selectedCase.name">
+      </lr-case-header>
+
+      <lr-tasks-filter-form></lr-tasks-filter-form>
+
+      <div
+        *ngIf="tasksGroupedByStatus$ | async as tasksGroupedByStatus; else loader"
+        class="lr-tasks__board board">
+
+        <kendo-sortable
+          [kendoSortableBinding]="tasksGroupedByStatus
+            | filterGroupedByStatusTasksBySearchQuery: searchQuery$.getValue()
+            | filterGroupedByStatusTasksByDueDate: dueDateFilter$.getValue()
+            | assignedToUserIdTasks: assignedToUserIdArr$.getValue()
+          "
+          class="lr-tasks__board board"
+          [itemStyle]="{
+            'width': '100%'
+          }"
+          [disabledIndexes]="[0, 1, 2]"
+          zone="innerZone"
+        >
+          <ng-template let-column="item">
+            <div class="board__col board-col">
+              <div class="board-col__header board-col-header">
+                <div class="board-col-header__title">{{ column.columnTitle }}</div>
+                <button
+                  *ngIf="column.status === 'todo'"
+                  class="board-col-header__btn create-task-btn"
+                  (click)="openCreateTaskModal(column.status, column.tasks.length)"
+                  lr-ic-btn-dropdown
+                  icon="dark-plus">
+                </button>
+              </div>
+
+              <kendo-sortable
+                [kendoSortableBinding]="column.tasks | sortByOrder"
+                [itemStyle]="{'marginBottom': '20px'}"
+                (dataAdd)="changeTaskStatus($event, column.status)"
+                [animation]="true"
+                (dragStart)="dragAndDropEventInProgress.next(true)"
+                (dragEnd)="updateTasksOrder()"
+                [activeItemStyle]="{'width': cardWidth + 'px', 'z-index': '2', 'box-shadow': '0 0 20px 0 rgba(0, 0, 0, 0.1)', 'margin-bottom': '20px' }"
+              >
+                <ng-template let-task="item">
+                  <div
+                    (click)="openTaskPreviewModal(task.id)"
+                    [class]="'board-col__card task-card task-card_' + tasksService.calcTaskStatus(task.dueDate, task.status)"
+                  >
+                    <div class="task-card__title">{{ task.title }}</div>
+                    <div class="task-card__row">
+                      <div class="task-card__assigned-user">
+                        <div class="task-card__assigned-user-icon"></div>
+                        <span>{{ task.assignedToUser?.name || '' }}</span>
+                      </div>
+                      <div class="task-card__due-date">
+                        {{ (task.dueDate && task.status !== 'completed') ? (task.dueDate | timeAgo) : '' }}
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </kendo-sortable>
+            </div>
+          </ng-template>
+        </kendo-sortable>
+
+      </div>
+    </ng-container>
+  </section>
+
+  <section class="glb-grid-container__aside-column">
+    <header class="glb-grid-container__aside-column_heading">
+      Recent activity
+    </header>
+    <lr-recent-activities-cards></lr-recent-activities-cards>
+  </section>
+</section>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

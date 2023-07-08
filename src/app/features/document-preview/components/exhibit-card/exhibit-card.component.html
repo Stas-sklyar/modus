@@ -1,0 +1,63 @@
+<form class="exhibit-card">
+  <div class="exhibit-card__label">Exhibit №{{ index + 1 }}</div>
+
+  <div class="exhibit-card__row row row_dates">
+    <div class="exhibit-card__control control">
+      <span class="control__label">Bates Number</span>
+
+      <input
+        [value]="document.batesNumber"
+        autocomplete="off"
+        placeholder="Bates Number"
+        type="text"
+        class="lr-filled-input"
+        disabled>
+    </div>
+
+    <div class="exhibit-card__control control">
+      <span class="control__label">Date Added</span>
+
+      <input
+        autocomplete="off"
+        placeholder="Date Added"
+        type="text"
+        class="lr-filled-input"
+        disabled>
+    </div>
+  </div>
+
+  <div class="exhibit-card__row row">
+    <div class="exhibit-card__control control">
+      <span class="control__label">Title</span>
+
+      <a
+        [routerLink]="[]"
+        [queryParams]="{'documentId': document.id}"
+        class="lr-filled-input control__title">
+        {{ document.title }}
+      </a>
+    </div>
+  </div>
+
+  <div class="exhibit-card__row">
+    <div class="exhibit-card__control control">
+      <span class="control__label">Issues</span>
+
+      <div class="exhibit-card__tags-container">
+        <span class="tag">-</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exhibit-card__row">
+    <div class="exhibit-card__control">
+      <span class="control__label">Description</span>
+
+      <div
+        [innerHTML]="document.description || '-'"
+        class="exhibit-card__description">
+      </div>
+    </div>
+  </div>
+</form>
+

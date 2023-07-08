@@ -1,0 +1,31 @@
+@import './constants/common';
+
+.modal {
+  --bs-modal-width: 689px;
+
+  & footer {
+    margin-top: 63px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      margin-top: 70px;
+      gap: 30px;
+    }
+  }
+
+  & btn-close {
+
+  }
+}
+
+.modal-content {
+  border-radius: $BORDER_RADIUS_BASE;
+  max-width: 689px;
+
+  & form {
+    width: 100%;
+    max-width: 689px;
+  }
+}

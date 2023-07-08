@@ -1,0 +1,161 @@
+<ng-container *ngIf="card$ | async as card; else loader">
+  <ng-container *ngIf="!errorOccurred; else error">
+    <section
+      (click)="hideHeaderMenu(); $event.stopPropagation()"
+      [class]="
+          selectedCategory === 'comments'
+            ? 'lr-card-preview lr-card-preview--comment-tab-active'
+            : 'lr-card-preview'
+          "
+      #cardPreview>
+
+      <div class="lr-card-preview__container" #headerContainer>
+        <header class="lr-card-preview__card-header card-header">
+          <a
+            (click)="closePanel()"
+            class="card-header__step-back-lnk step-back-lnk">
+            <svg class="step-back-lnk__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+              <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+            </svg>
+            Back to {{ backTo }}
+          </a>
+
+          <section class="card-header__container">
+            <h3 class="card-header__title">
+              {{ card.name }}
+            </h3>
+
+            <div class="card-header__controls controls">
+              <button
+                (click)="cardHeaderMenuIsActive = !cardHeaderMenuIsActive; $event.stopPropagation()"
+                lr-ic-btn-dropdown
+                icon="plus">
+              </button>
+
+              <div [class]="
+                cardHeaderMenuIsActive
+                  ? 'card-header__menu card-header-menu card-header-menu--open'
+                  : 'card-header__menu card-header-menu card-header-menu--closed'
+              ">
+                <ul class="card-header-menu__list">
+                  <li class="card-header-menu__item" (click)="openAddContentMenu('general')">Add note</li>
+                  <li class="card-header-menu__item" (click)="openAddContentMenu('comments')">Add comment</li>
+                  <li class="card-header-menu__item" (click)="openAddContentMenu('tasks')">Add task</li>
+                </ul>
+              </div>
+
+              <div class="card-header__dropdown-menu-container" dropdown>
+
+                <button
+                  dropdownToggle
+                  lr-ic-btn
+                  icon="ellipsis">
+                </button>
+
+                <div class="card-header__dropdown-menu dropdown-menu" *dropdownMenu role="menu">
+                  <div
+                    class="dropdown-menu__item"
+                    (click)="openEditCardModal(card.id); $event.stopPropagation()">
+                    Edit
+                  </div>
+
+                  <div
+                    class="dropdown-menu__item"
+                    (click)="showConfirmationModalForDeletingCards(confirmationWindowTemplate); $event.stopPropagation()">
+                    Delete
+                  </div>
+
+                  <ng-container *ngIf="notes$ | async as notes">
+                    <div
+                      *ngIf="notes.length > 0"
+                      class="dropdown-menu__item"
+                      (click)="openSortNotesModal(notes); $event.stopPropagation()">
+                      Sort Notes
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <ng-container *ngIf="card.description">
+            <section
+              lrApplyRedirectsToMentions
+              [innerHTML]="card.description | safeHtml"
+              class="card-header__description">
+              {{ card.description }}
+            </section>
+          </ng-container>
+        </header>
+
+        <div class="lr-card-preview__tabs-container tabs-container">
+          <div
+            class="tabs-container__tab tab"
+            [class.selected]="category === selectedCategory"
+            *ngFor="let category of cardCategories"
+            (click)="setSelectedCategory(category)">
+            <div class="tab_name">
+              {{ category }}
+<!--              TODO: DISPLAY AMOUNT OF COMMENTS-->
+<!--              {{ category === 'comments' ? '(' + 'TODO' + ')' : ''}}-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="lr-card-preview__categories">
+        <ng-container [ngSwitch]="selectedCategory">
+          <section *ngSwitchCase="'general'">
+            <lr-card-notes
+              [selectedAddContentMenuItemType]="selectedAddContentMenuItemType"
+              [cardId]="card.id">
+            </lr-card-notes>
+          </section>
+
+          <section *ngSwitchCase="'comments'">
+            <lr-card-comments [cardId]="card.id"></lr-card-comments>
+          </section>
+
+          <section *ngSwitchCase="'tasks'">
+            <lr-card-tasks
+              [selectedAddContentMenuItemType]="selectedAddContentMenuItemType"
+              [cardId]="card.id">
+            </lr-card-tasks>
+          </section>
+
+          <section *ngSwitchCase="'documents'">
+            <lr-card-documents
+              [cardId]="card.id">
+            </lr-card-documents>
+          </section>
+        </ng-container>
+      </section>
+    </section>
+  </ng-container>
+
+  <ng-template #confirmationWindowTemplate>
+    <lr-confirmation-modal
+      (cancel)="deletionConfirmationCanceled()"
+      (confirm)="deletionConfirmationConfirmed(card)"
+    ></lr-confirmation-modal>
+  </ng-template>
+
+</ng-container>
+<ng-template #loader>
+  <section class="lr-card-preview">
+    <a
+      (click)="closePanel()"
+      class="card-header__step-back-lnk step-back-lnk">
+      <svg class="step-back-lnk__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+        <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+      </svg>
+      Back to {{ backTo }}
+    </a>
+    <div class="average-loader"></div>
+  </section>
+</ng-template>
+
+<ng-template #error>
+  <section>error...</section>
+</ng-template>

@@ -1,0 +1,94 @@
+<lr-modal>
+  <ng-container modalTitle>Edit person</ng-container>
+
+  <form
+    [formGroup]="form"
+    modalContent>
+
+    <label class="lr-default-label">
+      <span>Name</span>
+
+      <input
+        formControlName="name"
+        placeholder="Enter Name"
+        autocomplete="off"
+        type="text"
+        class="lr-filled-input"
+        required>
+    </label>
+
+    <label class="lr-default-label">
+      <span>Who is</span>
+
+      <input
+        formControlName="userType"
+        placeholder="Enter User Type"
+        autocomplete="off"
+        class="lr-filled-input"
+        required>
+    </label>
+
+    <label class="lr-default-label">
+      <span>Email</span>
+
+      <input
+        formControlName="email"
+        placeholder="Enter Email"
+        autocomplete="off"
+        type="email"
+        class="lr-filled-input">
+    </label>
+
+    <label class="lr-default-label">
+      <span>Phone number</span>
+
+      <input
+        formControlName="phoneNumber"
+        placeholder="Enter Phone number"
+        autocomplete="off"
+        type="text"
+        class="lr-filled-input">
+    </label>
+    <!--  TODO: IMPLEMENT ADDRESS FIELD-->
+    <!--  <label class="lr-edit-person-form__form-control lr-default-label">-->
+    <!--    <span>Address</span>-->
+
+    <!--    <input-->
+    <!--      formControlName="address"-->
+    <!--      placeholder="Enter Address"-->
+    <!--      autocomplete="off"-->
+    <!--      type="text"-->
+    <!--      class="lr-filled-input">-->
+    <!--  </label>-->
+
+    <label class="lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor
+        formControlName="description"
+        placeholder="Add some details about this person">
+      </lr-text-editor>
+    </label>
+
+    <!--  TODO: ADD UPLOAD DOCUMENT CONTROL-->
+    <!--  <lr-upload-file-control></lr-upload-file-control>-->
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      class="cancel-button"
+      type="button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="editPerson()"
+      class="primary-button"
+      [disabled]="form.status === 'INVALID' || form.disabled">
+      edit person
+      <div *ngIf="form.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

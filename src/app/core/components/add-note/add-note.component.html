@@ -1,0 +1,41 @@
+<div
+  [formGroup]="form"
+  class="lr-add-note">
+  <input
+    lrAutoFocus
+    formControlName="title"
+    autocomplete="off"
+    placeholder="Enter title"
+    type="text"
+    class="lr-add-note__control lr-filled-input"
+  >
+
+  <lr-text-editor
+    formControlName="description"
+    [participants$]="participants$"
+    placeholder="Enter note">
+  </lr-text-editor>
+
+  <div class="lr-add-note__control">
+    <lr-documents-buffer></lr-documents-buffer>
+  </div>
+
+  <div class="lr-add-note__buttons-container">
+    <button
+      *ngIf="cancelBtnIsActive"
+      class="lr-add-note-form__form-btn cancel-button"
+      (click)="closeForm('cancel')"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="onClickAddNoteBtn()"
+      type="submit"
+      class="lr-add-note__form-btn primary-button"
+      [disabled]="form.status === 'INVALID'"
+    >
+      add note
+    </button>
+  </div>
+</div>

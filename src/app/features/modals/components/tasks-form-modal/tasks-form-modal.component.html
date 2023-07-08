@@ -1,0 +1,122 @@
+<lr-modal>
+  <ng-container modalTitle>{{ modalType === 'create' ?  'Create' : 'Edit'}} Task</ng-container>
+
+  <form
+    [formGroup]="form"
+    class="task-form"
+    modalContent>
+
+    <label class="task-form__label lr-default-label">
+      <span>Title</span>
+
+      <input
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Give your task a title"
+        type="text"
+        class="task-form__control lr-filled-input">
+    </label>
+
+    <label class="task-form__label lr-default-label">
+      <span>Assignee</span>
+
+      <div class="assignee-select">
+        <select
+          formControlName="assignedToUserId"
+          class="assignee-select__control lr-filled-input role-select"
+          required>
+
+          <option [value]="null">
+            Select Assignee
+          </option>
+
+          <option
+            *ngFor="let user of users$ | async"
+            [value]="user.id">
+            {{ user.name }}
+          </option>
+
+        </select>
+      </div>
+    </label>
+
+    <label [class]="
+      'task-form__label lr-default-label' +
+      ((!caseInputIsVisible || modalType === 'edit') ? ' task-form__label_hidden' : '')
+    ">
+      <span>Case</span>
+
+      <select
+        formControlName="trialCaseId"
+        class="task-form__control lr-filled-input role-select">
+
+        <option [value]="null">Select Case</option>
+
+        <option
+          *ngFor="let trialCase of trialCases$ | async"
+          [value]="trialCase.id">
+          {{ trialCase.name }}
+        </option>
+
+      </select>
+    </label>
+
+    <div class="task-form__row">
+      <label class="task-form__label lr-default-label">
+        <span>Status</span>
+
+        <div [class]="'status-select + status-select_' + form.value.status">
+          <select
+            formControlName="status"
+            class="lr-filled-input role-select">
+
+            <option [value]="null" selected>Select Status</option>
+            <option [value]="'todo'">TO DO</option>
+            <option [value]="'in-progress'">In progress</option>
+            <option [value]="'completed'">Completed</option>
+
+          </select>
+        </div>
+      </label>
+
+      <label class="task-form__label lr-default-label">
+        <span>Due Date</span>
+
+        <input
+          autocomplete="off"
+          formControlName="dueDate"
+          type="date"
+          class="task-form__control lr-filled-input">
+      </label>
+    </div>
+
+    <label class="lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor
+        formControlName="description"
+        placeholder="Add some details about this event">
+      </lr-text-editor>
+    </label>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="modalType === 'create' ? createTask() : editTask()"
+      type="submit"
+      class="primary-button"
+      [disabled]="form.status === 'INVALID' || form.disabled || !form.value.assignedToUserId"
+    >
+      {{  modalType === 'create' ? 'create' : 'edit' }} task
+      <div *ngIf="form.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

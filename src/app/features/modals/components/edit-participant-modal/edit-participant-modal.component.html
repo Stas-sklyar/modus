@@ -1,0 +1,121 @@
+<lr-modal>
+  <ng-container modalTitle>Edit User</ng-container>
+
+  <form
+    [formGroup]="form"
+    modalContent>
+
+    <label
+      class="lr-default-label">
+      <span>Name</span>
+
+      <input
+        autocomplete="off"
+        formControlName="name"
+        placeholder="Enter Name"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label
+      class="lr-default-label">
+      <span>Title</span>
+
+      <input
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Enter Title"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label
+      class="lr-default-label">
+      <span>Email</span>
+
+      <input
+        autocomplete="off"
+        formControlName="email"
+        placeholder="Enter Email"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label
+      class="lr-default-label">
+      <span>Phone</span>
+
+      <input
+        autocomplete="off"
+        formControlName="phone"
+        placeholder="Enter Phone Number"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label
+      class="lr-default-label">
+      <span>Company</span>
+
+      <input
+        autocomplete="off"
+        formControlName="companyName"
+        placeholder="Enter Company Name"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <!--    <label-->
+    <!--      class="lr-default-label">-->
+    <!--      <span>Address</span>-->
+
+    <!--      <input-->
+    <!--        autocomplete="off"-->
+    <!--        formControlName="address"-->
+    <!--        placeholder="Enter Address"-->
+    <!--        type="text"-->
+    <!--        class="lr-filled-input">-->
+    <!--    </label>-->
+
+    <div
+      class="lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor
+        formControlName="description"
+        placeholder="Enter description">
+      </lr-text-editor>
+    </div>
+
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button">
+      Cancel
+    </button>
+
+    <button
+      (click)="editParticipant()"
+      [disabled]="form.invalid || submitting"
+      type="button"
+      class="primary-button">
+        Save
+    </button>
+
+    <button
+      (click)="reInviteParticipant()"
+      [disabled]="form.invalid || submitting"
+      type="button"
+      class="primary-button">
+        Save and Invite
+        <div *ngIf="submitting" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>
+
+
+
+

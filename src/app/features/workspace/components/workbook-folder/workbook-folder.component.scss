@@ -1,0 +1,172 @@
+@import '../../../../../assets/styles/global';
+
+.lr-folder {
+  margin-bottom: 30px;
+  border-radius: $BORDER_RADIUS_BASE;
+  position: relative;
+
+  &__folder-container {
+    margin: 0 22px;
+  }
+
+  &_gray-cover {
+    background: $COVER_GRAY_TO_WHITE;
+  }
+
+  &_bookmark {
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -14px;
+      background: $COVER_LIGHT_GRAY;
+      width: 96px;
+      height: 14px;
+      border-radius: 4px 19px 0 0;
+
+      @media screen and (min-width: 1280px) and (min-height: 800px) {
+        width: 131px;
+        height: 19px;
+        top: -19px;
+      }
+    }
+  }
+}
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 22px;
+
+  &__title {
+    @include medium-headline;
+    font-weight: normal;
+    line-height: 100%;
+    margin-right: 20px;
+    text-transform: capitalize;
+
+    @media screen and (min-width: 1280px) {
+      @include large-headline;
+    }
+  }
+
+  &__updates-notification {
+    @include small-paragraph;
+    font-size: 12px;
+    background: $COVER_PURE_WHITE;
+    color: $TEXT_DARK_BLUE;
+    padding: 10px;
+    border-radius: $BORDER_RADIUS_BASE;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 8px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    gap: 10px;
+  }
+
+  &__toggle-btn {
+    display: block;
+    width: 37px;
+    height: 37px;
+    transform: rotate(180deg);
+
+    &_expanded {
+      transform: rotate(0);
+    }
+  }
+
+  &_shift-arrow {
+    margin-left: 10px;
+  }
+
+  &__dropdown {
+    @include dropdown-menu;
+
+    & .dropdown__menu {
+      transform: translateX(-150px) !important;
+      z-index: 2;
+    }
+  }
+}
+
+.folder-container {
+  display: flex;
+
+  &_separated {
+    border-top: 2px solid  $SEPARATION_LINE_LIGHT_GRAY;
+  }
+
+  &__folder-content,
+  &__activities {
+    flex: 1;
+  }
+
+  &__folder-content,
+  &__activities {
+    margin-bottom: 30px;
+  }
+}
+
+.folder-description,
+.folder-sections {
+  padding-right: 30px;
+}
+
+.folder-description,
+.folder-sections,
+.activities {
+
+  &__title {
+    @include small-paragraph;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 20px 0 10px;
+    color: $GRAY_0_5;
+  }
+}
+
+// TODO: IMPLEMENT ACTIVITIES
+.activities {
+  display: none;
+}
+
+.folder-description {
+  &__text {
+    @include small-paragraph;
+    color: $TEXT_DARK_GRAY;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include large-paragraph;
+    }
+  }
+}
+
+.folder-sections {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+}
+
+.folder-section-btn {
+  @include small-paragraph;
+  color: $TEXT_LIGHT_BLACK;
+  padding: 10px;
+  background: $COVER_PURE_WHITE;
+  border-radius: $BORDER_RADIUS_BASE;
+  margin: 0 10px 10px 0;
+  cursor: pointer;
+  font-weight: 600;
+}

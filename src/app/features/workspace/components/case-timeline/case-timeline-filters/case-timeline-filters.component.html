@@ -1,0 +1,68 @@
+<form class="lr-case-timeline__filter-form filter-form">
+  <div class="filter-form__col">
+    <lr-search-autocomplete
+      class="filter-form__form-control btn-group"
+      (searchQueryChangeEvent)="filterTimelineEventsBySearchQuery($event)">
+    </lr-search-autocomplete>
+  </div>
+
+  <div class="filter-form__col">
+    <lr-select
+      [list]="people"
+      [itemLabel]="'name'"
+      [label]="'Filter by People'"
+      (toggleItemEvent)="filterTimelineEventsByPeople($event)"
+      class="filter-form__form-control">
+    </lr-select>
+
+    <lr-select
+      [list]="tags"
+      [itemLabel]="'name'"
+      [label]="'Filter by Issue'"
+      (toggleItemEvent)="filterTimelineEventsByIssues($event)"
+      class="filter-form__form-control">
+    </lr-select>
+  </div>
+
+</form>
+
+<form
+  [formGroup]="switchForm"
+  class="lr-case-timeline__switches-box switches-box">
+
+  <div class="switches-box__switches">
+    <div class="switches-box__switch form-check form-switch switches-box__switch--defense">
+      <input
+        formControlName="defenceSwitch"
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="defenseSwitch"
+        checked>
+
+      <label class="form-check-label" for="defenseSwitch">Defense</label>
+    </div>
+    <div class="switches-box__switch form-check form-switch switches-box__switch--plaintiff">
+      <input
+        formControlName="plaintiffSwitch"
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="plaintiffSwitch"
+        checked>
+
+      <label class="form-check-label" for="plaintiffSwitch">Plaintiff</label>
+    </div>
+    <div class="switches-box__switch form-check form-switch switches-box__switch--other">
+      <input
+        formControlName="otherSwitch"
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="3rdPartySwitch"
+        checked>
+
+      <label class="form-check-label" for="3rdPartySwitch">3rd Party</label>
+    </div>
+  </div>
+</form>

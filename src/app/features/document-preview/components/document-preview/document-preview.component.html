@@ -1,0 +1,112 @@
+<div class="document-preview">
+  <a
+    (click)="closePanel()"
+    class="step-back-button">
+    <svg class="step-back-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+      <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+    </svg>
+    {{ backTo || 'Go back' }}
+  </a>
+
+  <ng-container *ngIf="selectedDocument$ | async as document">
+    <header class="document-preview__header header">
+      <div class="header__document-title">
+        {{ document.title }}
+      </div>
+
+      <div class="header__controls">
+        <button
+          *ngIf="!isExhibit(document)"
+          lr-ic-btn
+          (click)="openExhibitModal(document)"
+          icon="plus">
+        </button>
+
+        <div
+          dropdown
+          placement="bottom right"
+          class="btn-group lr-dropdown lr-dropdown_primary">
+          <button
+            class="dropdown-toggle"
+            dropdownToggle
+            lr-ic-btn
+            icon="ellipsis">
+          </button>
+
+          <div
+            *dropdownMenu
+            class="dropdown-menu dropdown-menu-right">
+            <div
+              (click)="openEditDocumentDocumentModal(document)"
+              class="dropdown-item">
+              Edit Document
+            </div>
+            <div
+              (click)="openDeleteDocumentDocumentModal(document)"
+              class="dropdown-item">
+              Delete Document
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <ng-container *ngIf="selectedCategory$ | async as selectedCategory">
+      <section class="lr-category-tabs-container">
+        <div
+          class="lr-category-tabs-container__category-tab"
+          [class.selected]="selectedCategory === 'general'"
+          (click)="selectedCategory$.next('general')">
+          <div class="tab_name">
+            general
+          </div>
+        </div>
+        <div
+          *ngIf="!isExhibit(document)"
+          class="lr-category-tabs-container__category-tab"
+          [class.selected]="selectedCategory === 'exhibits'"
+          (click)="selectedCategory$.next('exhibits')">
+          <div class="tab_name">
+            exhibits
+          </div>
+        </div>
+        <div
+          class="lr-category-tabs-container__category-tab"
+          [class.selected]="selectedCategory === 'comments'"
+          (click)="selectedCategory$.next('comments')">
+          <div class="tab_name">
+            comments
+          </div>
+        </div>
+      </section>
+
+      <section class="document-preview__categories categories">
+        <ng-container [ngSwitch]="selectedCategory">
+          <section *ngSwitchCase="'general'">
+            <lr-document-info
+              [document]="document">
+            </lr-document-info>
+          </section>
+
+          <ng-container *ngIf="!isExhibit(document)">
+            <section
+              *ngSwitchCase="'exhibits'"
+              class="categories__exhibits">
+              <lr-exhibit-card
+                *ngFor="let exhibit of document.documents; index as i"
+                [document]="exhibit"
+                [index]="i">
+              </lr-exhibit-card>
+            </section>
+          </ng-container>
+
+          <section *ngSwitchCase="'comments'">
+            <lr-document-comments
+              [document]="document">
+            </lr-document-comments>
+          </section>
+        </ng-container>
+      </section>
+    </ng-container>
+  </ng-container>
+</div>

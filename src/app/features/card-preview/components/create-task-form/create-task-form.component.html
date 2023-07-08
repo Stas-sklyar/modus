@@ -1,0 +1,54 @@
+<form
+  class="lr-add-new-task"
+  [formGroup]="createNewTaskForm"
+>
+  <h2 class="lr-add-new-task__title">Create a new task</h2>
+
+  <input
+    lrAutoFocus
+    autocomplete="off"
+    formControlName="title"
+    placeholder="Title"
+    type="text"
+    class="lr-add-new-task__control lr-filled-input">
+
+  <textarea
+    autocomplete="off"
+    formControlName="description"
+    placeholder="Description"
+    type="text"
+    class="lr-add-new-task__control lr-filled-textarea"
+  ></textarea>
+
+  <select
+    formControlName="assignedToUserId"
+    class="lr-add-new-task__control form-select"
+  >
+    <option [value]="null" selected>Assign to</option>
+    <option *ngFor="let user of users$ | async" [value]="user.id">{{ user.name }}</option>
+  </select>
+
+  <input
+    autocomplete="off"
+    formControlName="dueDate"
+    placeholder="Due Date"
+    type="date"
+    class="lr-add-new-task__control lr-filled-input">
+
+  <div class="lr-add-new-task__buttons-container">
+    <button
+      (click)="onClickCancelButton()"
+      class="lr-add-new-task__form-btn cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="onClickSubmitButton()"
+      class="lr-add-new-task__form-btn primary-button"
+      [disabled]="createNewTaskForm.status === 'INVALID'"
+    >
+      add task
+    </button>
+  </div>
+</form>

@@ -1,0 +1,102 @@
+<lr-modal>
+  <ng-container modalTitle>
+    {{ (action === 'create') ? 'Create Exhibit' : 'Edit Exhibit' }}
+  </ng-container>
+
+  <form
+    [formGroup]="form"
+    modalContent>
+
+    <label class="lr-default-label">
+      <span>Created from</span>
+
+      <div class="parent-document-control">
+        <input
+          autocomplete="off"
+          formControlName="parentDocument"
+          placeholder="Parent"
+          type="text">
+      </div>
+    </label>
+
+    <label class="lr-file-uploader">
+      <div class="lr-file-uploader__container">
+      <span class="lr-file-uploader__trigger">
+        Choose a file
+      </span>
+
+        <span
+          *ngIf="fileName"
+          [title]="fileName"
+          class="lr-file-uploader__title text-truncate">
+        {{ fileName }}
+      </span>
+      </div>
+
+      <input
+        (change)="saveUploadedFile($event.target)"
+        type="file"
+      />
+    </label>
+
+    <label class="lr-default-label">
+      <span>Title</span>
+
+      <input
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Document Title"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label class="lr-default-label">
+      <span>Exhibit Stamp</span>
+
+      <input
+        autocomplete="off"
+        formControlName="exhibitStamp"
+        placeholder="000-000"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+
+    <label class="lr-default-label">
+      <span>Issues</span>
+
+      <input
+        autocomplete="off"
+        placeholder="Issues"
+        type="text"
+        class="lr-filled-input"
+        disabled>
+    </label>
+
+    <div class="lr-default-label">
+      <span>Description</span>
+
+      <lr-text-editor formControlName="description"></lr-text-editor>
+    </div>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button">
+      cancel
+    </button>
+
+    <button
+      (click)="submitForm()"
+      [disabled]="form.invalid || submitting"
+      class="primary-button"
+      type="submit">
+      {{ (action === 'create') ? 'Create Exhibit' : 'Edit Exhibit' }}
+      <div *ngIf="submitting" class="btn-loader"></div>
+    </button>
+  </ng-container>
+
+</lr-modal>
+

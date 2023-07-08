@@ -1,0 +1,33 @@
+<section class="lr-person-documents">
+  <h1 class="lr-person-documents__title">Documents</h1>
+
+  <div class="lr-person-documents__documents-list">
+    <div class="lr-person-documents__document-card document-card">
+      <lr-document-card
+        [name]="'Police Report – January 4, 1992'"
+      ></lr-document-card>
+    </div>
+
+    <label class="lr-person-documents__add-btn" (click)="openUploadDocumentSection()">
+      <lr-add-content-btn [btnLabel]="'Add document'"></lr-add-content-btn>
+    </label>
+
+    <div class="lr-person-documents__document-card document-card">
+      <lr-document-card
+        [name]="'Police Report – January 4, 1992'"
+      ></lr-document-card>
+    </div>
+
+    <label class="lr-person-documents__add-btn" (click)="openUploadDocumentSection()">
+      <lr-add-content-btn [btnLabel]="'Add document'"></lr-add-content-btn>
+    </label>
+  </div>
+
+  <div [class]="
+          uploadDocumentSectionIsActive
+            ? 'lr-person-documents__add-document add-document add-document--open'
+            : 'lr-person-documents__add-document add-document add-document--closed'
+        " #uploadDocumentSection>
+    <lr-upload-file-control></lr-upload-file-control>
+  </div>
+</section>

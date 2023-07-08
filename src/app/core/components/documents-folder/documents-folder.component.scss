@@ -1,0 +1,35 @@
+@import '../../../../assets/styles/global';
+
+.documents-folder {
+  align-items: center;
+  background: $COVER_GRAY_TO_WHITE;
+  border-radius: 4px;
+  color: $TEXT_DARK_GRAY;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  height: 60px;
+  width: 260px;
+
+  &:hover {
+    &:not(.documents-folder_selected) {
+      background: $COVER_LIGHT_GRAY;
+    }
+  }
+
+  &_selected {
+    background: $COVER_BLUE;
+    color: $TEXT_DARK_BLUE;
+  }
+
+  &__icon {
+    margin-left: 17px;
+  }
+
+  &__title {
+    overflow: hidden;
+    max-width: 140px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

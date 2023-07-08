@@ -1,0 +1,102 @@
+  @import '../../../../assets/styles/global';
+
+:host {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: $COVER_TRANSPARENT;
+}
+
+.ic-btn,
+.nav-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.ic-btn {
+  background: $COVER_DARK_BLUE;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50% !important;
+
+  @media screen and (min-width: 1280px) {
+    width: 36px;
+    height: 36px;
+  }
+
+  &_dropdown {
+
+  }
+
+  .icon {
+    color: $COVER_LIGHT_WHITE;
+    width: 15px;
+    height: 15px;
+
+    @media screen and (min-width: 1280px) {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.nav-btn {
+  width: 42px;
+  height: 42px;
+
+  @media screen and (min-width: 1280px) {
+    width: 64px;
+    height: 64px;
+  }
+
+  .icon {
+    width: 21px;
+    height: 21px;
+
+    //@media screen and (min-width: 1280px) {
+    //  width: 32px;
+    //  height: 32px;
+    //}
+  }
+
+  &_primary {
+    background: $COVER_GRAY;
+    border: 1px solid transparent;
+    border-radius: 50%;
+
+    .icon {
+      color: $COVER_GRAY_TO_BLACK;
+    }
+
+    &.bordered {
+      background: $COVER_TRANSPARENT;
+      border-color: $GRAY_2;
+    }
+
+    &.activated-route {
+      background: $COVER_DARK_BLUE;
+
+      .icon {
+        color: $COVER_LIGHT_WHITE;
+      }
+
+      &.bordered {
+        background: $COVER_TRANSPARENT;
+        border-color: $COVER_DARK_BLUE;
+        .icon {
+          color: $COVER_DARK_BLUE;
+        }
+      }
+    }
+
+  }
+  &_secondary {
+    .icon {
+      color: $COVER_PURE_BLACK;
+    }
+  }
+}

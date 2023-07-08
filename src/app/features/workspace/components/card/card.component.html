@@ -1,0 +1,53 @@
+<div
+  *ngIf="card; else loader"
+  class="lr-card">
+  <span
+    class="lr-card__tag-btn tag-btn"
+    [class.tag-btn_tagged]="false">
+    <svg  class="tag-btn__icon" xmlns="http://www.w3.org/2000/svg" width="39.993" height="35.412" viewBox="0 0 39.993 35.412">
+      <g id="Trial_Notebook_Icon" data-name="Trial Notebook Icon" transform="translate(0.25 0.375)">
+        <path id="Path_113" data-name="Path 113" d="M43.014,63.372h1.53v-1.28a1.91,1.91,0,0,1,1.907-1.907H59.637a1.91,1.91,0,0,1,1.907,1.907v1.28h1.534a.439.439,0,0,1,.439.439V67a.439.439,0,0,1-.439.439H43.015A.439.439,0,0,1,42.576,67V63.811A.438.438,0,0,1,43.014,63.372Zm17.652-1.28a1.031,1.031,0,0,0-1.03-1.03H46.452a1.031,1.031,0,0,0-1.03,1.03v1.28H60.666ZM43.453,66.559H62.639V64.25H43.453v2.309Z" transform="translate(-42.576 -32.65)" fill="currentColor" stroke="currentColor" stroke-width="0.5"/>
+        <path id="Path_114" data-name="Path 114" d="M7.653,17.7l6.786-9.98a2.015,2.015,0,0,1,2.678-2.962l5.964,4.055a2.015,2.015,0,0,1-1.77,3.579l-1.487,2.187a1.36,1.36,0,0,0,.359,1.887l14.089,9.58a3.533,3.533,0,0,1,4.764,2.982,3.553,3.553,0,0,1-1.049,2.854,3.533,3.533,0,0,1-6-2.474L17.9,19.822a1.36,1.36,0,0,0-1.887.359l-1.487,2.187a2.015,2.015,0,0,1-2.678,2.962L5.883,21.275A2.015,2.015,0,0,1,7.653,17.7Zm15.236-6.574a1.144,1.144,0,0,0-.3-1.588L16.623,5.479a1.143,1.143,0,0,0-1.285,1.89L21.3,11.424A1.143,1.143,0,0,0,22.889,11.122Zm-4.5,7.975L32.68,28.813a.437.437,0,0,1,.186.424,2.654,2.654,0,1,0,1.589-2.323.439.439,0,0,1-.476-.011L19.69,17.187a2.237,2.237,0,0,1-.591-3.106l1.439-2.116L15.117,8.28l-6.69,9.839L13.847,21.8l1.439-2.116A2.237,2.237,0,0,1,18.391,19.1ZM6.376,20.549,12.34,24.6a1.143,1.143,0,0,0,1.285-1.89L7.661,18.659a1.143,1.143,0,0,0-1.285,1.89Z" transform="translate(0.439 -4.405)" fill="currentColor" stroke="currentColor" stroke-width="0.5"/>
+      </g>
+    </svg>
+  </span>
+
+  <div class="lr-card__card-content card-content">
+    <h3 class="card-content__title">
+      {{ card.name }}
+    </h3>
+    <div
+      lrApplyRedirectsToMentions
+      [innerHTML]="card.description | safeHtml"
+      class="card-content__description">
+    </div>
+
+    <div class="card-content__counters counters">
+
+      <div class="counters__people people-counter">
+        <svg class="people-counter__icon" xmlns="http://www.w3.org/2000/svg" width="33" height="21" viewBox="0 0 33 21">
+          <path id="People_Icon" data-name="People Icon" d="M24.75,19.5A17.98,17.98,0,0,0,18,21a17.694,17.694,0,0,0-6.75-1.5c-3.255,0-9.75,1.62-9.75,4.875V28.5h33V24.375C34.5,21.12,28.005,19.5,24.75,19.5Zm-6,6.75h-15V24.375c0-.81,3.84-2.625,7.5-2.625s7.5,1.815,7.5,2.625Zm13.5,0H21V24.375a2.729,2.729,0,0,0-.78-1.83,14.471,14.471,0,0,1,4.53-.8c3.66,0,7.5,1.815,7.5,2.625ZM11.25,18A5.25,5.25,0,1,0,6,12.75,5.256,5.256,0,0,0,11.25,18Zm0-8.25a3,3,0,1,1-3,3A3.009,3.009,0,0,1,11.25,9.75ZM24.75,18a5.25,5.25,0,1,0-5.25-5.25A5.256,5.256,0,0,0,24.75,18Zm0-8.25a3,3,0,1,1-3,3A3.009,3.009,0,0,1,24.75,9.75Z" transform="translate(-1.5 -7.5)" fill="#4c4c4c"/>
+        </svg>
+        <span class="people-counter__value">
+          {{ card.personMentions.length }}
+        </span>
+        <div class="people-counter__title">People</div>
+      </div>
+
+      <div class="counters__documents documents-counter">
+        <svg class="documents-counter__icon" xmlns="http://www.w3.org/2000/svg" width="24.131" height="27.578" viewBox="0 0 24.131 27.578">
+          <path id="Documents_Icon" data-name="Documents Icon" d="M27.493,11.545A24.416,24.416,0,0,0,25.145,8.86,24.426,24.426,0,0,0,22.46,6.512a4.3,4.3,0,0,0-2.449-1.136H10.1A2.157,2.157,0,0,0,7.946,7.53V27.352A2.157,2.157,0,0,0,10.1,29.506H26.475a2.157,2.157,0,0,0,2.155-2.155V13.993a4.3,4.3,0,0,0-1.136-2.449Zm-3.567-1.466a23.507,23.507,0,0,1,1.955,2.192H21.735V8.124a23.491,23.491,0,0,1,2.192,1.954Zm2.979,17.273a.437.437,0,0,1-.431.431H10.1a.437.437,0,0,1-.431-.431V7.53A.437.437,0,0,1,10.1,7.1h9.911v6.033a.862.862,0,0,0,.862.862h6.033ZM19.013,3.064a4.3,4.3,0,0,0-2.449-1.136H6.653A2.157,2.157,0,0,0,4.5,4.083V23.9a2.158,2.158,0,0,0,1.724,2.111V4.083a.437.437,0,0,1,.431-.431H19.766c-.26-.213-.512-.411-.753-.587Z" transform="translate(-4.499 -1.928)" fill="#4c4c4c"/>
+        </svg>
+        <span class="documents-counter__value">
+          <!--    TODO: CALC DOCUMENTS      -->
+          0
+        </span>
+        <div class="documents-counter__title">Documents</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

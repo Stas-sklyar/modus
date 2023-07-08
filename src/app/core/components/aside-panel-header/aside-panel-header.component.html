@@ -1,0 +1,93 @@
+<header class="lr-aside-panel-header">
+  <a
+    (click)="closePanel()"
+    class="lr-aside-panel-header__step-back-lnk step-back-lnk">
+    <svg class="step-back-lnk__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+      <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+    </svg>
+    Back to {{ backToBtnLabel }}
+  </a>
+
+  <section class="lr-aside-panel-header__container">
+    <h3 class="lr-aside-panel-header__title">
+      {{ title }}
+    </h3>
+
+    <div class="lr-aside-panel-header__controls controls">
+
+      <div class="lr-aside-panel-header__dropdown dropdown" dropdown>
+        <button
+          class="dropdown__toggle dropdown-toggle"
+          (click)="$event.stopPropagation()"
+          dropdownToggle
+          lr-ic-btn-dropdown
+          icon="plus">
+        </button>
+
+        <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+          <ul
+            *ngIf="!specificCreateContentItemsList"
+            class="dropdown-menu__list">
+            <li class="dropdown-menu__item" (click)="openCreateContentWindow('general')">Add note</li>
+            <li class="dropdown-menu__item" (click)="openCreateContentWindow('comments')">Add comment</li>
+          </ul>
+
+          <ul
+            *ngIf="specificCreateContentItemsList"
+            class="dropdown-menu__list">
+            <li
+              *ngFor="let item of specificCreateContentItemsList"
+              class="dropdown-menu__item"
+              (click)="openCreateContentWindow(item)"
+            >
+              Add {{ item }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lr-aside-panel-header__dropdown dropdown" dropdown>
+        <button
+          class="dropdown__toggle dropdown-toggle"
+          (click)="$event.stopPropagation()"
+          dropdownToggle
+          lr-ic-btn
+          icon="ellipsis">
+        </button>
+
+        <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+          <div
+            class="dropdown-menu__item"
+            (click)="openEditEntityModal(); $event.stopPropagation()">
+            Edit
+          </div>
+
+          <div
+            class="dropdown-menu__item"
+            (click)="openSortNotesModal(); $event.stopPropagation()">
+            Sort Notes
+          </div>
+
+          <div
+            class="dropdown-menu__item"
+            (click)="showConfirmationModalForDeletingEntity(confirmationModalForDeleteEntity); $event.stopPropagation()">
+            Delete
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div
+    lrApplyRedirectsToMentions
+    [innerHTML]="description | safeHtml"
+    class="lr-aside-panel-header__description">
+  </div>
+</header>
+
+<ng-template #confirmationModalForDeleteEntity>
+  <lr-confirmation-modal
+    (cancel)="deletionConfirmationCanceled()"
+    (confirm)="deletionConfirmationConfirmed()"
+  ></lr-confirmation-modal>
+</ng-template>

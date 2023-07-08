@@ -1,0 +1,47 @@
+<div class="lr-person-profile">
+  <h3 class="lr-person-profile__title">Contact Details</h3>
+
+  <label class="lr-person-profile__form-control lr-default-label">
+    <span>Email</span>
+
+    <input
+      [value]="person.email"
+      autocomplete="off"
+      placeholder="Email address"
+      type="email"
+      class="lr-filled-input"
+      disabled>
+  </label>
+
+  <label class="lr-person-profile__form-control lr-default-label">
+    <span>Phone number</span>
+
+    <input
+      [value]="person.phoneNumber"
+      autocomplete="off"
+      placeholder="Phone number"
+      type="text"
+      class="lr-filled-input"
+      disabled>
+  </label>
+  <!--  TODO: IMPLEMENT ADDRESS FIELD-->
+<!--  <label class="lr-person-profile__form-control lr-default-label">-->
+<!--    <span>Address</span>-->
+
+<!--    <input-->
+<!--      [value]="person.address"-->
+<!--      placeholder="Address"-->
+<!--      autocomplete="off"-->
+<!--      type="text"-->
+<!--      class="lr-filled-input"-->
+<!--      disabled>-->
+<!--  </label>-->
+
+  <label class="lr-person-profile__form-control lr-person-profile__form-control--description lr-default-label">
+    <span>Description</span>
+
+    <div [innerHTML]="person.description | safeHtml">
+      {{ person.description }}
+    </div>
+  </label>
+</div>

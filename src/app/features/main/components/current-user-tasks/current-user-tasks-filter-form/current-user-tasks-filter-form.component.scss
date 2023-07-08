@@ -1,0 +1,29 @@
+.my-tasks-filter {
+  display: flex;
+  justify-content: space-between;
+
+  &__col {
+    display: flex;
+    align-items: center;
+
+    &:first-child {
+      margin-right: 15px;
+    }
+  }
+
+  &__form-control {
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &_select {
+      width: 300px;
+    }
+  }
+}
+
+.form-check-label {
+  cursor: pointer;
+}

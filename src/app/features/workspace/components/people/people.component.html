@@ -1,0 +1,62 @@
+<section class="people">
+  <ng-container *ngIf="selectedCase$ | async as selectedCase">
+    <lr-case-header
+      pageTitle="people"
+      [caseTitle]="selectedCase.name">
+
+      <button
+        (click)="openCreatePersonModal()"
+        lr-ic-btn-dropdown
+        icon="plus">
+      </button>
+      <button [style.display]="'none'"
+        lr-ic-btn
+        icon="ellipsis">
+      </button>
+    </lr-case-header>
+  </ng-container>
+
+  <div class="people__filter-form filter-form" *ngIf="casePeople$ | async as people">
+    <lr-search-autocomplete
+      class="filter-form__form-control"
+      (searchQueryChangeEvent)="filterPeople($event, categories, people)">
+    </lr-search-autocomplete>
+
+    <lr-select
+      [list]="calcUserTypesList(people)"
+      [label]="'Filter by People'"
+      (toggleItemEvent)="filterPeople(searchQuery, $event, people)"
+      class="filter-form__form-control">
+    </lr-select>
+  </div>
+
+  <div
+    *ngIf="casePeople$ | async as casePeople$"
+    class="people__inner-container">
+    <div
+      *ngFor="let person of filterIsActive ? filteredPeople : casePeople$"
+      (click)="openPersonPreviewPanel(person.id)"
+      class="people__person person"
+    >
+      <div class="person__avatar">
+        <img
+          class="person__avatar-img"
+          *ngIf="'person.avatar' && false; else emptyAvatar"
+          src=""
+          alt=""
+        >
+
+        <ng-template #emptyAvatar>
+          <div class="person__empty-avatar">
+            {{ person.name | getInitials }}
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="person__info">
+        <div class="person__full-name">{{ person.name }}</div>
+        <div class="person__role">{{ person.userType }}</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+@import '../../../../assets/styles/global';
+
+.lr-card-chip {
+  background: $COVER_GRAY;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 21px 4px;
+
+  &__icon {
+    width: 12px;
+    height: 14px;
+
+    &--document {
+      background: no-repeat center url("../../../../assets/icons/ic_documents.svg");
+      background-size: contain;
+    }
+
+    &--people {
+      background: no-repeat center url("../../../../assets/icons/ic_people.svg");
+      background-size: contain;
+    }
+  }
+
+  &__value,
+  &__title {
+    @include extra-small-paragraph;
+    color: $TEXT_DARK_GRAY;
+  }
+}

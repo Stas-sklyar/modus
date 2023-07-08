@@ -1,0 +1,136 @@
+@import '../../../../../../assets/styles/global';
+
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+
+  &__col {
+
+    &:last-of-type {
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &__form-control {
+    margin-right: 20px;
+    min-width: 353px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.switches-box {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 38px;
+
+  &__switches {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__switch {
+    @include medium-paragraph;
+    font-weight: 600;
+    color: $GRAY_1;
+
+    & .form-check-input,
+    & .form-check-input + label {
+      cursor: pointer;
+    }
+
+    &--defense {
+
+      & .form-check-input:checked {
+        background-color: $BLUE_2;
+        border-color: $BLUE_2;
+        background-image: url("../../../../../../assets/icons/ic_blue-switch-circle.svg");
+        background-size: 12px 12px;
+
+        & + label {
+          color: $BLUE_0;
+        }
+      }
+    }
+
+    &--plaintiff {
+
+      & .form-check-input:checked {
+        background-color: $PINK_0;
+        border-color: $PINK_0;
+        background-image: url("../../../../../../assets/icons/ic_red-switch-circle.svg");
+        background-size: 12px 12px;
+
+        & + label {
+          color: $RED_0;
+        }
+      }
+    }
+
+    &--other {
+
+      & .form-check-input:checked {
+        background-color: $GRAY_3;
+        border-color: $GRAY_3;
+        background-image: url("../../../../../../assets/icons/ic_gray-switch-circle.svg");
+        background-size: 12px 12px;
+
+        & + label {
+          color: $GRAY_0;
+        }
+      }
+    }
+  }
+}
+
+.filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 22px 20px;
+  width: 350px;
+  border: 2px solid $GRAY_3;
+  border-radius: $BORDER_RADIUS_BASE;
+  cursor: pointer;
+
+  &__icon {
+
+    &--sort {
+      width: 16px;
+      height: 16px;
+      background: center center url("../../../../../../assets/icons/ic_filer.svg");
+      margin-right: 10px;
+    }
+
+    &--arrow {}
+
+  }
+
+  &__label {
+    @include medium-paragraph;
+    color: $GRAY_0;
+    flex-grow: 1;
+
+    & span:last-child {
+      color: $BLUE_0;
+    }
+  }
+}
+
+.dropdown-menu {
+  padding: 10px;
+  width: 350px;
+}
+
+.form-check-input,
+.form-check-label {
+  cursor: pointer;
+}

@@ -1,0 +1,36 @@
+<lr-modal>
+  <ng-container modalTitle>Delete folder</ng-container>
+
+  <div modalContent>
+
+    <div>
+      <ng-container *ngIf="containFiles; else noFiles">
+        You cannot delete the folder since it contains files. You first need to delete files in it, and then the folder
+      </ng-container>
+
+      <ng-template #noFiles>
+        Are you sure you want to delete the {{ folder.name }} folder?
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button">
+      {{ containFiles ? 'Ok' : 'No' }}
+    </button>
+
+    <button
+      [disabled]="submitting"
+      *ngIf="!containFiles"
+      (click)="deleteFolder()"
+      type="button"
+      class="primary-button">
+      Yes
+    </button>
+  </ng-container>
+
+</lr-modal>
+

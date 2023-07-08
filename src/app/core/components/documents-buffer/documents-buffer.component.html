@@ -1,0 +1,55 @@
+<div class="documents-buffer">
+  <div
+    *ngIf="uploadedDocuments$ | async as uploadedDocuments; else title"
+    class="documents-buffer__document-list">
+    <div class="documents-buffer__title">
+      Attached documents: ({{ uploadedDocuments.length }})
+    </div>
+
+    <div
+      *ngFor="let document of uploadedDocuments; index as i"
+      class="documents-buffer__document document">
+      <span class="document__number">{{ i + 1 }}:</span>
+      <span class="document__title">{{ document.title }}</span>
+    </div>
+  </div>
+
+  <ng-template #title>
+    <div class="documents-buffer__title">
+      Attached documents: (0)
+    </div>
+  </ng-template>
+
+  <div>
+    <div
+      dropdown
+      [dropup]="dropUp"
+      #dropdown="bs-dropdown"
+      placement="bottom right"
+      class="btn-group lr-dropdown">
+      <button
+        class="dropdown-toggle btn btn-link"
+        dropdownToggle>
+        Select Document
+      </button>
+
+      <div
+        *dropdownMenu
+        class="dropdown-menu dropdown-menu-right">
+        <div
+          *ngFor="let document of documents$ | async"
+          (click)="selectDocument(document); dropdown.hide()"
+          class="dropdown-item">
+          {{ document.title }}
+        </div>
+      </div>
+    </div>
+
+    <button
+      (click)="openDocumentModal()"
+      class="btn btn-link">
+      Add Document
+    </button>
+  </div>
+
+</div>

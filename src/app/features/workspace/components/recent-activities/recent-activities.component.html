@@ -1,0 +1,61 @@
+<section
+  class="lr-recent-activities"
+  [class.lr-recent-activities_fixed-height]="partialOutput && displayType === 'full'"
+  [class.lr-recent-activities_reduced]="displayType === 'reduced'">
+  <ng-container *ngIf="recentActivities$ | async as activities">
+    <ng-container *ngFor="let activity of activities |
+          clipActivityList : partialOutput : outputPortion;
+          index as i">
+      <div class="lr-recent-activities__record activity-record">
+        <div class="activity-record__avatar avatar">
+          <svg class="avatar__icon" xmlns="http://www.w3.org/2000/svg" width="24.131" height="27.578" viewBox="0 0 24.131 27.578">
+            <path id="Documents_Icon" data-name="Documents Icon" d="M27.493,11.545A24.416,24.416,0,0,0,25.145,8.86,24.426,24.426,0,0,0,22.46,6.512a4.3,4.3,0,0,0-2.449-1.136H10.1A2.157,2.157,0,0,0,7.946,7.53V27.352A2.157,2.157,0,0,0,10.1,29.506H26.475a2.157,2.157,0,0,0,2.155-2.155V13.993a4.3,4.3,0,0,0-1.136-2.449Zm-3.567-1.466a23.507,23.507,0,0,1,1.955,2.192H21.735V8.124a23.491,23.491,0,0,1,2.192,1.954Zm2.979,17.273a.437.437,0,0,1-.431.431H10.1a.437.437,0,0,1-.431-.431V7.53A.437.437,0,0,1,10.1,7.1h9.911v6.033a.862.862,0,0,0,.862.862h6.033ZM19.013,3.064a4.3,4.3,0,0,0-2.449-1.136H6.653A2.157,2.157,0,0,0,4.5,4.083V23.9a2.158,2.158,0,0,0,1.724,2.111V4.083a.437.437,0,0,1,.431-.431H19.766c-.26-.213-.512-.411-.753-.587Z" transform="translate(-4.499 -1.928)" fill="#4c4c4c"/>
+          </svg>
+        </div>
+
+        <div class="activity-record__record-description record-description">
+          <div class="record-description__action">
+            {{ activity.name }} : {{ activity.action }}
+          </div>
+          <div class="record-description__action-moment">
+            {{ activity.actionMoment }}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="partialOutput &&
+          displayType === 'full' &&
+          activities.length > outputPortion">
+          <span
+            (click)="increaseOutputPortion()"
+            class="lr-recent-activities__show-more-btn">
+            Show more
+          </span>
+    </ng-container>
+  </ng-container>
+
+  <div class="lr-recent-activities__record activity-record">
+    <div class="activity-record__avatar avatar">
+      <svg class="avatar__icon" xmlns="http://www.w3.org/2000/svg" width="24.131" height="27.578" viewBox="0 0 24.131 27.578">
+        <path id="Documents_Icon" data-name="Documents Icon" d="M27.493,11.545A24.416,24.416,0,0,0,25.145,8.86,24.426,24.426,0,0,0,22.46,6.512a4.3,4.3,0,0,0-2.449-1.136H10.1A2.157,2.157,0,0,0,7.946,7.53V27.352A2.157,2.157,0,0,0,10.1,29.506H26.475a2.157,2.157,0,0,0,2.155-2.155V13.993a4.3,4.3,0,0,0-1.136-2.449Zm-3.567-1.466a23.507,23.507,0,0,1,1.955,2.192H21.735V8.124a23.491,23.491,0,0,1,2.192,1.954Zm2.979,17.273a.437.437,0,0,1-.431.431H10.1a.437.437,0,0,1-.431-.431V7.53A.437.437,0,0,1,10.1,7.1h9.911v6.033a.862.862,0,0,0,.862.862h6.033ZM19.013,3.064a4.3,4.3,0,0,0-2.449-1.136H6.653A2.157,2.157,0,0,0,4.5,4.083V23.9a2.158,2.158,0,0,0,1.724,2.111V4.083a.437.437,0,0,1,.431-.431H19.766c-.26-.213-.512-.411-.753-.587Z" transform="translate(-4.499 -1.928)" fill="#4c4c4c"/>
+      </svg>
+    </div>
+
+    <div class="activity-record__record-description record-description">
+      <div class="record-description__action">
+        Constance Riley Eye Exam – 10/17/1982 was tagged in Requests for Admissions.
+      </div>
+      <div class="record-description__action-moment">
+        5 days ago
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #noActivities>
+  <section class="lr-recent-activities">
+    No activities
+  </section>
+</ng-template>

@@ -1,0 +1,52 @@
+@import '../../../../assets/styles/global';
+
+.documents-buffer {
+  align-items: baseline;
+  border: 1px solid $BORDER_GRAY_2;
+  border-radius: $BORDER_RADIUS_BASE;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 30px;
+  }
+
+  &__title {
+    color: $TEXT_GRAY;
+  }
+
+  &__document-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__document-selector {
+    border: none;
+    color: $TEXT_DARK_BLUE;
+    outline: none;
+    width: auto !important;
+  }
+}
+
+.document {
+  padding: 5px;
+
+  &__number {
+    color: $TEXT_GRAY;
+    font-size: 15px;
+  }
+
+  &__title {
+    color: $TEXT_PURPLE;
+    padding-left: 10px;
+    text-decoration: underline;
+  }
+}
+
+.select-trigger {
+  background: transparent;
+  border: none;
+  color: $TEXT_DARK_GRAY;
+  width: 100%;
+}

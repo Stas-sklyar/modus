@@ -1,0 +1,9 @@
+<div class="main-page" [class.lr-scroll-lock]="scrollLock">
+  <lr-app-top-menu></lr-app-top-menu>
+
+  <div class="main-page__container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <lr-aside-panel (scrollLock)="scrollLock = $event"></lr-aside-panel>
+</div>

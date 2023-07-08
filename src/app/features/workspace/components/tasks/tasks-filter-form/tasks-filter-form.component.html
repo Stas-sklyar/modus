@@ -1,0 +1,25 @@
+<div class="tasks-filter-form">
+  <lr-search-autocomplete
+    class="tasks-filter-form__form-control btn-group"
+    [placeholder]="'Search for a task…'"
+    (searchQueryChangeEvent)="filterTasksBySearchQuery($event)">
+  </lr-search-autocomplete>
+
+  <lr-select
+    [list]="['Overdue', 'Due this week', 'Due next week']"
+    [multiple]="false"
+    [label]="'View all tasks'"
+    (toggleItemEvent)="filterTasksByDueDate($event)"
+    class="tasks-filter-form__form-control tasks-filter-form__form-control_select">
+  </lr-select>
+
+<!--  <div class="tasks-filter-form__form-control form-check">-->
+<!--    <label class="form-check-label">-->
+<!--      <span>Assigned to me</span>-->
+<!--      <input-->
+<!--        (change)="filterTasksByAssignedToCurrentUserIdArr($event)"-->
+<!--        class="form-check-input"-->
+<!--        type="checkbox">-->
+<!--    </label>-->
+<!--  </div>-->
+</div>

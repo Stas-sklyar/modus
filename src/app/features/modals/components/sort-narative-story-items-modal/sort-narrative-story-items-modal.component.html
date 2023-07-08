@@ -1,0 +1,53 @@
+<lr-modal>
+  <ng-container modalTitle>Sort story items</ng-container>
+
+  <ng-container modalContent>
+
+    <div *ngIf="storyItems.length">
+
+      <kendo-sortable
+        [kendoSortableBinding]="sortedStoryItems"
+        [itemClass]="'sortable-elem sortable-elem_nested'"
+        [activeItemClass]="'sortable-elem sortable-elem_active sortable-elem_nested'"
+      >
+        <ng-template let-storyItem="item">
+          <div class="sortable-parent-item-title">
+            {{ storyItem.title }}
+          </div>
+
+          <div>
+            <kendo-sortable
+              [kendoSortableBinding]="storyItem.items"
+              zone="innerZone"
+              [itemClass]="'sortable-elem sortable-elem_nested'"
+              [activeItemClass]="'sortable-elem sortable-elem_active sortable-elem_nested'"
+              [emptyItemClass]="'sortable-elem_empty'"
+            >
+              <ng-template let-childStory="item">
+                <div> {{ childStory.title }} </div>
+              </ng-template>
+            </kendo-sortable>
+          </div>
+        </ng-template>
+      </kendo-sortable>
+
+    </div>
+  </ng-container>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      class="lr-sort-narrative-story-items-modal__button cancel-button"
+      type="button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="sortEntities()"
+      type="submit"
+      class="lr-sort-narrative-story-items-modal__button primary-button">
+      Save Changes
+    </button>
+  </ng-container>
+</lr-modal>

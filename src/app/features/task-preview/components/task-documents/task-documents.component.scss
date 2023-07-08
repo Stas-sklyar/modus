@@ -1,0 +1,36 @@
+@import '../../../../../assets/styles/global';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.task-documents {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 0 20px 20px 20px;
+  overflow-y: hidden;
+
+  @media screen and (min-width: 1280px) {
+    margin: 30px;
+  }
+
+  &__list {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 20px;
+  }
+
+  &__form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+}

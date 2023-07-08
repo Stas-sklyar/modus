@@ -1,0 +1,14 @@
+<label class="upload-file-control">
+  <div class="upload-file-control__icon"></div>
+
+  <span class="upload-file-control__label">
+    Drag and drop your file here or
+    <u>choose file</u>
+  </span>
+
+  <input
+    (change)="onUploadFile($event.target)"
+    type="file"
+    [multiple]="true"
+  />
+</label>

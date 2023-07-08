@@ -1,0 +1,27 @@
+<div class="my-tasks-filter">
+  <div class="my-tasks-filter__col">
+    <lr-search-autocomplete
+      class="my-tasks-filter__form-control btn-group"
+      [placeholder]="'Search for a task…'"
+      (searchQueryChangeEvent)="filterTasksBySearchQuery($event)">
+    </lr-search-autocomplete>
+
+    <lr-select
+      [list]="['Overdue', 'Due this week', 'Due next week']"
+      [label]="'Filter by due date'"
+      [multiple]="false"
+      (toggleItemEvent)="filterTasksByDueDate($event)"
+      class="my-tasks-filter__form-control my-tasks-filter__form-control_select">
+    </lr-select>
+  </div>
+
+  <div class="my-tasks-filter__col">
+    <div>
+      <button
+        (click)="openCreateTaskModal()"
+        lr-ic-btn-dropdown
+        icon="plus">
+      </button>
+    </div>
+  </div>
+</div>

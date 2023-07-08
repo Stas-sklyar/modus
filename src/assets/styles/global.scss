@@ -1,0 +1,224 @@
+@import 'constants/colorsPalette';
+@import './constants/common';
+@import './mixins/mixins';
+@import './category-tabs';
+@import './file-uploader';
+@import './comment';
+@import './dropdown';
+@import './search-input';
+@import './sortable';
+@import './data-field';
+@import 'bootstrap-modal';
+@import './modal';
+@import './forms';
+@import './task-status-select';
+
+* {
+  box-sizing: border-box;
+}
+
+* > p:last-child {
+  margin-bottom: 0;
+}
+
+html,
+body {
+  background: $COVER_LIGHT_WHITE;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+ol, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+.lr-scroll-lock {
+  height: 100vh;
+  overflow: hidden;
+}
+
+[lrapplyredirectstomentions] ul,
+[lrapplyredirectstomentions] ol {
+  padding-left: 40px;
+}
+
+.glb-grid-container {
+  // TODO: FIX STYLES AFTER "RECENT ACTIVITY" IMPLEMENTATION
+  display: grid;
+  grid-template-columns: 1fr 0;
+  //grid-gap: 30px;
+  grid-auto-columns: auto;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    grid-template-columns: 1fr 0;
+  }
+
+  &__main-column,
+  &__aside-column {
+    padding: 20px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      padding: 30px;
+    }
+  }
+
+  &__aside-column {
+    display: none;
+    background: $COVER_GRAY_TO_WHITE;
+    &_heading {
+      @include small-headline;
+      border-bottom: 2px solid $SEPARATION_LINE_LIGHT_GRAY;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+
+      @media screen and (min-width: 1280px) and (min-height: 800px) {
+        padding-bottom: 14px;
+        margin-bottom: 30px;
+        @include medium-headline;
+      }
+    }
+  }
+}
+
+.average-loader {
+  @include average-loader;
+}
+
+.btn-loader {
+  @include btn-loader;
+}
+
+.button {
+  @include button;
+}
+
+.primary-button {
+  @include primary-button;
+}
+
+.cancel-button {
+  @include cancel-button;
+}
+
+.sortable-elem {
+  display: block;
+  padding: 20px;
+  cursor: grab;
+  position: relative;
+  border-bottom: 1px solid $SEPARATION_LINE_LIGHT_GRAY;
+
+  &:before {
+    content: url("../icons/ic_grip_dots_vertical.svg");
+    position: absolute;
+    left: 3px;
+    top: 22px;
+    bottom: auto;
+    width: 18px;
+  }
+
+  &_active {
+    background: $COVER_GRAY_TO_WHITE;
+  }
+
+  &_nested {
+    border: 1px solid $SEPARATION_LINE_LIGHT_GRAY;
+    margin-bottom: 10px;
+
+    &:before {
+      top: 50%;
+      transform: translateY(-10px);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &_empty {
+    display: block;
+    border: 1px solid $SEPARATION_LINE_LIGHT_GRAY;
+    padding: 10px;
+  }
+}
+
+.dropdown-toggle:after {
+  display: none;
+}
+
+.step-back-button {
+  display: flex;
+  align-items: center;
+  @include small-paragraph;
+  text-decoration: none;
+  margin: 20px 0 0 20px;
+  cursor: pointer;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    @include medium-paragraph;
+  }
+
+  &__icon {
+    width: 7px;
+    height: 13px;
+    margin-right: 10px;
+  }
+}
+
+// Ngx-bootstrap offcanvas
+.offcanvas {
+  --bs-offcanvas-width: min(95vw, 50vw) !important;
+  overflow: auto;
+}
+
+
+// Quill mentions
+.mention{
+  color: $BLUE_0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ql-mention-list {
+  background-color: $GRAY_5;
+  min-width: 160px;
+  box-shadow: 0 3px 5px -2px rgb(0 0 0 / 20%);
+  z-index: 1;
+}
+
+.ql-mention-list-item {
+  color: black;
+  padding: 8px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.ql-mention-list-item:hover {
+  background-color: $GRAY_3;
+  cursor: pointer;
+}
+
+// ngx-toastr
+.toast-container {
+  position: fixed !important;
+}
+
+// radio buttons
+.form-check {
+  cursor: pointer;
+}
+
+// cdk overlay
+.cdk-overlay-container {
+  z-index: 1000 !important;
+}

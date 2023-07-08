@@ -1,0 +1,79 @@
+<div class='tasks__title'>My tasks</div>
+
+<div class='tasks__container'>
+  <div class='tasks__tabs-panel tabs-panel'>
+    <button
+      (click)="tasksFilters$.next('assignedToMe')"
+      [class.active]="(tasksFilters$ | async) === 'assignedToMe'"
+      class='tabs-panel__tab tab'>
+      Assigned to Me
+    </button>
+    <button
+      (click)="tasksFilters$.next('createdByMe')"
+      [class.active]="(tasksFilters$ | async) === 'createdByMe'"
+      class='tabs-panel__tab tab'>
+      Created by Me
+    </button>
+  </div>
+
+  <ng-container *ngIf="(tasksFilters$ | async) === 'assignedToMe'">
+    <div
+      *ngIf="assignedToCurrentUserTasks$ | async as assignedToCurrentUserTasks; else loader"
+      class="tasks__list">
+      <div
+        *ngFor="let task of assignedToCurrentUserTasks"
+        (click)="openTaskPreviewModal(task.id)"
+        [class]="'tasks__card task-card task-card_' + tasksService.calcTaskStatus(task.dueDate, task.status)">
+
+        <span class="task-card__case-title">
+          {{ task.trialCase.name }}
+          <span class="task-card__link-icon"></span>
+        </span>
+
+        <div class="task-card__row">
+          <div class="task-card__col">
+            <span class="task-card__task-title">{{ task.title }}</span>
+          </div>
+
+          <div class="task-card__col">
+            <span class="task-card__due-date">
+              {{ task.dueDate ? (task.dueDate | timeAgo) : '' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="(tasksFilters$ | async) === 'createdByMe'">
+    <div
+      *ngIf="tasksCreatedByCurrentUser$ | async as tasksCreatedByCurrentUser; else loader"
+      class="tasks__list">
+      <div
+        *ngFor="let task of tasksCreatedByCurrentUser"
+        (click)="openTaskPreviewModal(task.id)"
+        [class]="'tasks__card task-card task-card_' + tasksService.calcTaskStatus(task.dueDate, task.status)">
+        <span class="task-card__case-title">
+          {{ task.trialCase.name }}
+          <span class="task-card__link-icon"></span>
+        </span>
+
+        <div class="task-card__row">
+          <div class="task-card__col">
+            <span class="task-card__task-title">{{ task.title }}</span>
+          </div>
+
+          <div class="task-card__col">
+            <span class="task-card__due-date">
+              {{ task.dueDate ? (task.dueDate | timeAgo) : '' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

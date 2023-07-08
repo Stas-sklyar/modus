@@ -1,0 +1,16 @@
+.tasks-filter-form {
+  display: flex;
+  justify-content: space-between;
+
+  &__form-control {
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &_select {
+      width: 310px;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+<ng-container *ngIf="section$ | async as section; else loader">
+  <div class="lr-section glb-grid-container">
+    <section class="glb-grid-container__main-column">
+      <header class="lr-section__section-header section-header">
+        <a
+          routerLink=".."
+          class="section-header__step-back-lnk step-back-lnk">
+          <svg class="step-back-lnk__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+            <path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+          </svg>
+          Back to workbook
+        </a>
+
+        <section class="section-header__container">
+          <h3 class="section-header__title">
+            {{ section.name }}
+          </h3>
+
+          <div class="section-header__controls controls">
+            <button
+              lr-ic-btn-dropdown
+              (click)="showControlPanelHandler()"
+              icon="plus">
+            </button>
+
+            <div class="section-header__dropdown dropdown" dropdown>
+              <button
+                class="dropdown__toggle dropdown-toggle"
+                (click)="$event.stopPropagation()"
+                dropdownToggle
+                lr-ic-btn
+                icon="ellipsis">
+              </button>
+
+              <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+                <div
+                  class="dropdown-menu__item"
+                  (click)="openEditSectionModal(section.id); $event.stopPropagation()">
+                  Edit section
+                </div>
+
+                <ng-container *ngIf="subSections$ | async as subSections">
+                  <ng-container *ngIf="subSections | sortByOrder as sortedSubsections">
+                    <div
+                      class="dropdown-menu__item"
+                      (click)="openSortSubsectionsModal(sortedSubsections); $event.stopPropagation()">
+                      Sort subsections
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <ng-container *ngIf="section.description">
+          <section class="section-header__description">
+            {{ section.description }}
+          </section>
+        </ng-container>
+      </header>
+
+      <section
+        *ngIf="subSections$ | async as subSections; else loader"
+        class="lr-section__section-content section-content">
+
+        <lr-workbook-subsection
+          *ngFor="let subsection of subSections | sortByOrder"
+          [workbookSubsection]="subsection"
+          [workbookSectionName]='subsection.name'>
+        </lr-workbook-subsection>
+      </section>
+
+      <form
+        [class]="
+          showControlPanel
+            ? 'lr-section__subsection-create-panel subsection-create-panel subsection-create-panel__active'
+            : 'lr-section__subsection-create-panel subsection-create-panel'
+        "
+        (submit)="$event.preventDefault()"
+        #scrollDestination>
+
+        <input
+          (keyup)="onKeyUpAddSubsectionFormControl($event, section.id)"
+          [formControl]='newWorkbookSubsection'
+          autocomplete="off"
+          class="subsection-create-panel__input"
+          placeholder="Sub-section name"
+          type="text"
+          lrAutoFocus
+          #createPanelInput>
+
+        <button
+          (click)="showControlPanel = false"
+          class="form-btn cancel-button"
+        >
+          cancel
+        </button>
+
+        <button
+          type="submit"
+          (click)="initSubsectionCreation(section.id)"
+          class="primary-button"
+          [disabled]="newWorkbookSubsection.status === 'INVALID'"
+        >
+          save sub-section
+        </button>
+      </form>
+    </section>
+
+    <section class="glb-grid-container__aside-column">
+      <header class="glb-grid-container__aside-column_heading">
+        Recent activity
+      </header>
+      <lr-recent-activities-cards></lr-recent-activities-cards>
+    </section>
+  </div>
+</ng-container>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

@@ -1,0 +1,74 @@
+<div
+  class="lr-case-narrative-story"
+  (click)="openNarrativeStoryPreviewModal(story.id)">
+    <div
+      *ngIf="expandAllBtnIsVisible"
+      class="lr-case-narrative-story__expander lr-case-narrative-story__expander--expand"
+      (click)="expandAll(); $event.stopPropagation()">
+    </div>
+
+    <div
+      *ngIf="collapseAllBtnIsVisible"
+      class="lr-case-narrative-story__expander lr-case-narrative-story__expander--collapse"
+      (click)="collapseAll(); $event.stopPropagation()">
+    </div>
+
+    <h2 class="lr-case-narrative-story__title">{{ story.title }}</h2>
+
+    <p
+      class="lr-case-narrative-story__description"
+      lrApplyRedirectsToMentions
+      [innerHTML]="story.description | safeHtml">
+      {{ story.description }}
+    </p>
+
+    <div class="lr-case-narrative-story__story-item story-item">
+      <div *ngFor="let parentStoryItem of story.trialCaseNarrativeStoryItems | sortByOrder; let parentStoryItemIndex = index;">
+        <div class="story-item__container">
+
+          <div
+            class="story-item__parent"
+            (click)="openNarrativeStoryPreviewModal(story.id)">
+            <lr-narrative-story-item
+              [storyItem]="parentStoryItem"
+              [isOpen]="parentStoryItemIsOpen(parentStoryItemIndex)"
+              (toggleParentStoryItem)="toggleExpandParentStoryItem(parentStoryItemIndex)"
+            ></lr-narrative-story-item>
+          </div>
+
+          <div
+            *ngIf="parentStoryItemIsOpen(parentStoryItemIndex)"
+            class="story-item__children story-item-children-list">
+            <div class="story-item-children-list__container">
+
+              <div
+                class="story-item-children-list__child"
+                (click)="openNarrativeStoryPreviewModal(story.id)"
+                *ngFor="let childStoryItem of parentStoryItem.items | sortByOrder; let childStoryItemIndex = index;">
+                <lr-narrative-story-item
+                  [storyItem]="childStoryItem"
+                  [isOpen]="childStoryItemIsOpen(parentStoryItemIndex, childStoryItemIndex)"
+                  [parentStoryItemIndex]="parentStoryItemIndex"
+                  (toggleChildStoryItem)="toggleExpandChildStoryItem(parentStoryItemIndex, childStoryItemIndex)"
+                ></lr-narrative-story-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div
+    class="lr-case-narrative-story__add-story-items-btn"
+    *ngIf="story.trialCaseNarrativeStoryItems.length === 0"
+    (click)="openNarrativeStoryPreviewModal(story.id)">
+
+    <button
+      lr-ic-btn-dropdown
+      icon="plus">
+    </button>
+
+    <span>Add story items</span>
+
+  </div>
+</div>

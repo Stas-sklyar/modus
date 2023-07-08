@@ -1,0 +1,28 @@
+<section class='dashboard'>
+  <header class='dashboard__header'>
+    <h5 class='dashboard__date-indicator'>
+      {{ currentDate | date:'EEEE, MMMM d' }}
+    </h5>
+
+    <h2 class='dashboard__greeting'>
+      Good {{ periodOfDay }},
+      <span
+        *ngIf="currentAppUser$ | async as user"
+        class='dashboard__greeting_capitalized'>{{ user.name }}</span>
+    </h2>
+  </header>
+
+  <section class='dashboard__content-container'>
+    <section class="dashboard__inner-container">
+      <lr-trial-cases [displayAs]="'widget'"></lr-trial-cases>
+
+      <section class="dashboard__analytics">
+        Outlet For Analytics
+      </section>
+    </section>
+
+    <section class='dashboard__tasks tasks'>
+      <lr-current-user-related-tasks></lr-current-user-related-tasks>
+    </section>
+  </section>
+</section>

@@ -1,0 +1,84 @@
+@import '../../../../../assets/styles/global';
+
+.lr-tasks {
+  &__board {
+    margin-top: 40px;
+  }
+}
+
+.board {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
+  & > div {
+    width: 100%;
+  }
+}
+
+.board-col {
+  width: 100%;
+  height: 100%;
+  background-color: $GRAY_4;
+  border-radius: $BORDER_RADIUS_BASE;
+  min-height: 100vh;
+  padding: 30px;
+
+  &__header {
+    margin-bottom: 20px;
+  }
+}
+
+.board-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    @include medium-headline;
+    color: $GRAY_0;
+    font-weight: 500;
+  }
+}
+
+.task-card {
+  @include task-card-decor-line;
+  padding: 20px;
+  background-color: $WHITE_0;
+  border-radius: $BORDER_RADIUS_BASE;
+
+  &__title {
+    @include medium-headline;
+    margin-bottom: 20px;
+  }
+
+  &__due-date {
+    @include extra-small-paragraph;
+    color: $BLACK_1;
+  }
+
+  &__assigned-user {
+    @include extra-small-paragraph;
+    color: $BLACK_1;
+    display: flex;
+    align-items: center;
+  }
+
+  &__assigned-user-icon {
+    width: 25px;
+    height: 25px;
+    background: url("../../../../../assets/icons/ic_user-avatar.svg") no-repeat center center;
+    margin-right: 5px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.create-task-btn {
+  background: $GRAY_2;
+}

@@ -1,0 +1,72 @@
+@import '../../../../../assets/styles/global';
+
+.lr-edit-folder-form {
+
+  &__invited-people-panel,
+  &__workbook-sections-container {
+    margin-top: 20px;
+  }
+
+  &__invited-people-panel {
+    padding: 20px;
+    background: $COVER_GRAY_TO_WHITE;
+  }
+
+  &__workbook-sections-container {
+
+  }
+
+  &__control {
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+.workbook-sections-container {
+  margin: 20px;
+
+  &__title,
+  &__section {
+    border-bottom: 1px solid $SEPARATION_LINE_LIGHT_GRAY;
+  }
+
+  &__title {
+    padding: 20px 0;
+  }
+
+  &__section {
+    padding: 20px;
+
+    &:hover {
+      cursor: pointer;
+      background: $COVER_GRAY_TO_WHITE;
+    }
+  }
+}
+
+.lr-edit-folder-form {
+
+  &__radios-title {
+    margin-top: 20px;
+    @include medium-paragraph;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      margin-top: 30px;
+      @include large-paragraph;
+    }
+  }
+
+  &__invited-people-panel,
+  &__workbook-sections-container {
+    margin-top: 20px;
+  }
+
+  &__invited-people-panel {
+    padding: 20px;
+    background: $COVER_GRAY_TO_WHITE;
+  }
+}

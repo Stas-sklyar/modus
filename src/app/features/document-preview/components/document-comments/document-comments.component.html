@@ -1,0 +1,31 @@
+<div class="root-doc-comments">
+  <div class="root-doc-comments__comments-list">
+    <div
+      *ngFor="let comment of document.comments"
+      class="lr-comment">
+      <div class="lr-comment__title">
+        <span class="lr-comment__avatar"></span>
+        <span>{{ comment.userComment.createdByUser.name }}</span>
+        <span class="lr-comment__title_small">{{ comment.userComment.createdDateTime | timeAgo }}</span>
+      </div>
+
+      <div
+        [innerHTML]="comment.userComment.message"
+        class="lr-comment__content">
+      </div>
+    </div>
+  </div>
+
+  <footer class="root-doc-comments__add-comment-form">
+    <lr-text-editor [formControl]="comment"></lr-text-editor>
+    <div class="d-flex">
+      <button
+        [disabled]="comment.invalid"
+        (click)="addComment()"
+        type="button"
+        class="primary-button ms-auto mt-2">
+        Add comment
+      </button>
+    </div>
+  </footer>
+</div>

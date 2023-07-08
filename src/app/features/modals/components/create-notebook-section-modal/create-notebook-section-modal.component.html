@@ -1,0 +1,39 @@
+<lr-modal>
+  <ng-container modalTitle>
+    Create section
+  </ng-container>
+
+  <form
+    [formGroup]="sectionForm"
+    modalContent>
+
+    <label class="lr-default-label">
+      <span>Title</span>
+
+      <input
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Give your section a title"
+        type="text"
+        class="lr-filled-input">
+    </label>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="initSectionCreation()"
+      class="primary-button"
+      [disabled]="sectionForm.status === 'INVALID' || sectionForm.disabled">
+      create section
+      <div *ngIf="sectionForm.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

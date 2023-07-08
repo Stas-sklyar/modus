@@ -1,0 +1,131 @@
+<section
+  [class.trial-cases_widget]="displayAs === 'widget'"
+  class="trial-cases">
+  <header class="trial-cases__title">
+    Cases
+  </header>
+
+  <div class="trial-cases__container">
+    <div class="trial-cases__filters filters">
+      <div
+        *ngIf="displayAs === 'page'"
+        class="filters__row">
+        <label class="lr-search-input lr-search-input_outline filters__search-input">
+          <input
+            [formControl]="searchFilter$"
+            type="text"
+            placeholder="Search Cases…">
+          <span class="lr-search-input__icon"></span>
+        </label>
+      </div>
+
+      <section
+        [style.padding-top.px]="(displayAs === 'page') ? 0 : 30"
+        class="lr-category-tabs-container">
+        <ng-container *ngIf="typeFilter$ | async as typeFilter">
+          <div
+            class="lr-category-tabs-container__category-tab  lr-category-tabs-container__category-tab_purple"
+            [class.selected]="typeFilter === 'mine'">
+            <div class="tab_name" (click)="typeFilter$.next('mine')">
+              My Cases ({{ mineCasesAmount }})
+            </div>
+          </div>
+          <div
+            class="lr-category-tabs-container__category-tab  lr-category-tabs-container__category-tab_purple"
+            [class.selected]="typeFilter === 'favorites'">
+            <div class="tab_name" (click)="typeFilter$.next('favorites')">
+              My Favorites ({{ favoriteCasesAmount }})
+            </div>
+          </div>
+<!--          <div-->
+<!--            class="lr-category-tabs-container__category-tab  lr-category-tabs-container__category-tab_purple"-->
+<!--            [class.selected]="typeFilter === 'all'">-->
+<!--            <div class="tab_name" (click)="typeFilter$.next('all')">-->
+<!--              All Cases-->
+<!--            </div>-->
+<!--          </div>-->
+        </ng-container>
+      </section>
+    </div>
+
+    <div class="trial-cases__inner-container">
+<!--      <div-->
+<!--        *ngIf="displayAs === 'page'"-->
+<!--        class="filters__column">-->
+<!--        <h5 class="filters__header">Filter by:</h5>-->
+
+<!--        <div class="filters__group">-->
+<!--          <div class="filters__group-title">Case status:</div>-->
+<!--          <ng-container *ngIf="trialCases$ | async as trialCases">-->
+<!--            <label-->
+<!--              class="filters__group-item group-item">-->
+<!--              <input-->
+<!--                (change)="caseStatusFilter = 'pre-trial'"-->
+<!--                type="checkbox"-->
+<!--                class="form-check-input">-->
+<!--              <span-->
+<!--                class="group-item__name text-truncate">pre-trial</span>-->
+<!--            </label>-->
+<!--            <a-->
+<!--              *ngIf="false"-->
+<!--              (click)="changeSliceSize('status')"-->
+<!--              class="filters__filter-toggle">-->
+<!--              {{ casesListSliceSizeFilter ? 'Show more' : 'Hide' }}-->
+<!--            </a>-->
+<!--          </ng-container>-->
+<!--        </div>-->
+<!--      </div>-->
+
+      <div
+        class="case-cards-column">
+        <div class="case-cards-list">
+          <div
+            *ngFor="let trialCase of trialCases$ | async | clipList: casesListSliceSizeFilter"
+            class="case-card">
+            <header class="case-card__status-panel">
+              <div class="case-card__status">
+                pre-trial
+              </div>
+
+              <button
+                (click)="toggleFavoriteState(trialCase)"
+                [disabled]="inProcess"
+                [class.case-card__favorite-label_active]="trialCase.isFavorite"
+                class="case-card__favorite-label"></button>
+            </header>
+
+            <h3 class="case-card__heading">
+              {{ trialCase.name }}
+            </h3>
+
+            <div
+              lrApplyRedirectsToMentions
+              [innerHTML]="trialCase.description | safeHtml"
+              class="case-card__description">
+              {{ trialCase.description }}
+            </div>
+
+            <div class="case-card__buttons-panel">
+              <a class="case-card__button case-card__outline-button">
+                <span class="case-card__button-counter">0</span>
+                <span>Task Overdue</span>
+              </a>
+              <a
+                [routerLink]="['/', appRoutes.CASE, trialCase.id]"
+                class="case-card__button case-card__solid-button">View Case</a>
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="trialCases$ | async as trialCases">
+          <a
+            *ngIf="(displayAs === 'widget') && trialCases.length > 3"
+            (click)="changeSliceSize('cases')"
+            class="case-cards-list__filter-toggle">
+            {{ casesListSliceSizeFilter ? 'Show all' : 'Hide' }}
+          </a>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>

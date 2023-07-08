@@ -1,0 +1,52 @@
+@import './constants/common';
+@import './mixins/mixins';
+
+.lr-category-tabs-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid $SEPARATION_LINE_LIGHT_GRAY;
+  margin: 20px;
+
+  @media screen and (min-width: 1280px) {
+    margin: 30px;
+  }
+
+  &__category-tab {
+    @include small-headline;
+    color: $TEXT_LIGHT_BLACK;
+    cursor: pointer;
+    padding-bottom: 10px;
+    position: relative;
+    text-transform: capitalize;
+
+    @media screen and (min-width: 1280px) {
+      @include medium-headline;
+    }
+
+    &:not(:last-child) {
+      margin-right: 40px;
+    }
+
+    &.selected {
+      color: $TEXT_DARK_BLUE;
+      &:after {
+        background: $COVER_DARK_BLUE;
+        bottom: -3px;
+        content: '';
+        left: 0;
+        position: absolute;
+        height: 4px;
+        width: 100%;
+      }
+    }
+
+    &_purple {
+      &.selected {
+        color: $TEXT_PURPLE;
+        &:after {
+          background: $COVER_PURPLE;
+        }
+      }
+    }
+  }
+}

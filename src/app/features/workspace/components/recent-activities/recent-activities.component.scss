@@ -1,0 +1,95 @@
+@import '../../../../../assets/styles/global';
+
+.lr-recent-activities {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__show-more-btn {
+    display: block;
+    @include extra-small-paragraph;
+    color: $TEXT_DARK_BLUE;
+    cursor: pointer;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include small-paragraph;
+    }
+  }
+
+  &_reduced {
+    .avatar {
+      display: none;
+    }
+
+    .record-description {
+      margin-left: 0;
+
+      &__action {
+        font-size: 14px;
+        line-height: 16px;
+      }
+      &__action-moment {
+        color: $TEXT_GRAY;
+      }
+    }
+  }
+
+  &_fixed-height {
+    max-height: 350px;
+  }
+}
+
+.activity-record {
+  display: flex;
+  align-items: center;
+  background: $COVER_PURE_WHITE;
+  border-radius: 4px;
+  border-left: 6px solid $BORDER_YELLOW;
+  padding: 10px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    padding: 14px 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: $COVER_GRAY;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.record-description {
+  margin-left: 20px;
+
+  &__action {
+    @include large-paragraph;
+    font-size: 14px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      font-size: 16px;
+    }
+  }
+  &__action-moment {
+    @include extra-small-paragraph;
+  }
+
+  &__action,
+  &__action-moment {
+    color: $TEXT_DARK_GRAY;
+  }
+}

@@ -1,0 +1,57 @@
+<lr-modal>
+  <ng-container modalTitle>
+    {{ isCreation ? 'Create folder' : 'Edit folder' }}
+  </ng-container>
+
+  <form
+    [formGroup]="form"
+    (submit)="isCreation ? createFolder() : editFolder()"
+    modalContent>
+
+    <div>
+      <label
+        *ngIf="allowAction; else message"
+        class="lr-default-label">
+        <span>Name</span>
+
+        <input
+          autocomplete="off"
+          formControlName="name"
+          placeholder="Enter name"
+          type="text"
+          class="lr-filled-input">
+      </label>
+
+      <ng-template #message>
+        You should select any folder to edit it.
+      </ng-template>
+    </div>
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      *ngIf="!allowAction"
+      (click)="closeModal()"
+      type="button"
+      class="primary-button">
+      ok
+    </button>
+
+    <button
+      *ngIf="allowAction"
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button">
+      cancel
+    </button>
+
+    <button
+      *ngIf="allowAction"
+      [disabled]="form.invalid || submitting"
+      class="primary-button"
+      type="submit">
+      {{ isCreation ? 'Create folder' : 'Edit folder' }}
+      <div *ngIf="submitting" class="btn-loader"></div>
+    </button>
+  </ng-container>
+</lr-modal>

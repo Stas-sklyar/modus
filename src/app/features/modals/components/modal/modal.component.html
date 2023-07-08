@@ -1,0 +1,21 @@
+<div class="lr-modal">
+  <header class="lr-modal__header">
+    <h3 class="lr-modal__title">
+      <ng-content select="[modalTitle]"></ng-content>
+    </h3>
+
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      (click)="closeModal()"
+    >
+      <span class="visually-hidden">&times;</span>
+    </button>
+  </header>
+
+  <ng-content select="[modalContent]"></ng-content>
+
+  <footer class="lr-modal__footer">
+    <ng-content select="[modalFooter]"></ng-content>
+  </footer>
+</div>

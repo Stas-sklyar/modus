@@ -1,0 +1,16 @@
+@import '../../../../../assets/styles/global';
+
+.workspace {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+
+  &__content-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+

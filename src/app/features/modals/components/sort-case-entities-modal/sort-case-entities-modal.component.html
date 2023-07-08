@@ -1,0 +1,38 @@
+<lr-modal>
+  <ng-container modalTitle>{{ title }}</ng-container>
+
+  <div
+    class="lr-sort-case-entities-modal"
+    modalContent>
+
+    <div
+      *ngIf="entities.length"
+      class="lr-sort-case-entities-modal__list">
+
+      <bs-sortable
+        [(ngModel)]="sortedEntities"
+        [fieldName]="fieldName"
+        itemActiveClass="sortable-elem_active"
+        itemClass="sortable-elem">
+      </bs-sortable>
+
+    </div>
+  </div>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      class="cancel-button"
+      type="button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="sortEntities()"
+      type="submit"
+      class="primary-button">
+      Save Changes
+    </button>
+  </ng-container>
+</lr-modal>

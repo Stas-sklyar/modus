@@ -1,0 +1,92 @@
+<div
+  [formGroup]="form"
+  class="lr-add-story-item">
+
+  <input
+    lrAutoFocus
+    formControlName="title"
+    autocomplete="off"
+    placeholder="Enter title of story item"
+    type="text"
+    class="lr-add-story-item__control lr-filled-input"
+  >
+
+  <select
+    *ngIf="addParentStoryItem"
+    formControlName="parentStoryItemId"
+    class="lr-add-story-item__control form-select"
+  >
+    <option [value]="null">Parent</option>
+
+    <option *ngFor="let storyItem of parentStoryItems" [value]="storyItem.id">
+      {{ storyItem.title }}
+    </option>
+  </select>
+
+  <div class="lr-add-story-item__control_radio-btns-container">
+    <div class="form-check">
+      <label class="form-check-label">
+        Allegation
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="storyItemType"
+          [value]="'allegation'"
+        >
+      </label>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        Fact
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="storyItemType"
+          [value]="'fact'"
+        >
+      </label>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        Note
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="storyItemType"
+          [value]="'note'"
+        >
+      </label>
+    </div>
+  </div>
+
+  <lr-text-editor
+    formControlName="description"
+    [participants$]="participants$"
+    placeholder="Enter description">
+  </lr-text-editor>
+
+  <div class="lr-add-story-item__control">
+    <lr-documents-buffer></lr-documents-buffer>
+  </div>
+
+  <div class="lr-add-story-item__buttons-container">
+    <button
+      *ngIf="addParentStoryItem"
+      class="lr-add-story-item-form__form-btn cancel-button"
+      (click)="closeForm('cancel')"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="onClickAddStoryItemBtn()"
+      type="submit"
+      class="lr-add-story-item__form-btn primary-button"
+      [disabled]="form.status === 'INVALID'"
+    >
+      add story item
+    </button>
+  </div>
+</div>

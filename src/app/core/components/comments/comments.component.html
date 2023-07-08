@@ -1,0 +1,26 @@
+<section class="lr-comments">
+  <div
+    *ngIf="comments.length"
+    class="lr-comments__comments-list comments-list">
+      <div
+        *ngFor="let comment of comments"
+        class="comments-list__record record">
+        <h5 class="record__title">
+          <span class="record__avatar"></span>
+          <span>
+            {{ comment.userComment.createdByUser.name }}
+          </span>
+          <span class="record__title_small">
+            {{ calcCommentDate(comment.userComment.createdDateTime) }}
+          </span>
+        </h5>
+        <div class="record__content">
+          {{ comment.userComment.message }}
+        </div>
+      </div>
+  </div>
+
+  <div class="lr-comments__add-new-comment add-new-comment">
+    <lr-add-comment-form (submitBtnWasPressed)="addNewComment($event)"></lr-add-comment-form>
+  </div>
+</section>

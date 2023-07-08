@@ -1,0 +1,84 @@
+@import '../../../../assets/styles/global';
+
+.lr-aside-panel-header {
+  margin: 20px;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    margin: 30px;
+  }
+
+  &__step-back-lnk {
+    display: flex;
+    align-items: center;
+    @include small-paragraph;
+    text-decoration: none;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include medium-paragraph;
+    }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    @include extra-large-headline;
+    font-size: 24px;
+    line-height: 52px;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      font-size: 40px;
+    }
+  }
+
+  &__controls {
+    margin-left: auto;
+  }
+
+  &__description {
+    @include small-paragraph;
+    width: 70%;
+    color: $COVER_GRAY_TO_BLACK;
+
+    @media screen and (min-width: 1280px) and (min-height: 800px) {
+      @include medium-paragraph;
+    }
+  }
+}
+
+.dropdown {
+  @include dropdown-menu;
+
+  & .dropdown__menu {
+    transform: translateX(-150px) !important;
+    z-index: 2;
+  }
+
+  & li {
+    list-style: none;
+  }
+}
+
+.step-back-lnk {
+  cursor: pointer;
+
+  &__icon {
+    width: 7px;
+    height: 13px;
+    margin-right: 10px;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+
+  @media screen and (min-width: 1280px) and (min-height: 800px) {
+    gap: 10px;
+  }
+}
+

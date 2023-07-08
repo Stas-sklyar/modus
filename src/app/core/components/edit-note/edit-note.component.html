@@ -1,0 +1,45 @@
+<form
+  [formGroup]="form"
+  class="lr-edit-note">
+  <h5 class="lr-edit-note__title">Edit your note</h5>
+
+  <input
+    formControlName="title"
+    autocomplete="off"
+    placeholder="Enter title"
+    type="text"
+    class="lr-edit-note__control lr-filled-input"
+  >
+
+  <lr-text-editor
+    formControlName="description"
+    [participants$]="participants$"
+    placeholder="Enter note">
+  </lr-text-editor>
+
+  <lr-related-documents
+    [documents]="getRelatedNoteDocuments(note)">
+  </lr-related-documents>
+
+  <div class="lr-edit-note__control">
+    <lr-documents-buffer></lr-documents-buffer>
+  </div>
+
+  <div class="lr-edit-note__buttons-container">
+    <button
+      class="lr-edit-note-form__form-btn cancel-button"
+      (click)="closeForm()"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="updateNote()"
+      type="submit"
+      class="lr-edit-note__form-btn primary-button"
+      [disabled]="form.status === 'INVALID'"
+    >
+      edit note
+    </button>
+  </div>
+</form>

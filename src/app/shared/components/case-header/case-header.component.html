@@ -1,0 +1,16 @@
+<section
+  class="lr-case-header"
+  [class.lr-case-header_separated]="separated">
+  <h4 class="lr-case-header__page-title">
+    {{ pageTitle }}
+  </h4>
+  <section class="lr-case-header__header-content">
+    <h1 class="lr-case-header__case-title">
+      {{ caseTitle }}
+    </h1>
+
+    <section class="lr-case-header__controls">
+      <ng-content></ng-content>
+    </section>
+  </section>
+</section>

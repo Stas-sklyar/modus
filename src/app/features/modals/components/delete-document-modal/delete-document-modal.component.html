@@ -1,0 +1,39 @@
+<lr-modal>
+  <ng-container modalTitle>Delete Document</ng-container>
+
+  <div modalContent>
+
+    <div>
+      <ng-container *ngIf="isExhibit; else parentDocument">
+        Are you sure you want to delete this Exhibit: {{ documentTitle }}?
+      </ng-container>
+
+      <ng-template #parentDocument>
+        <ng-container *ngIf="containExhibits; else noExhibits">
+          You cannot delete this document since it contains exhibits. You first need to delete exhibits in it, and then this document.
+        </ng-container>
+        <ng-template #noExhibits>
+          Are you sure you want to delete this document: {{ documentTitle }}?
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button">
+      {{ (isExhibit || (!isExhibit && !containExhibits)) ? 'No' : 'Ok' }}
+    </button>
+
+    <button
+      [disabled]="submitting"
+      *ngIf="isExhibit || (!isExhibit && !containExhibits)"
+      (click)="deleteDocument()"
+      type="button"
+      class="primary-button">
+      Yes
+    </button>
+  </ng-container>
+</lr-modal>

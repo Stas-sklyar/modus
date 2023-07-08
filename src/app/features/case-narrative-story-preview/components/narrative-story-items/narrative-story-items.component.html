@@ -1,0 +1,182 @@
+<section
+  (click)="indexOfCurrentVisibleStoryItemDropdown = null"
+  class="lr-narrative-story-items">
+
+  <div
+    *ngIf="!showAddStoryItemForm; else addStoryItemForm"
+    class="lr-narrative-story-items__story-item-list story-item-list">
+
+    <div
+      *ngFor="let storyItem of storyItems | sortByOrder; let i = index"
+      class="story-item-list__parent-story-item">
+      <div
+        *ngIf="calcVisibleOfParentStoryItem(i)"
+        [class]="'story-item-list__story-item story-item story-item_' + storyItem.type">
+        <button
+          (click)="toggleStoryItemDropdown(i); $event.stopPropagation()"
+          class="story-item__dropdown-btn"
+          lr-ic-btn
+          icon="ellipsis">
+        </button>
+
+        <div
+          *ngIf="calcVisibilityOfParentStoryItemDropdown(i)"
+          class="story-item__dropdown-menu dropdown-menu">
+          <div
+            (click)="toggleEditStoryItemForm(i)"
+            class="dropdown-menu__item">
+            Edit
+          </div>
+
+          <div
+            (click)="showConfirmationWindow(confirmationModalForDeleteParentStoryItem)"
+            class="dropdown-menu__item">
+            Delete
+          </div>
+        </div>
+
+        <div class="story-item__header">
+          <div [class]="'story-item__type' + ' ' + 'story-item__type_' + storyItem.type">
+            {{ storyItem.type }}
+          </div>
+
+          <h4 class="story-item__title">{{ storyItem.title }}</h4>
+        </div>
+
+        <div
+          lrApplyRedirectsToMentions
+          [innerHTML]="storyItem.description | safeHtml"
+          class="story-item__body">
+          {{ storyItem.description }}
+        </div>
+
+        <div class="story-item__related-documents">
+          <lr-related-documents [documents]="getRelatedNoteDocuments(storyItem)"></lr-related-documents>
+        </div>
+      </div>
+
+      <lr-edit-story-item-form
+        *ngIf="calcVisibilityOfEditParentStoryItemForm(i)"
+        [storyItem]="storyItem"
+        (hideFormEvent)="indexOfCurrentVisibleEditStoryItemForm = null"
+        (editStoryItemEvent)="editStoryItem($event)"
+      ></lr-edit-story-item-form>
+
+      <ng-template #confirmationModalForDeleteParentStoryItem>
+        <lr-confirmation-modal
+          (cancel)="confirmationOfDeletionCanceled()"
+          (confirm)="confirmationOfDeletionConfirmed(storyItem.id)"
+        ></lr-confirmation-modal>
+      </ng-template>
+
+
+      <!-- ----------CHILD STORY ITEMS---------- -->
+
+      <div
+        *ngIf="storyItem.items.length"
+        class="lr-narrative-story-items__story-item-list story-item-list">
+        <ng-container *ngFor="let childStoryItem of storyItem.items | sortByOrder; let j = index">
+          <div
+            *ngIf="calcVisibilityOfChildStoryItem(i, j)"
+            [class]="'story-item-list__story-item story-item story-item_child story-item_' + childStoryItem.type">
+            <button
+              (click)="toggleChildStoryItemDropdown(j, i); $event.stopPropagation()"
+              class="story-item__dropdown-btn"
+              lr-ic-btn
+              icon="ellipsis">
+            </button>
+
+            <div
+              *ngIf="calcVisibilityOfChildStoryItemDropdown(i, j)"
+              class="story-item__dropdown-menu dropdown-menu">
+              <div
+                (click)="toggleEditChildStoryItemForm(j, i)"
+                class="dropdown-menu__item">
+                Edit
+              </div>
+
+              <div
+                (click)="showConfirmationWindow(confirmationModalForDeleteChildStoryItem)"
+                class="dropdown-menu__item">
+                Delete
+              </div>
+            </div>
+
+            <div class="story-item__header">
+              <div [class]="'story-item__type' + ' ' + 'story-item__type_' + childStoryItem.type">
+                {{ childStoryItem.type }}
+              </div>
+
+              <h4 class="story-item__title">{{ childStoryItem.title }}</h4>
+            </div>
+
+            <div
+              class="story-item__body"
+              lrApplyRedirectsToMentions
+              [innerHTML]="childStoryItem.description | safeHtml">
+              {{ childStoryItem.description }}
+            </div>
+
+            <div class="story-item__related-documents">
+              <lr-related-documents [documents]="getRelatedNoteDocuments(childStoryItem)"></lr-related-documents>
+            </div>
+          </div>
+
+          <lr-edit-story-item-form
+            *ngIf="calcVisibilityOfEditChildStoryItemForm(i, j)"
+            [storyItem]="childStoryItem"
+            [parentStoryItems]="storyItems"
+            (hideFormEvent)="hideEditChildStoryItemForm()"
+            (editStoryItemEvent)="editStoryItem($event)"
+          ></lr-edit-story-item-form>
+
+          <ng-template #confirmationModalForDeleteChildStoryItem>
+            <lr-confirmation-modal
+              (cancel)="confirmationOfDeletionCanceled()"
+              (confirm)="confirmationOfDeletionConfirmed(childStoryItem.id)"
+            ></lr-confirmation-modal>
+          </ng-template>
+
+        </ng-container>
+      </div>
+
+      <div class="lr-narrative-story-items__add-btn">
+        <lr-add-story-item-btn (addStoryItemEvent)="onClickAddStoryItemBtn(i, $event)"></lr-add-story-item-btn>
+      </div>
+
+      <lr-add-story-item-form
+        *ngIf="i === indexOfCurrentVisibleAddStoryItemForm"
+        [addParentStoryItem]="true"
+        [order]="i + 1"
+        [storyItemType]="storyItemType"
+        [parentStoryItems]="storyItems"
+        (changeVisibilityFormEvent)="closeAddStoryItemForm()"
+        (clickAddAddStoryTypeBtnEvent)="addStoryItem($event)"
+      ></lr-add-story-item-form>
+
+      <ng-container *ngIf="i === storyItems.length - 1">
+        <lr-add-story-item-form
+          *ngIf="typeOfOpenAddStoryItemForm$ | async as typeOfOpenAddStoryItemForm"
+          [addParentStoryItem]="true"
+          [order]="storyItems.length"
+          [storyItemType]="typeOfOpenAddStoryItemForm"
+          [parentStoryItems]="storyItems"
+          (changeVisibilityFormEvent)="closeAddStoryItemForm()"
+          (clickAddAddStoryTypeBtnEvent)="addStoryItem($event)"
+        ></lr-add-story-item-form>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-template #addStoryItemForm>
+    <div class="lr-narrative-story-items__add-story-item">
+      <lr-add-story-item-form
+        [addParentStoryItem]="false"
+        [order]="0"
+        [storyItemType]="storyItemType"
+        [parentStoryItems]="[]"
+        (clickAddAddStoryTypeBtnEvent)="addStoryItem($event)"
+      ></lr-add-story-item-form>
+    </div>
+  </ng-template>
+</section>

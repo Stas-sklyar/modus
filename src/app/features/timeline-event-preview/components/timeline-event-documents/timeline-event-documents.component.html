@@ -1,0 +1,20 @@
+<section class="lr-timeline-event-documents">
+  <ng-container *ngIf="notes$ | async as notes; else loader">
+    <div class="lr-timeline-event-documents__documents-list documents-list">
+      <ng-container *ngFor="let document of getRelatedDocuments(notes) | removeDuplicatesDocuments">
+        <div
+          *ngIf="document.document.title"
+          class="documents-list__item">
+          <lr-document-card
+            [document]="document.document"
+            [name]="document.document.title">
+          </lr-document-card>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</section>
+
+<ng-template #loader>
+  <div class="average-loader"></div>
+</ng-template>

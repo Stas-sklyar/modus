@@ -1,0 +1,82 @@
+<lr-modal>
+  <ng-container modalTitle>
+    Create folder
+  </ng-container>
+
+  <form
+    [formGroup]="folderForm"
+    class="lr-create-folder-form"
+    modalContent>
+
+    <label class="lr-default-label">
+      <span>Name</span>
+
+      <input
+        autocomplete="off"
+        formControlName="name"
+        placeholder="Give your folder a name"
+        type="text"
+        class="lr-filled-input">
+    </label>
+
+    <label class="lr-default-label">
+      <span>Description</span>
+
+      <textarea
+        autocomplete="off"
+        formControlName="description"
+        placeholder="Add some details about this folder"
+        type="text"
+        class="lr-filled-textarea"></textarea>
+    </label>
+
+    <!--  <p class="lr-create-folder-form__radios-title">-->
+    <!--    Who can access this folder?-->
+    <!--  </p>-->
+
+    <!--  <div class="form-check">-->
+    <!--    <label class="form-check-label" >-->
+    <!--      Anyone on this case-->
+    <!--      <input-->
+    <!--        class="form-check-input"-->
+    <!--        autocomplete="off"-->
+    <!--        formControlName="accessLevel"-->
+    <!--        value="restricted"-->
+    <!--        type="radio"-->
+    <!--      >-->
+    <!--    </label>-->
+    <!--  </div>-->
+
+    <!--  <div class="form-check">-->
+    <!--    <label class="form-check-label" >-->
+    <!--      Only invited people-->
+    <!--      <input-->
+    <!--        class="form-check-input"-->
+    <!--        autocomplete="off"-->
+    <!--        formControlName="accessLevel"-->
+    <!--        value="free"-->
+    <!--        type="radio"-->
+    <!--      >-->
+    <!--    </label>-->
+    <!--  </div>-->
+  </form>
+
+  <ng-container modalFooter>
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="cancel-button"
+    >
+      cancel
+    </button>
+
+    <button
+      (click)="initFolderCreation()"
+      class="primary-button"
+      [disabled]="folderForm.status === 'INVALID' || folderForm.disabled">
+      create folder
+      <div *ngIf="folderForm.disabled" class="btn-loader"></div>
+    </button>
+  </ng-container>
+
+</lr-modal>

@@ -1,0 +1,79 @@
+@import '../../../../../assets/styles/global';
+
+.task-form {
+  &__row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+  }
+
+  &__label {
+    width: 100%;
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__control {
+    width: 100%;
+  }
+}
+
+.assignee-select {
+  //position: relative;
+  //
+  //&:before {
+  //  content: "";
+  //  position: absolute;
+  //  left: 20px;
+  //  top: 14px;
+  //  width: 30px;
+  //  height: 30px;
+  //  background-size: 30px 30px;
+  //  background: url("../../../../../assets/icons/ic_user-avatar.svg") no-repeat center center;
+  //}
+  //
+  //&__control {
+  //  padding-left: 60px;
+  //}
+}
+
+.status-select {
+  position: relative;
+
+  &:before {
+    content: "";
+    width: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 4px 0 0 4px;
+    background-color: $GRAY_0;
+  }
+
+  &_todo {
+    &:before {
+      background-color: $GRAY_2;
+    }
+  }
+
+  &_in-progress {
+    &:before {
+      background-color: $YELLOW_0;
+    }
+  }
+
+  &_completed {
+    &:before {
+      background-color: $GREEN_2;
+    }
+  }
+
+  &_blocked {
+    &:before {
+      background-color: $RED_1;
+    }
+  }
+}

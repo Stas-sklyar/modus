@@ -1,0 +1,29 @@
+@import '../../../../../assets/styles/global';
+
+.lr-add-new-task {
+  &__title {
+    @include medium-headline;
+    margin-bottom: 10px;
+  }
+
+  &__control {
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__buttons-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__form-btn {
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

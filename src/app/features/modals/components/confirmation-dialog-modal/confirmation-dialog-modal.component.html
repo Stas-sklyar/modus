@@ -1,0 +1,32 @@
+<lr-modal>
+  <ng-container
+    *ngIf="title"
+    modalTitle>
+    {{ title }}
+  </ng-container>
+
+  <div
+    *ngIf="content"
+    modalContent>
+    {{ content }}
+  </div>
+
+  <ng-container modalFooter>
+    <button
+      *ngIf="cancelButtonText"
+      (click)="cancelAction()"
+      type="button"
+      class="cancel-button">
+      {{ cancelButtonText }}
+    </button>
+
+    <button
+      *ngIf="confirmButtonText"
+      (click)="confirmAction()"
+      type="button"
+      class="primary-button">
+      {{ confirmButtonText }}
+    </button>
+  </ng-container>
+</lr-modal>
+

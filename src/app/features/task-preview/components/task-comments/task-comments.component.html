@@ -1,0 +1,38 @@
+<div class="task-comments">
+  <div class="task-comments__container">
+    <div class="comments-list">
+      <div
+        *ngFor="let comment of task.comments"
+        class="comments-list-item">
+        <h5 class="comments-list-item__title">
+          <span class="comments-list-item__avatar"></span>
+          <span>
+            {{ comment.userComment.createdByUser.name }}
+          </span>
+          <span class="comments-list-item__title_small">
+            {{ comment.userComment.createdDateTime | timeAgo }}
+          </span>
+        </h5>
+        <div
+          [innerHTML]="comment.userComment.message"
+          class="comments-list-item__comment">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form (ngSubmit)="createComment(comment.value)">
+    <lr-text-editor
+      [formControl]="comment"
+      placeholder="Your comment">
+    </lr-text-editor>
+
+    <div class="task-comments__form-buttons">
+      <button
+        class="primary-button"
+        [disabled]="!comment.value || submitting">
+        add comment
+      </button>
+    </div>
+  </form>
+</div>
